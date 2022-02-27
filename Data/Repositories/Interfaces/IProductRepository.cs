@@ -8,12 +8,9 @@ namespace Data.Repositories.Interfaces
 {
     public interface IProductRepository
     {
+        Task<Product> Get(Expression<Func<Product, bool>> expression = null, params string[] Includes);
         List<Product> GetAll(Expression<Func<Product, bool>> expression = null, params string[] Includes);
-
-        List<Product> GetAllPaginated(int page, int size, Expression<Func<Product, bool>> expression = null,
-            params string[] Includes);
-
-        Product Get(Expression<Func<Product, bool>> expression = null, params string[] Includes);
+        List<Product> GetAllPaginated(int page, int size, Expression<Func<Product, bool>> expression = null, params string[] Includes);
         int GetTotalCount(Expression<Func<Product, bool>> expression = null);
         bool IsProductExist(Expression<Func<Product, bool>> expression = null);
         Task CreateAsync(Product product);
