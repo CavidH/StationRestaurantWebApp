@@ -1,10 +1,12 @@
-using Core.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Core.Entities;
 using Data.DAL;
+using Data.Repositories.Implementations;
+using Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +40,8 @@ namespace StationRestaurant
                 Options.Password.RequireUppercase = true;
                 Options.Password.RequireDigit = true;
             });
-    }
+            services.AddScoped<IProductRepository, ProductRepository>();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,7 +60,7 @@ namespace StationRestaurant
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -24,31 +24,38 @@ namespace Data.Repositories.Implementations
         public async Task<Product> Get(Expression<Func<Product, bool>> expression = null, params string[] Includes)
         {
             //IQueryable<Product> query = _context.Products.AsQueryable();
-            var query = GetQuery(Includes);
-
+            var query = CheckQuery(Includes);
             return expression is null
                 ? await query.FirstOrDefaultAsync()
                 : await query.Where(expression).FirstOrDefaultAsync();
         }
 
-        public List<Product> GetAll(Expression<Func<Product, bool>> expression = null, params string[] Includes)
+        public async Task<List<Product>> GetAllAsync(Expression<Func<Product, bool>> expression = null, params string[] Includes)
         {
-            throw new NotImplementedException();
+            var query = CheckQuery(Includes);
+            return expression is null
+                ? await query.ToListAsync()
+                : await query.Where(expression).ToListAsync();
         }
 
-        public List<Product> GetAllPaginated(int page, int size, Expression<Func<Product, bool>> expression = null, params string[] Includes)
+        public async Task<List<Product>> GetAllPaginatedAsync(int page, int size, Expression<Func<Product, bool>> expression = null, params string[] Includes)
         {
-            throw new NotImplementedException();
+            var query = CheckQuery(Includes);
+            return expression is null
+                ? await query.Skip((page - 1) * size).Take(size).ToListAsync()
+                : await query.Where(expression).Skip((page - 1) * size).Take(size).ToListAsync();
         }
 
-        public int GetTotalCount(Expression<Func<Product, bool>> expression = null)
+        public async Task<int> GetTotalCountAsync(Expression<Func<Product, bool>> expression = null)
         {
-            throw new NotImplementedException();
+            return expression is null
+                ? await _context.Products.CountAsync()
+                : await _context.Products.Where(expression).CountAsync();
         }
 
-        public bool IsProductExist(Expression<Func<Product, bool>> expression = null)
+        public async Task<bool> IsProductExistAsync(Expression<Func<Product, bool>> expression)
         {
-            throw new NotImplementedException();
+                 return   await _context.Products.AnyAsync(expression);
         }
 
         public Task CreateAsync(Product product)
@@ -71,7 +78,7 @@ namespace Data.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        private IQueryable<Product> GetQuery(params string[] Includes)
+        private IQueryable<Product> CheckQuery(params string[] Includes)
         {
             var query = _context.Products.AsQueryable();
 
