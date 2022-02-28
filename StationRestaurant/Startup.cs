@@ -6,8 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Core.Entities;
 using Data.DAL;
 using Data.Repositories;
-using Data.Repositories.Implementations;
-using Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

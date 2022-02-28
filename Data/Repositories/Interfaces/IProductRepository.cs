@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Data.DAL;
 
 namespace Data.Repositories.Interfaces
 {
