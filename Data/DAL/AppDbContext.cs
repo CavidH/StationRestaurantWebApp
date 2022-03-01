@@ -1,4 +1,5 @@
 using Core.Entities;
+using Data.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,12 @@ namespace Data.DAL
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
             
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new ProductConfiguration());
+            base.OnModelCreating(builder);
         }
 
         public  DbSet<Product> Products { get; set; }

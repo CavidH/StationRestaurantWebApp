@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Core;
+using Core.Interfaces;
 using Data.DAL;
 using Data.Repositories.Implementations;
-using Data.Repositories.Interfaces;
 
 namespace Data.Repositories
 {
@@ -9,14 +10,14 @@ namespace Data.Repositories
     {
         private readonly AppDbContext _context;
         private  IProductRepository _productRepository;
-
+        //12 ci setirdeki data null gele biler sebeb 20 ci setr
 
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
         }
 
-        public IProductRepository productRepository => productRepository ?? new ProductRepository(_context);
+        public IProductRepository productRepository => _productRepository=_productRepository ?? new ProductRepository(_context);
 
         public async Task SaveAsync()
         {
