@@ -8,6 +8,8 @@ namespace Data.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;
+        private  IProductRepository _productRepository;
+
 
         public UnitOfWork(AppDbContext context)
         {
