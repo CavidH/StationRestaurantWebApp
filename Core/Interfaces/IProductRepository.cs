@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
 
-namespace Data.Repositories.Interfaces
+namespace Core.Interfaces
 {
     public interface IProductRepository :IRepository<Product>
     {

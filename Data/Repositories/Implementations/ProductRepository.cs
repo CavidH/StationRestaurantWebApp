@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
+using Core.Interfaces;
 using Data.DAL;
-using Data.Repositories.Interfaces;
 
 namespace Data.Repositories.Implementations
 {
