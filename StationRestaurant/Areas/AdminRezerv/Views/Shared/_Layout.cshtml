@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>Dashboard 1 | Velonic - Responsive Bootstrap 4 Admin Dashboard</title>
+    <title>Station Baku Restaurant</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description"/>
     <meta content="Coderthemes" name="author"/>
@@ -31,33 +31,33 @@
 <!-- Topbar Start -->
 <div class="navbar-custom">
 <ul class="list-unstyled topnav-menu float-right mb-0">
-@* Language Bar *@
-@* <li class="dropdown d-none d-lg-block"> *@
-@*     <a class="nav-link dropdown-toggle mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"> *@
-@*         <img src="~/Admin/assets/images/flags/us.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">English <i class="mdi mdi-chevron-down"></i> </span> *@
-@*     </a> *@
-@*     <div class="dropdown-menu dropdown-menu-right"> *@
-@*         <!-- item--> *@
-@*         <a href="javascript:void(0);" class="dropdown-item notify-item"> *@
-@*             <img src="~/Admin/assets/images/flags/germany.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">German</span> *@
-@*         </a> *@
-@* *@
-@*         <!-- item--> *@
-@*         <a href="javascript:void(0);" class="dropdown-item notify-item"> *@
-@*             <img src="~/Admin/assets/images/flags/italy.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Italian</span> *@
-@*         </a> *@
-@* *@
-@*         <!-- item--> *@
-@*         <a href="javascript:void(0);" class="dropdown-item notify-item"> *@
-@*             <img src="~/Admin/assets/images/flags/spain.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Spanish</span> *@
-@*         </a> *@
-@* *@
-@*         <!-- item--> *@
-@*         <a href="javascript:void(0);" class="dropdown-item notify-item"> *@
-@*             <img src="~/Admin/assets/images/flags/russia.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Russian</span> *@
-@*         </a> *@
-@*     </div> *@
-@* </li> *@
+@* @todo Language Bar *@
+<li class="dropdown d-none d-lg-block">
+    <a class="nav-link dropdown-toggle mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+        <img src="~/Admin/assets/images/flags/us.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">English <i class="mdi mdi-chevron-down"></i> </span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- item-->
+        <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img src="~/Admin/assets/images/flags/germany.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">German</span>
+        </a>
+
+        <!-- item-->
+        <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img src="~/Admin/assets/images/flags/italy.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Italian</span>
+        </a>
+
+        <!-- item-->
+        <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img src="~/Admin/assets/images/flags/spain.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Spanish</span>
+        </a>
+
+        <!-- item-->
+        <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img src="~/Admin/assets/images/flags/russia.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Russian</span>
+        </a>
+    </div>
+</li>
 
 <li class="dropdown notification-list">
     <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -276,9 +276,9 @@
 </li>
 
 <li class="dropdown notification-list">
-    @* <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect"> *@
-    @*     <i class="mdi mdi-settings-outline noti-icon"></i> *@
-    @* </a> *@
+    <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
+        <i class="mdi mdi-settings-outline noti-icon"></i>
+    </a>
 </li>
 
 
@@ -288,23 +288,19 @@
 <div class="logo-box">
     <a asp-controller="DashBoard" asp-action="Index" class="logo text-center logo-dark">
         <span class="logo-lg">
-            @* <img src="~/Admin/assets/images/logo-dark.png" alt="" height="18"> *@
-            <span class="logo-lg-text-light">FiorElla</span>
+            <span class="logo-lg-text-light">Admin</span>
         </span>
         <span class="logo-sm">
-            <span class="logo-lg-text-light">FiorElla</span>
-            @* <img src="~/Admin/assets/images/logo-sm.png" alt="" height="22"> *@
+            <span class="logo-lg-text-light">Admin</span>
         </span>
     </a>
 
     <a asp-controller="DashBoard" asp-action="Index" class="logo text-center logo-light">
         <span class="logo-lg">
-            @* <img src="~/Admin/assets/images/logo-light.png" alt="" height="18"> *@
-            <span class="logo-lg-text-light">FiorElla</span>
+            <span class="logo-lg-text-light">Admin</span>
         </span>
         <span class="logo-sm">
-            <span class="logo-lg-text-light">FiorElla</span>
-            @* <img src="~/Admin/assets/images/logo-sm.png" alt="" height="22"> *@
+            <span class="logo-lg-text-light">Admin</span>
         </span>
     </a>
 </div>
@@ -391,6 +387,17 @@
 @*     </ul> *@
 @* </li> *@
 <li>
+            <a href="javascript: void(0);" class="waves-effect">
+                <i class="mdi mdi-settings-outline"></i>
+                <span>Setting</span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li><a href="index.html">Dashboard 1</a></li>
+                <li><a href="dashboard-2.html">Dashboard 2</a></li>
+                <li><a href="dashboard-3.html">Dashboard 3</a></li>
+            </ul>
+        </li>
+<li>
     <a asp-area="AdminFiorElla" asp-controller="Category" asp-action="Index" class="waves-effect">
         <i class=" ion ion-md-folder-open"></i>
         <span class="text-light"> Category </span>
@@ -434,19 +441,8 @@
 </li>
 
 
-@* <li> *@
-@*             <a href="javascript: void(0);" class="waves-effect"> *@
-@*                 <i class="ion-md-speedometer"></i> *@
-@*                 <span>  Dashboard  </span> *@
-@*                 <span class="badge badge-info badge-pill float-right"> 3 </span> *@
-@*             </a> *@
-@*             <ul class="nav-second-level" aria-expanded="false"> *@
-@*                 <li><a href="index.html">Dashboard 1</a></li> *@
-@*                 <li><a href="dashboard-2.html">Dashboard 2</a></li> *@
-@*                 <li><a href="dashboard-3.html">Dashboard 3</a></li> *@
-@*             </ul> *@
-@*         </li> *@
-@* *@
+@* **************   -----------------------------****************************************son*************** *@
+
 @*         <li> *@
 @*             <a href="javascript: void(0);" class="waves-effect"> *@
 @*                 <i class="ion-md-basket"></i> *@
