@@ -10,7 +10,7 @@ namespace Data.Configurations
         {
             builder.Property(p => p.Title).IsRequired().HasMaxLength(255);
             builder.Property(p => p.Head).IsRequired().HasMaxLength(255);
-            builder.Property(p => p.Content).IsRequired().HasColumnType("TEXT()");
+            builder.Property(p => p.Content).IsRequired().HasColumnType("TEXT");
             builder.Property(p => p.UpdatedAt).IsRequired().HasDefaultValueSql("GETUTCDATE()");
         }
     }

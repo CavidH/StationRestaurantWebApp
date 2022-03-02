@@ -5,22 +5,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.DAL
 {
-    public class AppDbContext:IdentityDbContext<ApplicationUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         //add-migration AppUser -o DAL/Migrations
-        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new ProductCategoryConfiguration());
+            builder.ApplyConfiguration(new ProductImageConfiguration());
+
             base.OnModelCreating(builder);
         }
 
-        public  DbSet<Product> Products { get; set; }
-        public  DbSet<ProductCategory> ProductCategories { get; set; }
-        public  DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
     }
 }

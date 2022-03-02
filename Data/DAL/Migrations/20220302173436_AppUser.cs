@@ -26,6 +26,7 @@ namespace Data.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
@@ -39,11 +40,11 @@ namespace Data.DAL.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    SurName = table.Column<string>(nullable: true),
-                    IsActived = table.Column<bool>(nullable: false,defaultValue:true),
-                    Image = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    IsActivated = table.Column<bool>(nullable: false,defaultValue:true),
+                    Image = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

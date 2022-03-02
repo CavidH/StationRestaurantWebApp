@@ -3,38 +3,19 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.DAL.Migrations
 {
-    public partial class SomeProduct : Migration
+    public partial class PrCtIm : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "IsActived",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "SurName",
-                table: "AspNetUsers");
-
-            migrationBuilder.AddColumn<bool>(
-                name: "IsActivated",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddColumn<string>(
-                name: "LastName",
-                table: "AspNetUsers",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "ProductCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false,defaultValue:false)
+                    Name = table.Column<string>(maxLength: 255, nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -47,11 +28,12 @@ namespace Data.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 255, nullable: false),
+                    Title = table.Column<string>(maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
-                    ProductCategoryID = table.Column<int>(nullable: false )
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    ProductCategoryID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,8 +52,8 @@ namespace Data.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Image = table.Column<string>(nullable: true),
-                    ProductId = table.Column<int>(nullable: false )
+                    Image = table.Column<string>(maxLength: 255, nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,27 +87,6 @@ namespace Data.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductCategories");
-
-            migrationBuilder.DropColumn(
-                name: "IsActivated",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "LastName",
-                table: "AspNetUsers");
-
-            migrationBuilder.AddColumn<bool>(
-                name: "IsActived",
-                table: "AspNetUsers",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddColumn<string>(
-                name: "SurName",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: true);
         }
     }
 }
