@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Data.Configurations
 {
-    public class HeadSlideConfiguration:IEntityTypeConfiguration<HeadSlide>
+    public class GaleryImageConfiguration:IEntityTypeConfiguration<GaleryImage>
     {
-        public void Configure(EntityTypeBuilder<HeadSlide> builder)
+        public void Configure(EntityTypeBuilder<GaleryImage> builder)
         {
-
-            builder.Property(p => p.Image).IsRequired().HasMaxLength(255);
+            builder.Property(p=>p.Image).IsRequired().HasMaxLength(255);
             builder.Property(p => p.CreatedAt).IsRequired().HasDefaultValueSql("GETUTCDATE()");
 
         }

@@ -1,6 +1,4 @@
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Http;
 
 
 namespace Core.Entities
