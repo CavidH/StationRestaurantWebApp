@@ -1,7 +1,9 @@
+using Core.Entities;
+
 namespace Core.Interfaces
 {
-    public class IProductCategoryRepository
+    public interface IProductCategoryRepository:IRepository<ProductCategory>
     {
-        
+     
     }
 }

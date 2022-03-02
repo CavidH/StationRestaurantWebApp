@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace Business.ViewModels
+namespace Business.ViewModels.ProductVM
 {
     public class ProductPostVM
     {

@@ -1,4 +1,4 @@
-﻿using Business.ViewModels;
+﻿using Business.ViewModels.ProductVM;
 using FluentValidation;
 
 namespace Business.Validators.Product

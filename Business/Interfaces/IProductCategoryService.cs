@@ -1,7 +1,6 @@
-﻿ 
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Business.ViewModels;
+using Business.ViewModels.ProductCategoryVM;
 using Core.Entities;
 
 namespace Business.Interfaces
@@ -10,8 +9,8 @@ namespace Business.Interfaces
     {
         Task<List<Product>> GetAllAsync();
         Task<Product> GetAsync(int id);
-        Task Create(ProductPostVM productPostVm);
-        Task Update(int id, ProductUpdateVM productUpdateVm);
+        Task Create(ProductCategoryPostVM productCategoryPostVm);
+        Task Update(int id, ProductCategoryPostVM productCategoryUpdateVm);
         Task Remove(int id);
     }
 }

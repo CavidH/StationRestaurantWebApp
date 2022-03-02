@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.ViewModels;
+using Business.ViewModels.ProductVM;
 using Core.Entities;
 
 namespace Business.Interfaces
