@@ -7,7 +7,7 @@ using Core.Entities;
 
 namespace Business.Implementations
 {
-    public class ProductCategoryService:IProductCategoryService
+    public class ProductCategoryService : IProductCategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -16,12 +16,14 @@ namespace Business.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public Task<List<Product>> GetAllAsync()
+        public async Task<List<ProductCategory>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            return await _unitOfWork.productCategoryRepository
+                  .GetAllAsync(p => p.IsDeleted == false);
+
         }
 
-        public Task<Product> GetAsync(int id)
+        public Task<ProductCategory> GetAsync(int id)
         {
             throw new System.NotImplementedException();
         }

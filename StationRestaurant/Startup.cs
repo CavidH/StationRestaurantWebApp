@@ -1,3 +1,5 @@
+using Business.Implementations;
+using Business.Interfaces;
 using Business.Validators.ProductCategory;
 using Core;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +46,7 @@ namespace StationRestaurant
                 Options.Password.RequireDigit = true;
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IProductCategoryService, ProductCategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
