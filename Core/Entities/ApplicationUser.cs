@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace Core.Entities
 {
@@ -8,5 +9,7 @@ namespace Core.Entities
         public string LastName { get; set; }
         public bool IsActivated { get; set; }
         public string Image { get; set; }
+        public DateTime CreatedAt { get; set; }
+
     }
 }

@@ -10,6 +10,7 @@ namespace Core.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public bool IsDeleted { get; set; }
+        public DateTime CreatedAt { get; set; }
         public int ProductCategoryID { get; set; }
         public ProductCategory ProductCategory { get; set; }
         public List<ProductImage> ProductImages { get; set; }
