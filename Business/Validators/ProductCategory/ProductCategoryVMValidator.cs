@@ -1,4 +1,4 @@
-using Business.ViewModels.ProductCategoryVM;
+using Business.ViewModels.ProductCategory;
 using FluentValidation;
 
 namespace Business.Validators.ProductCategory
@@ -9,7 +9,8 @@ namespace Business.Validators.ProductCategory
         {
             RuleFor(p => p.Name)
                 .NotNull()
-                .NotEmpty();
+                .NotEmpty()
+                .MaximumLength(200);
         }
     }
 }
