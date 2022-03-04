@@ -24,13 +24,14 @@ namespace Business.Implementations
 
         }
 
-        public async Task<ProductCategory> GetAsync(int id)
+        public async Task<ProductCategoryVM> GetAsync(int id)
         {
             //exceptionlari nezereal
             var category = await _unitOfWork
                 .productCategoryRepository
-                .GetAsync(p => p.Id == id && p.IsDeleted==false );
-            return category;   
+                .GetAsync(p => p.Id == id && p.IsDeleted == false);
+            if (category == null) return null;
+            return new ProductCategoryVM() { Name = category.Name };
 
         }
 
@@ -58,6 +59,13 @@ namespace Business.Implementations
                 .productCategoryRepository
                 .Update(category);
             await _unitOfWork.SaveAsync();
+        }
+
+        public async Task<bool> IsExits(int id)
+        {
+            return await _unitOfWork
+                 .productCategoryRepository
+                 .IsExistAsync(p => p.Id == id && p.IsDeleted == false);
         }
 
         public async Task Remove(int id)

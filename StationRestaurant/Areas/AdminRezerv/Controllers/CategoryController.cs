@@ -39,15 +39,27 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
+            if (id < 1) return BadRequest();
+            //if (!await _productCategoryService.IsExits(id)) return NotFound();
             var category = await _productCategoryService.GetAsync(id);
+            if (category == null) return NotFound();
             return View(category);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(ProductCategoryVM productCategoryVm)
+        public async Task<IActionResult> Update(int id, ProductCategoryVM productCategoryVm)
         {
-            await _productCategoryService.Create(productCategoryVm);
-            return RedirectToAction(nameof(Index));
+            if (id < 1) return BadRequest();
+            if (ModelState.IsValid)
+            {
+                //if (!await _productCategoryService.IsExits(id)) return NotFound();
+                var category = await _productCategoryService.GetAsync(id);
+                if (category == null) return NotFound();
+                await _productCategoryService.Update(id, productCategoryVm);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(productCategoryVm);
         }
 
 
