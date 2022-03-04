@@ -19,7 +19,7 @@ namespace Data.Repositories.Implementations
             _context = context;
         }
 
-        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> expression = null, params string[] Includes)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression = null, params string[] Includes)
         {
             //IQueryable<entity> query = _context.entitys.AsQueryable();
             var query = CheckQuery(Includes);

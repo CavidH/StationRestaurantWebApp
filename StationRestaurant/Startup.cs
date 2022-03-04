@@ -29,7 +29,7 @@ namespace StationRestaurant
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews()
-                .AddFluentValidation(p=>p.RegisterValidatorsFromAssemblyContaining<ProductCategoryPostVMValidator>());//diff asembly
+                .AddFluentValidation(p=>p.RegisterValidatorsFromAssemblyContaining<ProductCategoryVMValidator>());//diff asembly
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));

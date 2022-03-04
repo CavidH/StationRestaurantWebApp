@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Business.Interfaces;
+using Business.ViewModels.ProductCategory;
+using Business.ViewModels.ProductCategoryVM;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
@@ -13,15 +15,43 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         {
             _productCategoryService = productCategoryService;
         }
-        public async  Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            var categories = await _productCategoryService.GetAllAsync();
-            return View(categories);
+            return View(await _productCategoryService.GetAllAsync());
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ProductCategoryVM productCategoryVm)
+        {
+            await _productCategoryService.Create(productCategoryVm);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var category = await _productCategoryService.GetAsync(id);
+            return View(category);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(ProductCategoryVM productCategoryVm)
+        {
+            await _productCategoryService.Create(productCategoryVm);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _productCategoryService.Remove(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

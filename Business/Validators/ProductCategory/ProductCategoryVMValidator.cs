@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Business.Validators.ProductCategory
 {
-    public class ProductCategoryPostVMValidator : AbstractValidator<ProductCategoryPostVM>
+    public class ProductCategoryVMValidator : AbstractValidator<ProductCategoryVM>
     {
-        public ProductCategoryPostVMValidator()
+        public ProductCategoryVMValidator()
         {
             RuleFor(p => p.Name)
                 .NotNull()

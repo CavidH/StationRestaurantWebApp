@@ -23,24 +23,59 @@ namespace Business.Implementations
 
         }
 
-        public Task<ProductCategory> GetAsync(int id)
+        public async Task<ProductCategory> GetAsync(int id)
         {
-            throw new System.NotImplementedException();
+            //exceptionlari nezereal
+            var category = await _unitOfWork
+                .productCategoryRepository
+                .GetAsync(p => p.Id == id && p.IsDeleted==false );
+            return category;   
+
         }
 
-        public Task Create(ProductCategoryPostVM productCategoryPostVm)
+        public async Task Create(ProductCategoryVM productCategoryVm)
         {
-            throw new System.NotImplementedException();
+            var p = new ProductCategory()
+            {
+                Name = productCategoryVm.Name
+
+            };
+            await _unitOfWork.productCategoryRepository.CreateAsync(p);
+            await _unitOfWork.SaveAsync();
+            //productCategoryPostVm.Name
         }
 
-        public Task Update(int id, ProductCategoryPostVM productCategoryUpdateVm)
+        public async Task Update(int id, ProductCategoryVM productCategoryVm)
         {
-            throw new System.NotImplementedException();
+
+            //exceptionlari nezere al
+            var category = await _unitOfWork
+                .productCategoryRepository
+                .GetAsync(p => p.Id == id);
+            category.Name = productCategoryVm.Name;
+            _unitOfWork
+                .productCategoryRepository
+                .Update(category);
+            await _unitOfWork.SaveAsync();
         }
 
-        public Task Remove(int id)
+        public async Task Remove(int id)
         {
-            throw new System.NotImplementedException();
+            if (id == 0)
+            {
+                //id exception
+            }
+            var category = await _unitOfWork
+                .productCategoryRepository
+                .GetAsync(p => p.Id == id);
+            if (category == null)
+            {
+                // category not found
+            }
+            category.IsDeleted = true;
+
+            _unitOfWork.productCategoryRepository.Update(category);
+            await _unitOfWork.SaveAsync();
         }
     }
 }
