@@ -67,6 +67,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
+            if (id < 1) return BadRequest();
             await _productCategoryService.Remove(id);
             return RedirectToAction(nameof(Index));
         }

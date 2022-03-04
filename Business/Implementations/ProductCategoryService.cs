@@ -70,21 +70,15 @@ namespace Business.Implementations
 
         public async Task Remove(int id)
         {
-            if (id == 0)
-            {
-                //id exception
-            }
             var category = await _unitOfWork
                 .productCategoryRepository
                 .GetAsync(p => p.Id == id);
-            if (category == null)
+            if (category != null)
             {
-                // category not found
+                category.IsDeleted = true;
+                _unitOfWork.productCategoryRepository.Update(category);
+                await _unitOfWork.SaveAsync();
             }
-            category.IsDeleted = true;
-
-            _unitOfWork.productCategoryRepository.Update(category);
-            await _unitOfWork.SaveAsync();
         }
     }
 }
