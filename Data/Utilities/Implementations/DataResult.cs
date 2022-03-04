@@ -11,13 +11,13 @@ namespace Data.Utilities.Implementations
             ResultStatus = resultStatus;
             Data = data;
         }
-        public DataResult(ResultStatus resultStatus, Entity data, string info)
+        public DataResult(ResultStatus resultStatus, string info, Entity data)
         {
             ResultStatus = resultStatus;
             Data = data;
             Info = info;
         }
-        public DataResult(ResultStatus resultStatus, Entity data, string info, Exception exception)
+        public DataResult(ResultStatus resultStatus, string info, Entity data,Exception exception)
         {
             ResultStatus = resultStatus;
             Data = data;

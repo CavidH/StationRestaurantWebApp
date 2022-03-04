@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.ProductCategory;
-using Business.ViewModels.ProductCategoryVM;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
@@ -28,8 +27,14 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductCategoryVM productCategoryVm)
         {
-            await _productCategoryService.Create(productCategoryVm);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                await _productCategoryService.Create(productCategoryVm);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(productCategoryVm);
+
         }
         [HttpGet]
         public async Task<IActionResult> Update(int id)
