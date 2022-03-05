@@ -1,4 +1,4 @@
-﻿@model ProductPostVM
+﻿@model ProductUpdateVM
 <div class="content-page">
     <div class="content">
 
@@ -49,11 +49,28 @@
                                     <input asp-for="Description" parsley-trigger="change" required placeholder="Enter Product Description" class="form-control">
                                     <span class="text-danger" asp-validation-for="Description"></span>
                                 </div>
+                                @* <div class="form-group"> *@
+                                @*     <label asp-for="ProductCategoryID">CategoryId<span class="text-danger">*</span></label> *@
+                                @*     <input asp-for="ProductCategoryID" value=@Model.ProductCategoryID parsley-trigger="change" required placeholder="Enter Product CategoryId" class="form-control" id="ProductCategoryId"> *@
+                                @*     <span class="text-danger" asp-validation-for="ProductCategoryID"></span> *@
+                                @* </div> *@
                                 <div class="form-group">
                                     <label asp-for="Description">Select Category<span class="text-danger">*</span></label>
                                     <select class="form-control" asp-for="ProductCategoryID">
+
                                         @foreach (var category in(List<ProductCategory>) ViewBag.categories)
                                         {
+                                            if (category.Id == Model.ProductCategoryID)
+                                            {
+                                                <option value="@category.Id">@category.Name</option>
+                                            }
+                                        }
+                                        @foreach (var category in(List<ProductCategory>) ViewBag.categories)
+                                        {
+                                            if (category.Id == Model.ProductCategoryID)
+                                            {
+                                                continue;
+                                            }
                                             <option value="@category.Id">@category.Name</option>
                                         }
 
@@ -66,7 +83,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="ImageFile">Image <span class="text-danger">*</span> </label>
-                                    <input asp-for="ImageFile" parsley-trigger="change" accept="image/*" required placeholder="Enter Product img" class="form-control">
+                                    <input asp-for="ImageFile" parsley-trigger="change" accept="image/*"  placeholder="Enter Product img" class="form-control">
                                     <span class="text-danger" asp-validation-for="ImageFile"></span>
                                 </div>
                                 <div class="form-group text-right mb-0">

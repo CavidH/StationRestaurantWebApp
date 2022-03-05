@@ -10,6 +10,6 @@ namespace Business.ViewModels.ProductVM
         public string Description { get; set; }
         public int ProductCategoryID { get; set; }
         public IFormFile ImageFile { get; set; }
-        public List<Core.Entities.ProductCategory> ProductCategories { get; set; }
+        // public List<Core.Entities.ProductCategory> ProductCategories { get; set; }
     }
 }
