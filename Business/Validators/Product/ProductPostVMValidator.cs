@@ -3,11 +3,14 @@ using FluentValidation;
 
 namespace Business.Validators.Product
 {
-    public  class ProductPostVMValidator:AbstractValidator<ProductVM>
+    public  class ProductPostVMValidator:AbstractValidator<ProductPostVM>
     {
         public ProductPostVMValidator()
         {
-            //RuleFor(p=>p.name)
+            RuleFor(p => p.Name).NotNull().NotEmpty().MaximumLength(200).WithMessage("Sdfdsf");
+            RuleFor(p => p.Title).NotNull().NotEmpty().MaximumLength(250);
+            RuleFor(p => p.Description).NotNull().NotEmpty().MaximumLength(500);
+            RuleFor(p => p.ImageFile).NotNull().NotEmpty();
         }
     }
 }

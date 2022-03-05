@@ -11,7 +11,7 @@ namespace Business.Interfaces
         Task<List<Product>> GetAllAsync();
         Task<Paginate<Product>> GetAllPaginatedAsync(int page);
         Task<Product> GetAsync(int id);
-        Task Create(ProductVM productPostVm);
+        Task Create(ProductPostVM productPostVm);
         Task Update(int id, ProductUpdateVM productUpdateVm);
         Task Remove(int id);
     }
