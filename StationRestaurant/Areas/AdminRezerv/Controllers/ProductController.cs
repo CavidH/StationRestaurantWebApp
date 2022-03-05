@@ -84,9 +84,9 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Update(int id,ProductUpdateVM productUpdateVm)
+        public async Task<IActionResult> Update(int id, ProductUpdateVM productUpdateVm)
         {
-            // ViewBag.categories = await _productCategoryService.GetAllAsync();
+            ViewBag.categories = await _productCategoryService.GetAllAsync();
 
             if (ModelState.IsValid)
             {
@@ -105,7 +105,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     }
                 }
 
-                await _productService.Update(id,productUpdateVm);
+                await _productService.Update(id, productUpdateVm);
 
                 return RedirectToAction(nameof(Index));
             }

@@ -7,9 +7,9 @@ namespace Business.Validators.Product
     {
         public ProductUpdateVMValidator()
         {
-            RuleFor(p => p.Name).MaximumLength(200);
-            RuleFor(p => p.Title).MaximumLength(250);
-            RuleFor(p => p.Description).MaximumLength(500);
+            RuleFor(p => p.Name).NotNull().NotEmpty().MaximumLength(200);
+            RuleFor(p => p.Title).NotNull().NotEmpty().MaximumLength(250);
+            RuleFor(p => p.Description).NotNull().NotEmpty().MaximumLength(500);
         }
     }
 }

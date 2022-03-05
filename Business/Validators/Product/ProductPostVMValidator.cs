@@ -7,7 +7,7 @@ namespace Business.Validators.Product
     {
         public ProductPostVMValidator()
         {
-            RuleFor(p => p.Name).NotNull().NotEmpty().MaximumLength(200).WithMessage("Sdfdsf");
+            RuleFor(p => p.Name).NotNull().NotEmpty().MaximumLength(200);
             RuleFor(p => p.Title).NotNull().NotEmpty().MaximumLength(250);
             RuleFor(p => p.Description).NotNull().NotEmpty().MaximumLength(500);
             RuleFor(p => p.ImageFile).NotNull().NotEmpty();
