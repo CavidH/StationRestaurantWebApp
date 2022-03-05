@@ -11,6 +11,10 @@ namespace Data.Repositories
         private readonly AppDbContext _context;
         private  IProductRepository _productRepository;
         private IProductCategoryRepository _productCategoryRepository;
+
+
+
+
         //12 ci setirdeki data null gele biler sebeb 20 ci setr
 
         public UnitOfWork(AppDbContext context)
