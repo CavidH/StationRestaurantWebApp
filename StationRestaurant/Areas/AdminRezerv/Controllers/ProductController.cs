@@ -105,7 +105,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     }
                 }
 
-                _productService.Update(id,productUpdateVm);
+                await _productService.Update(id,productUpdateVm);
 
                 return RedirectToAction(nameof(Index));
             }
