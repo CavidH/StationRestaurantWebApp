@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Business.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
 {
+    [Area("AdminRezerv")]
     public class ProductController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductService _productService;
+
+        public ProductController(IProductService productService)
         {
-            return View();
+            _productService = productService;
+        }
+        public async Task<IActionResult> Index(int page=1)
+        {
+            var products = await _productService.GetAllPaginatedAsync(page);
+            return View(products);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Data.Configurations
             builder.Property(p => p.Description).IsRequired().HasColumnType("TEXT");
             builder.Property(p => p.IsDeleted).IsRequired().HasDefaultValue(false);
             builder.Property(p => p.CreatedAt).IsRequired().HasDefaultValueSql("GETUTCDATE()");
+            builder.Property(p => p.Image).IsRequired().HasMaxLength(255);
 
         }
     }

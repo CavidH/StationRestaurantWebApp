@@ -17,13 +17,23 @@ namespace Data.DAL
         {
             builder.ApplyConfiguration(new ProductConfiguration());
             builder.ApplyConfiguration(new ProductCategoryConfiguration());
-            builder.ApplyConfiguration(new ProductImageConfiguration());
+            builder.ApplyConfiguration(new AboutConfiguration());
+            builder.ApplyConfiguration(new GaleryImageConfiguration());
+            builder.ApplyConfiguration(new HeadSlideConfiguration());
+            builder.ApplyConfiguration(new SettingConfiguration());
+            //builder.ApplyConfiguration(new ProductImageConfiguration());
 
             base.OnModelCreating(builder);
         }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
-        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<About> Abouts { get; set; }
+        public DbSet<GaleryImage> GaleryImages { get; set; }
+        public DbSet<HeadSlide> HeadSlides { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+
+
+        //public DbSet<ProductImage> ProductImages { get; set; }
     }
 }

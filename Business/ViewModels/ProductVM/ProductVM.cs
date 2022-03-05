@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Entities;
 
-namespace Core.Entities
+namespace Business.ViewModels.ProductVM
 {
-    public class Product
+    public class ProductVM
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public bool IsDeleted { get; set; }
         public DateTime CreatedAt { get; set; }
         public int ProductCategoryID { get; set; }
-        public ProductCategory ProductCategory { get; set; }
-        public string Image { get; set; }
-        //public List<ProductImage> ProductImages { get; set; }
-
-
-
+        public  Core.Entities.ProductCategory ProductCategory { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
     }
 }

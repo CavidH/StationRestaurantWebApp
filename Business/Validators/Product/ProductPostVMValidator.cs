@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Business.Validators.Product
 {
-    public  class ProductPostVMValidator:AbstractValidator<ProductPostVM>
+    public  class ProductPostVMValidator:AbstractValidator<ProductVM>
     {
         public ProductPostVMValidator()
         {

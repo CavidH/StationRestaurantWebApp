@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DAL\Migrations\20220302173146_AppUser.cs" />
-    <Compile Remove="DAL\Migrations\20220302173146_AppUser.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Repositories\Implementations\ProductCategoryRepository.cs~" />
   </ItemGroup>
 
@@ -20,10 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DAL\Migrations\" />
   </ItemGroup>
 
 </Project>

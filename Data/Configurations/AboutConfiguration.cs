@@ -9,6 +9,7 @@ namespace Data.Configurations
         public void Configure(EntityTypeBuilder<About> builder)
         {
             builder.Property(p => p.Title).IsRequired().HasMaxLength(255);
+            builder.Property(p => p.Image).IsRequired().HasMaxLength(255);
             builder.Property(p => p.Head).IsRequired().HasMaxLength(255);
             builder.Property(p => p.Content).IsRequired().HasColumnType("TEXT");
             builder.Property(p => p.UpdatedAt).IsRequired().HasDefaultValueSql("GETUTCDATE()");

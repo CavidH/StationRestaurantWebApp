@@ -9,8 +9,9 @@ namespace Business.Interfaces
     public interface IProductService
     {
         Task<List<Product>> GetAllAsync();
+        Task<Paginate<Product>> GetAllPaginatedAsync(int page);
         Task<Product> GetAsync(int id);
-        Task Create(ProductPostVM productPostVm);
+        Task Create(ProductVM productPostVm);
         Task Update(int id, ProductUpdateVM productUpdateVm);
         Task Remove(int id);
     }

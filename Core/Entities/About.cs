@@ -8,6 +8,7 @@ namespace Core.Entities
         public string Title { get; set; }
         public string Head { get; set; }
         public string Content { get; set; }
+        public string Image { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
 }
