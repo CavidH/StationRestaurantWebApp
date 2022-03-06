@@ -32,8 +32,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-4">Basic Form</h4>
-                            @* <div class="alert-danger"  asp-validation-summary="All"  ></div> *@
-                            <form class="parsley-examples" method="post" enctype="multipart/form-data">
+                             <form class="parsley-examples" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label asp-for="TableNumber">Table Number<span class="text-danger">*</span></label>
                                     <input asp-for="TableNumber" parsley-trigger="change" required placeholder="Enter Table Number" class="form-control">

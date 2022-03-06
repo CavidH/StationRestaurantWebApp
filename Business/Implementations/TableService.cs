@@ -44,7 +44,13 @@ namespace Business.Implementations
 
         public async Task Create(TablePostVM tablePostVm)
         {
-            throw new NotImplementedException();
+            var table = new Table()
+            {
+                TableNumber = tablePostVm.TableNumber,
+                MaxPersonCount = tablePostVm.MaxPersonCount
+            };
+            await _unitOfWork.tableRepository.CreateAsync(table);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task Update(int id, TablePostVM tablePostVm)
@@ -72,6 +78,18 @@ namespace Business.Implementations
                 .GetAllAsync(p => p.IsDeleted == false);
             var tableCount = tables.Count;
             return (int) Math.Ceiling(((decimal) tableCount / take));
+        }
+
+        public async Task<bool> IsExist(int TableNumber)
+        {
+            var table = await _unitOfWork.tableRepository.GetAsync(p => p.TableNumber == TableNumber &&p.IsDeleted==false);
+
+            if (table != null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Business.Interfaces
         Task Update(int id, TablePostVM tablePostVm);
         Task Remove(int id);
         Task<int> getPageCount(int take);
+        Task<bool> IsExist(int TableNumber);
 
     }
 }
