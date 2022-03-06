@@ -55,13 +55,13 @@
                                                 <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Detail" asp-route-id="@product.Id">
                                                 <i class="mdi mdi-eye-outline"></i>
                                                 </a>*@
-                                                <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@product.Id">
+                                            <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@product.Id">
                                                 <i class="mdi mdi-pencil-outline"></i>
-                                                </a>
-                                                <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@product.Id">
+                                            </a>
+                                            <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@product.Id">
                                                 <i class="mdi mdi-delete-outline"></i>
-                                                </a>
-                                                </td>
+                                            </a>
+                                        </td>
 
                                     </tr>
 
@@ -71,7 +71,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <nav aria-label="Page navigation example">
+                        @if(@Model.AllPageCount>1){ <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
 
                                 @if (Model.CurrentPage > 1)
@@ -116,6 +116,7 @@
 
                             </ul>
                         </nav>
+}
                     </div>
                 </div>
             </div>

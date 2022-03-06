@@ -49,6 +49,8 @@ namespace StationRestaurant
             
             services.AddScoped<IProductCategoryService, ProductCategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IReservationService, RezervationService>();
+            services.AddScoped<ITableService, TableService>();
 
         }
 

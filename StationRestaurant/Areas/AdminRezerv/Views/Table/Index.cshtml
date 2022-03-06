@@ -1,111 +1,147 @@
-﻿<div class="content-page">
+﻿@model Paginate<Table>
+@{
+    int count = ((Model.CurrentPage - 1) * 10) + 1;
+}
+<div class="content-page">
     <div class="content">
 
         <!-- Start Content-->
         <div class="container-fluid">
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body table-responsive">
                             <h4 class="m-t-0 header-title mb-4">
-                                <b>Buttons example</b>
+                                <b>Product Table</b>
                             </h4>
+                            @* <a class="btn btn-info waves-effect width-md waves-light " asp-action="Create" style="color:#ffffff  ">Add</a> *@
+                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
-                            <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dt-buttons btn-group flex-wrap">
-                                            <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="datatable-buttons" type="button">
-                                                <span>Copy</span>
+                                <thead>
+                                <tr>
+                                    <th>№</th>
+                                    <th>Table Number</th>
+                                    <th>Person</th>
+                                    <th>Status</th>
+                                    <th>Setting</th>
+
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach (var product in Model.Items)
+                                {
+                                    <tr>
+                                        <td>@count </td>
+                                        <td>
+                                            <button type="button" class="btn btn-dropbox waves-effect waves-light">
+                                                @product.TableNumber
                                             </button>
-                                            <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="datatable-buttons" type="button">
-                                                <span>Excel</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-icon waves-effect waves-light btn-purple">
+                                                @product.MaxPersonCount
                                             </button>
-                                            <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="datatable-buttons" type="button">
-                                                <span>PDF</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div id="datatable-buttons_filter" class="dataTables_filter">
-                                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatable-buttons"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid" aria-describedby="datatable-buttons_info">
+                                        </td>
+                                        <td>
+                                            @if (@product.IsReserved == true)
+                                            {
+                                                <button type="button" class="btn btn-icon waves-effect waves-light btn-danger"> Reserved </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-icon waves-effect waves-light btn-primary"> Empty </button>
+                                            }
 
-                                            <thead>
-                                            <tr role="row">
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 965px;" aria-label="Name: activate to sort column ascending">Name</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 0px;" aria-label="Position: activate to sort column ascending">Position</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 0px;" aria-label="Office: activate to sort column ascending">Office</th><th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 0px;" aria-label="Age: activate to sort column descending" aria-sort="ascending">Age</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 0px;" aria-label="Start date: activate to sort column ascending">Start date</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 0px;" aria-label="Salary: activate to sort column ascending">Salary</th>
-                                            </tr>
-                                            </thead>
+                                        </td>
 
-                                            <tbody>
+                                        <td> @* 
+                                                <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Detail" asp-route-id="@product.Id">
+                                                <i class="mdi mdi-eye-outline"></i>
+                                                </a>*@
+                                        @* <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@product.Id"> *@
+                                        @* <i class="mdi mdi-pencil-outline"></i> *@
+                                        @* </a> *@
+                                        <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@product.Id">
+                                        <i class="mdi mdi-delete-outline"></i>
+                                        </a>
+                                        </td>
+
+                                    </tr>
 
 
-                                            <tr role="row" class="odd">
-                                                <td class="" tabindex="0">Tatyana Fitzpatrick</td>
-                                                <td style="">Regional Director</td>
-                                                <td style="">London</td>
-                                                <td class="sorting_1" style="">19</td>
-                                                <td style="">2010/03/17</td>
-                                                <td style="">$385,750</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="" tabindex="0">Shou Itou</td>
-                                                <td style="">Regional Marketing</td>
-                                                <td style="">Tokyo</td>
-                                                <td class="sorting_1" style="">20</td>
-                                                <td style="">2011/08/14</td>
-                                                <td style="">$163,000</td>
-                                            </tr>
-                                       
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-7">
-                                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
-                                            <ul class="pagination">
-                                                <li class="paginate_button page-item previous disabled" id="datatable-buttons_previous">
-                                                    <a href="#" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                </li>
-                                                <li class="paginate_button page-item active">
-                                                    <a href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                                                </li>
-                                                <li class="paginate_button page-item ">
-                                                    <a href="#" aria-controls="datatable-buttons" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                                                </li>
-                                                <li class="paginate_button page-item ">
-                                                    <a href="#" aria-controls="datatable-buttons" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                                                </li>
-                                                <li class="paginate_button page-item ">
-                                                    <a href="#" aria-controls="datatable-buttons" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                                                </li>
-                                                <li class="paginate_button page-item ">
-                                                    <a href="#" aria-controls="datatable-buttons" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                                                </li>
-                                                <li class="paginate_button page-item ">
-                                                    <a href="#" aria-controls="datatable-buttons" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                                                </li>
-                                                <li class="paginate_button page-item next" id="datatable-buttons_next">
-                                                    <a href="#" aria-controls="datatable-buttons" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    count++;
+                                }
+                                </tbody>
+                            </table>
                         </div>
+                          @if(@Model.AllPageCount>1){ <nav aria-label="Page navigation example">
+                              <ul class="pagination justify-content-center">
+  
+                                  @if (Model.CurrentPage > 1)
+                                  {
+                                      var prev = Model.CurrentPage - 1;
+                                      <li class="page-item ">
+                                          <a class="page-link" asp-action="Index" asp-route-page="@prev">Previous</a>
+                                      </li>
+                                  }
+                                  else
+                                  {
+                                      <li class="page-item disabled">
+                                          <a class="page-link ">Previous</a>
+                                      </li>
+                                  }
+                                  @{
+                                      if (1 < Model.AllPageCount)
+                                      {
+                                          var start = 1;
+                                          var end = Model.AllPageCount;
+                                          for (int i = start; i <= end; i++)
+                                          {
+                                              <li class="page-item @(Model.CurrentPage == i ? "disabled" : "")">
+                                                  <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                              </li>
+                                          }
+                                      }
+                                  }
+                                  @if (Model.CurrentPage < Model.AllPageCount)
+                                  {
+                                      var next = Model.CurrentPage + 1;
+                                      <li class="page-item">
+                                          <a class="page-link" asp-action="Index" asp-route-page="@next">Next</a>
+                                      </li>
+                                  }
+                                  else
+                                  {
+                                      <li class="page-item disabled">
+                                          <a class="page-link">Next</a>
+                                      </li>
+                                  }
+  
+                              </ul>
+                          </nav>
+  }
                     </div>
                 </div>
             </div>
+
         </div>
+        <!-- end container-fluid -->
+
     </div>
+    <!-- end content -->
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    2015 - 2021 &copy; Velonic theme by <a href="#">Coderthemes</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end Footer -->
+
 </div>

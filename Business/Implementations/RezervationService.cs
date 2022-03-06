@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
 using Business.ViewModels.ProductVM;
+using Core;
 using Core.Entities;
 
 namespace Business.Implementations
 {
     public class RezervationService:IReservationService
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public RezervationService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
         public Task<List<Reservation>> GetAllAsync()
         {
             throw new NotImplementedException();
