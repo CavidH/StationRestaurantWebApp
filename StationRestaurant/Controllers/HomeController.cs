@@ -15,13 +15,11 @@ namespace StationRestaurant.Controllers
 
         public IActionResult Index()
         {
+            // @ViewData["Title"] title yaz setting
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+       
 
        
     }

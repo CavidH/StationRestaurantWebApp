@@ -11,7 +11,7 @@ namespace Core.Entities
 
 
 
-        public int ReservationId { get; set; }
+        //public int ReservationId { get; set; }
         public Reservation Reservation { get; set; }
     }
 }

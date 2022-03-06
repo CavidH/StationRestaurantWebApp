@@ -15,6 +15,8 @@ namespace Data.Configurations
             builder.Property(p => p.IsActive).IsRequired().HasDefaultValue(true);
             builder.Property(p => p.PhoneNumber).IsRequired().HasMaxLength(255);
             builder.Property(p => p.ReservDate).IsRequired();
+            builder.Property(p => p.IsActive).IsRequired().HasDefaultValue(false);
+
         }
     }
 }

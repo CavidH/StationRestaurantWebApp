@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
-using Business.Validators.Product;
 using Business.ViewModels.ProductVM;
 using Microsoft.AspNetCore.Mvc;
 

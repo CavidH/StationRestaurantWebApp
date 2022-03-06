@@ -10,8 +10,8 @@ namespace Data.Configurations
         {
             builder.Property(p => p.TableNumber).IsRequired();
             builder.Property(p => p.MaxPersonCount).IsRequired();
-            builder.Property(p => p.IsReserved).HasDefaultValue(false);
-            builder.Property(p => p.IsDeleted).HasDefaultValue(false);
+            builder.Property(p => p.IsReserved).IsRequired().HasDefaultValue(false);
+            builder.Property(p => p.IsDeleted).IsRequired().HasDefaultValue(false);
         }
     }
 }

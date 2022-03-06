@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DAL\Migrations\20220306073558_reservtable.cs" />
+    <Compile Remove="DAL\Migrations\20220306073558_reservtable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Repositories\Implementations\ProductCategoryRepository.cs~" />
   </ItemGroup>
 

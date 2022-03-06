@@ -28,4 +28,8 @@
     <Folder Include="wwwroot\Assets\img" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+  </ItemGroup>
+
 </Project>

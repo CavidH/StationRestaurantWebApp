@@ -21,6 +21,8 @@ namespace Data.DAL
             builder.ApplyConfiguration(new GaleryImageConfiguration());
             builder.ApplyConfiguration(new HeadSlideConfiguration());
             builder.ApplyConfiguration(new SettingConfiguration());
+            builder.ApplyConfiguration(new ReservationConfiguration());
+            builder.ApplyConfiguration(new TableConfiguration());
             //builder.ApplyConfiguration(new ProductImageConfiguration());
 
             base.OnModelCreating(builder);
@@ -32,6 +34,8 @@ namespace Data.DAL
         public DbSet<GaleryImage> GaleryImages { get; set; }
         public DbSet<HeadSlide> HeadSlides { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Table> Tables { get; set; }
 
 
         //public DbSet<ProductImage> ProductImages { get; set; }
