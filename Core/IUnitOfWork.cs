@@ -7,6 +7,8 @@ namespace Core
     {
         public IProductRepository productRepository { get; }
         public IProductCategoryRepository productCategoryRepository { get; }
+        public ITableRepository tableRepository { get; }
+        public IReservationRepository reservationRepository { get; }
         Task SaveAsync();
     }
 }

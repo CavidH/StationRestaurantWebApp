@@ -11,6 +11,8 @@ namespace Data.Repositories
         private readonly AppDbContext _context;
         private  IProductRepository _productRepository;
         private IProductCategoryRepository _productCategoryRepository;
+        private ITableRepository _tableRepository;
+        private IReservationRepository _reservationRepository;
 
 
 
@@ -25,6 +27,9 @@ namespace Data.Repositories
         public IProductRepository productRepository => _productRepository=_productRepository ?? new ProductRepository(_context);
 
         public IProductCategoryRepository productCategoryRepository => _productCategoryRepository = _productCategoryRepository ?? new ProductCategoryRepository(_context);
+        public ITableRepository tableRepository =>_tableRepository=_tableRepository ?? new TableRepository(_context);
+
+        public IReservationRepository reservationRepository => _reservationRepository = _reservationRepository ?? new ReservationRepository(_context);
 
 
         public async Task SaveAsync()
