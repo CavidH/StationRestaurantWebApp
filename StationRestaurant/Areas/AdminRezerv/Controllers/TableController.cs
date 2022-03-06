@@ -20,6 +20,13 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             var Tables = await _tableService.GetAllPaginatedAsync(page);
             return View(Tables);
         }
+        public async Task<IActionResult> Create()
+        {
+
+            return View();
+        }
+        
+
 
         public async Task<IActionResult> Delete(int id)
         {

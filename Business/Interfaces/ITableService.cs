@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.ViewModels;
-using Business.ViewModels.ProductVM;
+using Business.ViewModels.Table;
 using Core.Entities;
 
 namespace Business.Interfaces
@@ -11,8 +11,8 @@ namespace Business.Interfaces
         Task<List<Table>> GetAllAsync();
         Task<Paginate<Table>> GetAllPaginatedAsync(int page);
         Task<Table> GetAsync(int id);
-        Task Create(ProductPostVM productPostVm);
-        Task Update(int id, ProductUpdateVM productUpdateVm);
+        Task Create(TablePostVM tablePostVm);
+        Task Update(int id, TablePostVM tablePostVm);
         Task Remove(int id);
         Task<int> getPageCount(int take);
 
