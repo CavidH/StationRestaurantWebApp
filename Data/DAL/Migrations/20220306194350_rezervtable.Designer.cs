@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220306075144_rezervTable")]
-    partial class rezervTable
+    [Migration("20220306194350_rezervtable")]
+    partial class rezervtable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -301,8 +301,7 @@ namespace Data.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TableID")
-                        .IsUnique();
+                    b.HasIndex("TableID");
 
                     b.ToTable("Reservations");
                 });
@@ -504,8 +503,8 @@ namespace Data.DAL.Migrations
             modelBuilder.Entity("Core.Entities.Reservation", b =>
                 {
                     b.HasOne("Core.Entities.Table", "Table")
-                        .WithOne("Reservation")
-                        .HasForeignKey("Core.Entities.Reservation", "TableID")
+                        .WithMany("Reservations")
+                        .HasForeignKey("TableID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
-using Business.ViewModels.ProductVM;
 using Business.ViewModels.Table;
 using Core;
 using Core.Entities;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.DAL.Migrations
 {
-    public partial class rezervTable : Migration
+    public partial class rezervtable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,8 +53,7 @@ namespace Data.DAL.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_TableID",
                 table: "Reservations",
-                column: "TableID",
-                unique: true);
+                column: "TableID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

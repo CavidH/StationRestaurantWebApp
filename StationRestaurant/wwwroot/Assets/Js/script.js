@@ -1,38 +1,39 @@
-// $(document).ready(function() {
-//     $(window).scroll(function() {
-//
-//         console.log($(window).scrollTop());
-//
-//         if ($(window).scrollTop() > 0) {
-//             $('#Nav').addClass('navbar-fixed-top');
-//         }
-//
-//         if ($(window).scrollTop() < 1) {
-//             $('#Nav').removeClass('navbar-fixed-top');
-//         }
-//     });
-// });
+$(document).ready(function () {
+
+    $(document).on("click", "#btn_Checkdate",
+        function () {
+            alert("okeey")
+            $.ajax({
+                url: "/Reservation/CheckDate",
+                method: "GET",
+                success: function (result) {
+                    console.log(result)
+                }
+            })
+        })
 
 
-$('.owl-carousel').owlCarousel({
-    loop: true,
-    margin: 0,
-    nav: true,
-    autoplay: true,
-    autoplayTimeout: 4000, //slide deyishim sureti
-    autoplayHoverPause: false,
-    responsive: {
-        0: {
-            items: 1
-        },
-        600: {
-            items: 1
-        },
-        1000: {
-            items: 1
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 4000, //slide deyishim sureti
+        autoplayHoverPause: false,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
+            },
+            1000: {
+                items: 1
+            }
         }
-    }
+    })
 })
+
 
 
 // dish owl carousel slider js
@@ -88,41 +89,40 @@ $owl.owlCarousel({
 // });
 //
 
-$(function(){
+$(function () {
     $('.mhn-slide').owlCarousel({
-        nav:true,
+        nav: true,
         //loop:true,
-        slideBy:'page',
+        slideBy: 'page',
         loop: true,
         items: 5,
-        autoplay:true,
-        autoplayTimeout:1000,
-        autoplayHoverPause:true,
-        rewind:false,
-        responsive:{
-            0:{items:1},
-            480:{items:2},
-            600:{items:3},
-            1000:{items:4}
+        autoplay: true,
+        autoplayTimeout: 1000,
+        autoplayHoverPause: true,
+        rewind: false,
+        responsive: {
+            0: {items: 1},
+            480: {items: 2},
+            600: {items: 3},
+            1000: {items: 4}
         },
-        smartSpeed:70,
-        onInitialized:function(e){
-            $(e.target).find('img').each(function(){
-                if(this.complete){
+        smartSpeed: 70,
+        onInitialized: function (e) {
+            $(e.target).find('img').each(function () {
+                if (this.complete) {
                     $(this).closest('.mhn-inner').find('.loader-circle').hide();
-                    $(this).closest('.mhn-inner').find('.mhn-img').css('background-image','url('+$(e.target).attr('src')+')');
-                }else{
-                    $(this).bind('load',function(e){
+                    $(this).closest('.mhn-inner').find('.mhn-img').css('background-image', 'url(' + $(e.target).attr('src') + ')');
+                } else {
+                    $(this).bind('load', function (e) {
                         $(e.target).closest('.mhn-inner').find('.loader-circle').hide();
-                        $(e.target).closest('.mhn-inner').find('.mhn-img').css('background-image','url('+$(e.target).attr('src')+')');
+                        $(e.target).closest('.mhn-inner').find('.mhn-img').css('background-image', 'url(' + $(e.target).attr('src') + ')');
                     });
                 }
             });
         },
-        navText:['<svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>','<svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>']
+        navText: ['<svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>', '<svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>']
     });
 });
-
 
 
 lightGallery(document.querySelector(".galery"))

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
@@ -14,9 +14,9 @@
           integrity="sha512-kwJUhJJaTDzGp6VTPBbMQWBFUof6+pv0SM3s8fo+E6XnPmVmtfwENK0vHYup3tsYnqHgRDoBDTJWoq7rnQw2+g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="~/Assets/Style/style.css">
-<title>@ViewData["Title"] - Station Restaurant</title>
+    <title>@ViewData["Title"] - Station Restaurant</title>
 
- 
+
 </head>
 
 <body>
@@ -66,7 +66,6 @@
 
 
 @RenderBody()
- 
 <footer>
     <section id="Footer">
         <div class="footer-dark">
@@ -76,24 +75,38 @@
                         <div class="col-sm-6 col-md-3 item">
                             <h3>Services</h3>
                             <ul>
-                                <li><a href="#">Web design</a></li>
-                                <li><a href="#">Development</a></li>
-                                <li><a href="#">Hosting</a></li>
+                                <li>
+                                    <a href="#">Web design</a>
+                                </li>
+                                <li>
+                                    <a href="#">Development</a>
+                                </li>
+                                <li>
+                                    <a href="#">Hosting</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="col-sm-6 col-md-3 item">
                             <h3>About</h3>
                             <ul>
-                                <li><a href="#">Company</a></li>
-                                <li><a href="#">Team</a></li>
-                                <li><a href="#">Careers</a></li>
+                                <li>
+                                    <a href="#">Company</a>
+                                </li>
+                                <li>
+                                    <a href="#">Team</a>
+                                </li>
+                                <li>
+                                    <a href="#">Careers</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="col-md-6 item text">
                             <h3>Station Restaurant</h3>
-                            <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut
+                            <p>
+                                Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut
                                 vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit
-                                pulvinar dictum vel in justo.</p>
+                                pulvinar dictum vel in justo.
+                            </p>
                         </div>
                         <!-- <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div> -->
                     </div>
@@ -104,9 +117,11 @@
     </section>
 
 </footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
-        crossorigin="anonymous "></script>
+@* <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " *@
+@*         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " *@
+@*         crossorigin="anonymous "></script> *@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js "
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
         crossorigin="anonymous "></script>
@@ -119,8 +134,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="~/Assets/Js/owl.carousel.js "></script>
 @RenderSection("Scripts", required: false)
+
 <script src="~/Assets/Js/script.js "></script>
 </body>
 
 </html>
- 

@@ -405,16 +405,28 @@
     </a>
 </li>
 <li>
-            <a href="javascript: void(0);" class="waves-effect">
-                <i class="mdi mdi-settings-outline"></i>
-                <span class="text-light">Setting</span>
-            </a>
-            <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="index.html">Dashboard 1</a></li>
-                <li><a href="dashboard-2.html">Dashboard 2</a></li>
-                <li><a href="dashboard-3.html">Dashboard 3</a></li>
-            </ul>
+    <a asp-area="AdminRezerv" asp-controller="Reservation" asp-action="Index" class="waves-effect">
+        <i class=" ion ion-md-folder-open"></i>
+        <span class="text-light">Reservations</span>
+    </a>
+</li>
+<li>
+    <a href="javascript: void(0);" class="waves-effect">
+        <i class="mdi mdi-settings-outline"></i>
+        <span class="text-light">Setting</span>
+    </a>
+    <ul class="nav-second-level" aria-expanded="false">
+        <li>
+            <a href="index.html">Dashboard 1</a>
         </li>
+        <li>
+            <a href="dashboard-2.html">Dashboard 2</a>
+        </li>
+        <li>
+            <a href="dashboard-3.html">Dashboard 3</a>
+        </li>
+    </ul>
+</li>
 @* <li> *@
 @*     <a asp-area="AdminFiorElla" asp-controller="Product" asp-action="Index" class="waves-effect"> *@
 @*         <i class=" ion ion-md-basket"></i> *@

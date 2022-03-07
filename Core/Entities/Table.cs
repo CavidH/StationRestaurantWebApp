@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace Core.Entities
 {
     public class Table
@@ -12,6 +14,6 @@ namespace Core.Entities
 
 
         //public int ReservationId { get; set; }
-        public Reservation Reservation { get; set; }
+        public List<Reservation> Reservations { get; set; }
     }
 }
