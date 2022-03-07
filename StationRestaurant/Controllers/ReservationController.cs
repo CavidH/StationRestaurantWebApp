@@ -30,12 +30,14 @@ namespace StationRestaurant.Controllers
             ViewBag.tables = await _tableService.GetAllAsync();
             if (ModelState.IsValid)
             {
-                if (!await _reservationService
-                        .IsReserved(reservationPostVm.ReservDate.Date, reservationPostVm.TableID))
+                if (await _reservationService.IsReserved(reservationPostVm.ReservDate.Date, reservationPostVm.TableID))
                 {
-                    ModelState.AddModelError("", "This table has already been reserved");
+                    ModelState.AddModelError("TableID", "This table has already been reserved");
                     return View(reservationPostVm);
                 }
+
+                await _reservationService.Create(reservationPostVm);
+                return RedirectToAction("Index", "Home");
             }
 
             return View(reservationPostVm);

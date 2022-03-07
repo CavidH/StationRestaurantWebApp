@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
-using Business.ViewModels.ProductVM;
+using Business.ViewModels.Reservation;
 using Core;
 using Core.Entities;
-using Data.DAL;
 
 namespace Business.Implementations
 {
@@ -25,9 +24,17 @@ namespace Business.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<Paginate<Reservation>> GetAllPaginatedAsync(int page)
+        public async Task<Paginate<Reservation>> GetAllPaginatedAsync(int page)
         {
-            throw new NotImplementedException();
+            var reservations = await _unitOfWork
+                .reservationRepository
+                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false);
+
+            var Result = new Paginate<Reservation>();
+            Result.Items = reservations;
+            Result.CurrentPage = page;
+            Result.AllPageCount = await getPageCount(10);
+            return Result;
         }
 
         public Task<Reservation> GetAsync(int id)
@@ -35,12 +42,23 @@ namespace Business.Implementations
             throw new NotImplementedException();
         }
 
-        public Task Create(ProductPostVM productPostVm)
+        public async Task Create(ReservationPostVM reservationPostVm)
         {
-            throw new NotImplementedException();
+            var newReserv = new Reservation()
+            {
+                Name = reservationPostVm.Name,
+                LastName = reservationPostVm.LastName,
+                PhoneNumber = reservationPostVm.PhoneNumber,
+                Email = reservationPostVm.Email,
+                ReservDate = reservationPostVm.ReservDate,
+                TableID = reservationPostVm.TableID,
+                Additionals = reservationPostVm.Additionals
+            };
+            await _unitOfWork.reservationRepository.CreateAsync(newReserv);
+            await _unitOfWork.SaveAsync();
         }
 
-        public Task Update(int id, ProductUpdateVM productUpdateVm)
+        public Task Update(int id, ReservationPostVM reservationPostVm)
         {
             throw new NotImplementedException();
         }
@@ -87,6 +105,15 @@ namespace Business.Implementations
         public Task Remove(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<int> getPageCount(int take)
+        {
+            var reservations = await _unitOfWork
+                .reservationRepository
+                .GetAllAsync(p => p.IsDeleted == false);
+            var productCount = reservations.Count;
+            return (int) Math.Ceiling(((decimal) productCount / take));
         }
     }
 }
