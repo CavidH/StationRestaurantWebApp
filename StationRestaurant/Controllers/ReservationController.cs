@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.Reservation;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Controllers
@@ -21,12 +22,7 @@ namespace StationRestaurant.Controllers
         {
             return View();
         }
-
-        public async Task<IActionResult> CheckDate()
-        {
-            var emptyTables=await _reservationService.CheckRezervDate(DateTime.Now);
-            return Json(emptyTables);
-        }
+       
 
         // [HttpPost]
         // [AutoValidateAntiforgeryToken]

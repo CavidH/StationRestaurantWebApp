@@ -1,4 +1,4 @@
-﻿ @* @model  ReservationDataTimeVM  *@
+﻿@model  ReservationPostVM  
 <main>
     <section class="ttt">
         <div class="container">
@@ -9,21 +9,48 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="header-title mb-4">Basic Form</h4>
+                                    <form class="parsley-examples" method="post" enctype="multipart/form-data">
 
-                                    <div class="form-group">
-                                        <label for="ReservDate">Reservation Date<span class="text-danger">*</span></label>
-                                        <input parsley-trigger="change" required placeholder="Enter Reservation Date" class="form-control" type="datetime-local" data-val="true" data-val-required="&#x27;Reserv Date&#x27; must not be empty." id="ReservDate" name="ReservDate" value="">
-                                        <span class="text-danger field-validation-valid" data-valmsg-for="ReservDate" data-valmsg-replace="true"></span>
-                                    </div>
-                                    <div class="form-group text-right mb-0">
-                                        <button class="btn btn-primary waves-effect waves-light mr-1" id="btn_Checkdate">
-                                            Submit
-                                        </button>
-                                        <button type="reset" class="btn btn-secondary waves-effect waves-light">
-                                            Cancel
-                                        </button>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="ReservDate">Reservation Date<span class="text-danger">*</span></label>
+                                            <input id="Date_input" parsley-trigger="change" required placeholder="Enter Reservation Date" class="form-control" type="datetime-local" data-val="true" data-val-required="&#x27;Reserv Date&#x27; must not be empty." id="ReservDate" name="ReservDate" value="">
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="ReservDate" data-valmsg-replace="true"></span>
+                                            <button class="btn btn-primary waves-effect waves-light mr-1" id="btn_Checkdate">
+                                                Check Empty Tables
+                                            </button>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="TableID" id="ccc">Select Table Number<span class="text-danger">*</span></label>
+                                            <select id="Table_option" class="form-control" asp-for="TableID">
 
+                                                @* <option value="@category.Id">@category.Name</option> *@
+
+
+                                            </select>
+                                        </div>
+
+                                        @* <div class="form-group"> *@
+                                        @*     <label for="ReservDate">Reservation Date<span class="text-danger">*</span></label> *@
+                                        @*     <input parsley-trigger="change" required placeholder="Enter Reservation Date" class="form-control" type="datetime-local" data-val="true" data-val-required="&#x27;Reserv Date&#x27; must not be empty." id="ReservDate" name="ReservDate" value=""> *@
+                                        @*     <span class="text-danger field-validation-valid" data-valmsg-for="ReservDate" data-valmsg-replace="true"></span> *@
+                                        @* </div> *@
+                                        @* *@
+                                        @* <div class="form-group"> *@
+                                        @*     <label for="ReservDate">Reservation Date<span class="text-danger">*</span></label> *@
+                                        @*     <input parsley-trigger="change" required placeholder="Enter Reservation Date" class="form-control" type="datetime-local" data-val="true" data-val-required="&#x27;Reserv Date&#x27; must not be empty." id="ReservDate" name="ReservDate" value=""> *@
+                                        @*     <span class="text-danger field-validation-valid" data-valmsg-for="ReservDate" data-valmsg-replace="true"></span> *@
+                                        @* </div> *@
+                                        <div class="form-group text-right mb-0">
+                                            <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                                                Submit
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary waves-effect waves-light">
+                                                Cancel
+                                            </button>
+                                        </div>
+
+
+                                    </form>
                                 </div>
                             </div>
                             <!-- end card -->

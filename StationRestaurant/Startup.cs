@@ -11,8 +11,10 @@ using Core.Entities;
 using Data.DAL;
 using Data.Repositories;
 using FluentValidation.AspNetCore;
+using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace StationRestaurant
 {
@@ -28,8 +30,8 @@ namespace StationRestaurant
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews()
-                .AddFluentValidation(p=>p.RegisterValidatorsFromAssemblyContaining<ProductCategoryVMValidator>());//diff asembly
+            services.AddControllersWithViews().AddFluentValidation(p =>
+                p.RegisterValidatorsFromAssemblyContaining<ProductCategoryVMValidator>()); //diff asembly
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
@@ -46,12 +48,11 @@ namespace StationRestaurant
                 Options.Password.RequireDigit = true;
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            
+
             services.AddScoped<IProductCategoryService, ProductCategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IReservationService, RezervationService>();
             services.AddScoped<ITableService, TableService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +68,7 @@ namespace StationRestaurant
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
