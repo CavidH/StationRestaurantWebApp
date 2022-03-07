@@ -8,19 +8,16 @@ using Business.ViewModels.ProductVM;
 using Core;
 using Core.Entities;
 using Data.DAL;
-using Microsoft.EntityFrameworkCore;
 
 namespace Business.Implementations
 {
     public class RezervationService : IReservationService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly AppDbContext _context;
 
-        public RezervationService(IUnitOfWork unitOfWork,AppDbContext context)
+        public RezervationService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _context = context;
         }
 
         public Task<List<Reservation>> GetAllAsync()
@@ -48,13 +45,23 @@ namespace Business.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<List<Table>> CheckRezervDate(DateTime dateTime)
+        public async Task<bool> IsReserved(DateTime dateTime, int tableId)
         {
+            var table = await _unitOfWork.tableRepository.GetWithRezervsAsync(tableId);
+            if (table.Reservations.Count == 0) return false;
+
+            if (table.Reservations.Where(p => p.ReservDate.Date == dateTime.Date).FirstOrDefault() != null)
+            {
+                return true;
+            }
+
+            return false;
+
             // var allDbTables = await _unitOfWork
-            //     .tableRepository
-            //     .GetAllAsync(p=>p.IsDeleted==false,"Reservations");
-            var allDbTables = await _context.Tables.Include(p=>p.Reservations).ToListAsync();
-            var emptyTables = new List<Table>();
+            //      .tableRepository
+            //    .GetAllAsync(p=>p.IsDeleted==false,"Reservations");
+            // var allDbTables = await _context.Tables.Include(p=>p.Reservations).ToListAsync();
+            // var emptyTables = new List<Table>();
             // foreach (var table in allDbTables)
             // {
             //     foreach (var rezerv in table.Reservations)
@@ -63,16 +70,17 @@ namespace Business.Implementations
             //     }
             // }
 
-            for (int i = 0; i < allDbTables.Count; i++)
-            {
-                var rezev = allDbTables[i].Reservations.Where(p => p.ReservDate.Date == dateTime.Date).ToList();
-                if (rezev.Count==0)
-                {
-                    emptyTables.Add(allDbTables[i]);
-                }
-            }
+            // for (int i = 0; i < allDbTables.Count; i++)
+            // {
+            //     var rezev = allDbTables[i].Reservations.Where(p => p.ReservDate.Date == dateTime.Date).ToList();
+            //     if (rezev.Count==0)
+            //     {
+            //         emptyTables.Add(allDbTables[i]);
+            //     }
+            // }
 
-            return emptyTables;
+            // return true;
+            // return true;
         }
 
 

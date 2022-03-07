@@ -15,7 +15,7 @@ namespace Business.Interfaces
         Task<Reservation> GetAsync(int id);
         Task Create(ProductPostVM productPostVm);
         Task Update(int id, ProductUpdateVM productUpdateVm);
-        Task<List<Table>> CheckRezervDate(DateTime dateTime);
+        Task<bool> IsReserved(DateTime dateTime,int tableId);
         Task Remove(int id);
     }
 }

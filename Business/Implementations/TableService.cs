@@ -20,7 +20,7 @@ namespace Business.Implementations
 
         public async Task<List<Table>> GetAllAsync()
         {
-            throw new NotImplementedException();
+           return await _unitOfWork.tableRepository.GetAllAsync(p => p.IsDeleted==false);
         }
 
         public async Task<Paginate<Table>> GetAllPaginatedAsync(int page)
@@ -81,7 +81,8 @@ namespace Business.Implementations
 
         public async Task<bool> IsExist(int TableNumber)
         {
-            var table = await _unitOfWork.tableRepository.GetAsync(p => p.TableNumber == TableNumber &&p.IsDeleted==false);
+            var table = await _unitOfWork.tableRepository.GetAsync(p =>
+                p.TableNumber == TableNumber && p.IsDeleted == false);
 
             if (table != null)
             {

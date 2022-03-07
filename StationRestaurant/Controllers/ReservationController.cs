@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.Reservation;
-using Core.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Controllers
@@ -12,17 +8,39 @@ namespace StationRestaurant.Controllers
     public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
+        private readonly ITableService _tableService;
 
-        public ReservationController(IReservationService reservationService)
+        public ReservationController(IReservationService reservationService, ITableService tableService)
         {
             _reservationService = reservationService;
+            _tableService = tableService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.tables = await _tableService.GetAllAsync();
+
             return View();
         }
-       
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(ReservationPostVM reservationPostVm)
+        {
+            ViewBag.tables = await _tableService.GetAllAsync();
+            if (ModelState.IsValid)
+            {
+                if (!await _reservationService
+                        .IsReserved(reservationPostVm.ReservDate.Date, reservationPostVm.TableID))
+                {
+                    ModelState.AddModelError("", "This table has already been reserved");
+                    return View(reservationPostVm);
+                }
+            }
+
+            return View(reservationPostVm);
+        }
+
 
         // [HttpPost]
         // [AutoValidateAntiforgeryToken]
