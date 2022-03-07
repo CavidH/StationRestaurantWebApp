@@ -20,6 +20,9 @@ namespace Business.ViewModels
         public int CurrentPage { get; set; }
         public int PageCount { get; set; }
         public int AllPageCount { get; set; }
+        //for post some data
+        public  T Item { get; set; }
+
 
     }
 }

@@ -1,174 +1,207 @@
 ﻿@model Paginate<Reservation>
 @{
     int count = ((Model.CurrentPage - 1) * 10) + 1;
+    var tables = (List<Table>) ViewBag.tables;
 }
 <div class="content-page">
-    <div class="content">
+<div class="content">
 
-        <!-- Start Content-->
-        <div class="container-fluid">
+    <!-- Start Content-->
+    <div class="container-fluid">
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body table-responsive">
-                            <h4 class="m-t-0 header-title mb-4">
-                                <b> Table</b>
-                            </h4>
-                            @* <a class="btn btn-info waves-effect width-md waves-light " asp-action="Create" style="color:#ffffff  ">Add</a> *@
-                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-responsive">
+                        <h4 class="m-t-0 header-title mb-4">
+                            <form class="parsley-examples" method="post" enctype="multipart/form-data">
+                                <div class="form-group col-3">
+                                    <label asp-for="Item.ReservDate">
+                                        Search by date
+                                    </label>
+                                    <input asp-for="Item.ReservDate" type="date" parsley-trigger="change" required placeholder="Enter date" class="form-control">
+                                    <span asp-validation-for="Item.ReservDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group text-right mb-0 col-3">
 
-                                <thead>
+                                    <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                                        Search
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary waves-effect waves-light">
+                                        Reset
+                                    </button>
+                                    <a asp-area="AdminRezerv" asp-controller="Reservation" asp-action="Index" class="btn btn-success waves-effect waves-light mr-1">
+                                        All
+                                    </a>
+                                </div>
+                            </form>
+
+                        </h4>
+                        @* <a class="btn btn-info waves-effect width-md waves-light " asp-action="Create" style="color:#ffffff  ">Add</a> *@
+                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                            <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Name</th>
+                                <th>LastName</th>
+                                <th>Reserv Date</th>
+                                <th>Email Status</th>
+                                <th>Table №</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Additionals</th>
+                                <th>Setting</th>
+
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @foreach (var rezerv in Model.Items)
+                            {
                                 <tr>
-                                    <th>№</th>
-                                    <th>Name</th>
-                                    <th>LastName</th>
-                                    <th>Reserv Date</th>
-                                    <th>Table №</th>
-                                    <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>Additionals</th>
-                                     
+                                    <td>@count </td>
+                                    <td>
+                                        @rezerv.Name
+                                    </td>
+                                    <td>
+                                        @rezerv.LastName
+                                    </td>
+                                    <td>
+                                        @rezerv.ReservDate
+                                    </td>
+                                    <td>
+                                        @if (rezerv.IsActive)
+                                        {
+                                            <button type="button" class="btn btn-success waves-effect width-md waves-light text-uppercase">Active</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-danger waves-effect width-md waves-light ext-uppercase">DeActive</button>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-icon waves-effect waves-light btn-purple">
+                                            @tables.Where(p => p.Id == rezerv.TableID).FirstOrDefault().TableNumber
+                                        </button>
+                                    </td>
+                                    <td>
+                                        @rezerv.Email
+                                    </td>
+                                    <td>
+                                        @rezerv.PhoneNumber
+                                    </td>
+                                    <td>
+                                        @rezerv.Additionals
+                                    </td>
+                                    @* <td> *@
+                                    @*     <button type="button" class="btn btn-icon waves-effect waves-light btn-purple"> *@
+                                    @*         @product.MaxPersonCount *@
+                                    @*     </button> *@
+                                    @* </td> *@
+                                    @* <td> *@
+                                    @*     @if (@product.IsReserved == true) *@
+                                    @*     { *@
+                                    @*         <button type="button" class="btn btn-icon waves-effect waves-light btn-danger"> Reserved </button> *@
+                                    @*     } *@
+                                    @*     else *@
+                                    @*     { *@
+                                    @*         <button type="button" class="btn btn-icon waves-effect waves-light btn-primary"> Empty </button> *@
+                                    @*     } *@
+                                    @* *@
+                                    @* </td> *@
 
+                                    <td>
+                                        @*
+                                                <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Detail" asp-route-id="@product.Id">
+                                                <i class="mdi mdi-eye-outline"></i>
+                                                </a>
+                                            @* <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@product.Id"> *@
+                                        @* <i class="mdi mdi-pencil-outline"></i> *@
+                                        @* </a> *@
+
+                                        <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@rezerv.Id">
+                                            <i class="mdi mdi-delete-outline"></i>
+                                        </a>
+
+                                    </td>
 
                                 </tr>
-                                </thead>
 
-                                <tbody>
-                                @foreach (var product in Model.Items)
+
+                                count++;
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    @if (@Model.AllPageCount > 1)
+                    {
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+
+                                @if (Model.CurrentPage > 1)
                                 {
-                                    <tr>
-                                        <td>@count </td>
-                                        <td>
-                                            @product.Name
-                                        </td>
-                                        <td>
-                                            @product.LastName
-                                        </td>
-                                        <td>
-                                            @product.ReservDate
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-icon waves-effect waves-light btn-purple">
-                                                @product.TableID
-                                            </button>
-                                        </td>
-                                        <td>
-                                            @product.Email
-                                        </td>
-                                        <td>
-                                            @product.PhoneNumber
-                                        </td>  <td>
-                                            @product.Additionals
-                                        </td>
-                                        @* <td> *@
-                                        @*     <button type="button" class="btn btn-icon waves-effect waves-light btn-purple"> *@
-                                        @*         @product.MaxPersonCount *@
-                                        @*     </button> *@
-                                        @* </td> *@
-                                        @* <td> *@
-                                        @*     @if (@product.IsReserved == true) *@
-                                        @*     { *@
-                                        @*         <button type="button" class="btn btn-icon waves-effect waves-light btn-danger"> Reserved </button> *@
-                                        @*     } *@
-                                        @*     else *@
-                                        @*     { *@
-                                        @*         <button type="button" class="btn btn-icon waves-effect waves-light btn-primary"> Empty </button> *@
-                                        @*     } *@
-                                        @* *@
-                                        @* </td> *@
-
-                                        @* <td> *@
-                                        @*     @*  *@
-                                        @*         <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Detail" asp-route-id="@product.Id"> *@
-                                        @*         <i class="mdi mdi-eye-outline"></i> *@
-                                        @*         </a>*@ 
-                                        @*     $1$ <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@product.Id"> #1# *@
-                                        @*     $1$ <i class="mdi mdi-pencil-outline"></i> #1# *@
-                                        @*     $1$ </a> #1# *@
-                                        @*     @if (!product.IsReserved) *@
-                                        @*     { *@
-                                        @*         <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@product.Id"> *@
-                                        @*             <i class="mdi mdi-delete-outline"></i> *@
-                                        @*         </a> *@
-                                        @*     } *@
-                                        @* </td> *@
-
-                                    </tr>
-
-
-                                    count++;
+                                    var prev = Model.CurrentPage - 1;
+                                    <li class="page-item ">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@prev">Previous</a>
+                                    </li>
                                 }
-                                </tbody>
-                            </table>
-                        </div>
-                        @if (@Model.AllPageCount > 1)
-                        {
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-
-                                    @if (Model.CurrentPage > 1)
+                                else
+                                {
+                                    <li class="page-item disabled">
+                                        <a class="page-link ">Previous</a>
+                                    </li>
+                                }
+                                @{
+                                    if (1 < Model.AllPageCount)
                                     {
-                                        var prev = Model.CurrentPage - 1;
-                                        <li class="page-item ">
-                                            <a class="page-link" asp-action="Index" asp-route-page="@prev">Previous</a>
-                                        </li>
-                                    }
-                                    else
-                                    {
-                                        <li class="page-item disabled">
-                                            <a class="page-link ">Previous</a>
-                                        </li>
-                                    }
-                                    @{
-                                        if (1 < Model.AllPageCount)
+                                        var start = 1;
+                                        var end = Model.AllPageCount;
+                                        for (int i = start; i <= end; i++)
                                         {
-                                            var start = 1;
-                                            var end = Model.AllPageCount;
-                                            for (int i = start; i <= end; i++)
-                                            {
-                                                <li class="page-item @(Model.CurrentPage == i ? "disabled" : "")">
-                                                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
-                                                </li>
-                                            }
+                                            <li class="page-item @(Model.CurrentPage == i ? "disabled" : "")">
+                                                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                            </li>
                                         }
                                     }
-                                    @if (Model.CurrentPage < Model.AllPageCount)
-                                    {
-                                        var next = Model.CurrentPage + 1;
-                                        <li class="page-item">
-                                            <a class="page-link" asp-action="Index" asp-route-page="@next">Next</a>
-                                        </li>
-                                    }
-                                    else
-                                    {
-                                        <li class="page-item disabled">
-                                            <a class="page-link">Next</a>
-                                        </li>
-                                    }
+                                }
+                                @if (Model.CurrentPage < Model.AllPageCount)
+                                {
+                                    var next = Model.CurrentPage + 1;
+                                    <li class="page-item">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@next">Next</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item disabled">
+                                        <a class="page-link">Next</a>
+                                    </li>
+                                }
 
-                                </ul>
-                            </nav>
-                        }
-                    </div>
+                            </ul>
+                        </nav>
+                    }
                 </div>
             </div>
-
         </div>
-        <!-- end container-fluid -->
 
     </div>
-    <!-- end content -->
-    <!-- Footer Start -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    2015 - 2021 &copy; Velonic theme by <a href="#">Coderthemes</a>
-                </div>
+    <!-- end container-fluid -->
+
+</div>
+<!-- end content -->
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                2015 - 2021 &copy; Velonic theme by <a href="#">Coderthemes</a>
             </div>
         </div>
-    </footer>
-    <!-- end Footer -->
+    </div>
+</footer>
+<!-- end Footer -->
 
 </div>

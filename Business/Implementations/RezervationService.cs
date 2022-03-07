@@ -37,6 +37,19 @@ namespace Business.Implementations
             return Result;
         }
 
+        public async Task<Paginate<Reservation>> GetAllPaginatedAsync(int page, DateTime date)
+        {
+            var reservations = await _unitOfWork
+                .reservationRepository
+                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false && p.ReservDate.Date == date);
+
+            var Result = new Paginate<Reservation>();
+            Result.Items = reservations;
+            Result.CurrentPage = page;
+            Result.AllPageCount = await getPageCount(10);
+            return Result;
+        }
+
         public Task<Reservation> GetAsync(int id)
         {
             throw new NotImplementedException();
@@ -102,9 +115,17 @@ namespace Business.Implementations
         }
 
 
-        public Task Remove(int id)
+        public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            var rezerv = await _unitOfWork
+                .reservationRepository
+                .GetAsync(p => p.Id == id);
+            if (rezerv != null)
+            {
+                rezerv.IsDeleted = true;
+                _unitOfWork.reservationRepository.Update(rezerv);
+                await _unitOfWork.SaveAsync();
+            }
         }
 
         public async Task<int> getPageCount(int take)
