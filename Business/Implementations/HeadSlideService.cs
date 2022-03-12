@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Business.Exceptions;
 using Business.Interfaces;
 using Business.Utilities;
+using Business.Utilities.Helpers;
 using Business.ViewModels.HeadSlide;
 using Core;
 using Core.Entities;
@@ -18,7 +19,7 @@ namespace Business.Implementations
         private IWebHostEnvironment _env { get; }
         private string _erorrMessage;
 
-        public HeadSlideService(IUnitOfWork unitOfWork,IWebHostEnvironment env)
+        public HeadSlideService(IUnitOfWork unitOfWork, IWebHostEnvironment env)
         {
             _unitOfWork = unitOfWork;
             _env = env;
@@ -26,8 +27,8 @@ namespace Business.Implementations
 
         public async Task<List<HeadSlide>> GetAllAsync()
         {
-           var headSlides = await _unitOfWork.headSlideRepository.GetAllAsync();
-           return headSlides;
+            var headSlides = await _unitOfWork.headSlideRepository.GetAllAsync();
+            return headSlides;
         }
 
         public async Task<HeadSlide> GetAsync(int id)
@@ -37,18 +38,19 @@ namespace Business.Implementations
 
         public async Task Create(HeadSlidePostVM headSlidePostVm)
         {
-            int EmptySlide =await _unitOfWork.headSlideRepository.GetEmptySliderCount();
+            int EmptySlide = await _unitOfWork.headSlideRepository.GetEmptySliderCount();
 
             if (headSlidePostVm.ImageFile.Count > EmptySlide)
-            { 
-                throw new SlideOutOfBoundException($"You can currently upload {EmptySlide} slides  ** Max Limit 8 slide");
+            {
+                throw new SlideOutOfBoundException(
+                    $"You can currently upload {EmptySlide} slides  ** Max Limit 8 slide");
             }
-            
+
             if (!ChechkImageValid(headSlidePostVm.ImageFile))
             {
                 throw new ImageFileException(_erorrMessage);
             }
-            
+
             foreach (var photo in headSlidePostVm.ImageFile)
             {
                 string filename = await photo.SaveFileAsync(_env.WebRootPath, "Assets", "img");
@@ -56,6 +58,7 @@ namespace Business.Implementations
                 await _unitOfWork.SaveAsync();
             }
         }
+
         private bool ChechkImageValid(List<IFormFile> photos)
         {
             foreach (var photo in photos)
@@ -79,9 +82,11 @@ namespace Business.Implementations
 
         public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            var slide = await _unitOfWork.headSlideRepository.GetAsync(p => p.Id == id);
+            if (slide == null) throw new NotFoundException("Slide not found");
+            FileHelper.RemoveFile(_env.WebRootPath, slide.Image, "Assets", "img");
+            _unitOfWork.headSlideRepository.Remove(slide);
+            await _unitOfWork.SaveAsync();
         }
-
-       
     }
 }

@@ -28,8 +28,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         }
 
         [HttpPost]
-        // [RequestSizeLimit(737280000)] for file siz exeption jsjs
-
+        // [RequestSizeLimit(737280000)] for file size exeption jsjs
         public async Task<IActionResult> Create(HeadSlidePostVM headSlidePostVm)
         {
             if (ModelState.IsValid)
@@ -40,7 +39,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 }
                 catch (Exception e)
                 {
-                    ModelState.AddModelError("ImageFile",e.Message);
+                    ModelState.AddModelError("ImageFile", e.Message);
                     return View(headSlidePostVm);
                 }
 
@@ -48,6 +47,13 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             }
 
             return View(headSlidePostVm);
+        }
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+            if (Id == 0) return NotFound();
+            await _slideService.Remove(Id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
