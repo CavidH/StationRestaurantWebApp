@@ -49,11 +49,11 @@ namespace StationRestaurant
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IProductCategoryService, ProductCategoryService>();
-            // services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IReservationService, RezervationService>();
-            services.AddScoped<ITableService, TableService>();
-            services.AddScoped<IUserService, UserService>();
+            // services.AddScoped<IProductCategoryService, ProductCategoryService>();
+            // // services.AddScoped<IProductService, ProductService>();
+            // services.AddScoped<IReservationService, RezervationService>();
+            // services.AddScoped<ITableService, TableService>();
+            // services.AddScoped<IUserService, UserService>();
             // services.AddScoped<IHeadSlideService, HeadSlideService>();
             services.AddScoped<IUnitOfWorkService,UnitOfWorkService>();
         }
