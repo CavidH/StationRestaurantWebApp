@@ -15,7 +15,6 @@ namespace Business.Implementations
 
         //biznesdeki servislerin unit of vorkin yaz ve controllerlere inject ele
     {
-        
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _environment;
 
@@ -32,6 +31,13 @@ namespace Business.Implementations
             throw new System.NotImplementedException();
         }
 
+        public async Task<List<Product>> GetLastProductsAsync()
+        {
+            return await _unitOfWork
+                .productRepository
+                .GetLastProduct(8);
+        }
+
         public async Task<Paginate<Product>> GetAllPaginatedAsync(int page)
         {
             var products = await _unitOfWork
@@ -44,15 +50,16 @@ namespace Business.Implementations
             Result.AllPageCount = await getPageCount(10);
             return Result;
         }
+
         public async Task<int> getPageCount(int take)
         {
             var products = await _unitOfWork
                 .productRepository
                 .GetAllAsync(p => p.IsDeleted == false);
             var productCount = products.Count;
-            return (int)Math.Ceiling(((decimal)productCount / take));
+            return (int) Math.Ceiling(((decimal) productCount / take));
         }
- 
+
         public async Task<Product> GetAsync(int id)
         {
             var category = await _unitOfWork
@@ -92,7 +99,8 @@ namespace Business.Implementations
                     .SaveFileAsync(_environment.WebRootPath, "Assets", "img");
                 product.Image = imageFile;
             }
-            product.Id= id;
+
+            product.Id = id;
             product.Name = productUpdateVm.Name;
             product.Title = productUpdateVm.Title;
             product.Description = productUpdateVm.Description;
@@ -100,10 +108,9 @@ namespace Business.Implementations
             _unitOfWork.productRepository.Update(product);
             await _unitOfWork.SaveAsync();
 
-          
 
             // _unitOfWork.productRepository.Update(product);
-             // await _unitOfWork.SaveAsync();
+            // await _unitOfWork.SaveAsync();
         }
 
         public async Task Remove(int id)
@@ -118,7 +125,5 @@ namespace Business.Implementations
                 await _unitOfWork.SaveAsync();
             }
         }
-
-    
     }
 }

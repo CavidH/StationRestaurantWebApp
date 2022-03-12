@@ -21,10 +21,12 @@ namespace StationRestaurant.Controllers
         public async Task<IActionResult> Index()
         {
             var slides = await _unitOfWorkService.headSlideService.GetAllAsync();
+            var lastProducts = await _unitOfWorkService.productService.GetLastProductsAsync();
 
             var homeVM = new HomeVM
             {
-                HeadSlides = slides
+                HeadSlides = slides,
+                Products = lastProducts
             };
             return View(homeVM);
         }
