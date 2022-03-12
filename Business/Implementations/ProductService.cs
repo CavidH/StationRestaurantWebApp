@@ -15,6 +15,7 @@ namespace Business.Implementations
 
         //biznesdeki servislerin unit of vorkin yaz ve controllerlere inject ele
     {
+        
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _environment;
 

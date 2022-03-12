@@ -1,26 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Business.Interfaces;
+using Business.ViewModels.Home;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
- 
+
 
 namespace StationRestaurant.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
+        private readonly IHeadSlideService _headSlideService;
+        // private readonly IP _headSlideService;
 
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        public IActionResult Index()
+        public HomeController(IHeadSlideService headSlideService)
         {
-            // @ViewData["Title"] title yaz setting
-            return View();
+            _headSlideService = headSlideService;
         }
 
-       
+        public async Task<IActionResult> Index()
+        {
+            var slides = await _headSlideService.GetAllAsync();
 
-       
+            var homeVM = new HomeVM
+            {
+                HeadSlides = slides
+            };
+            return View(homeVM);
+        }
     }
 }
