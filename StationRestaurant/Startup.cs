@@ -50,11 +50,12 @@ namespace StationRestaurant
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IProductCategoryService, ProductCategoryService>();
-            services.AddScoped<IProductService, ProductService>();
+            // services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IReservationService, RezervationService>();
             services.AddScoped<ITableService, TableService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IHeadSlideService, HeadSlideService>();
+            // services.AddScoped<IHeadSlideService, HeadSlideService>();
+            services.AddScoped<IUnitOfWorkService,UnitOfWorkService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

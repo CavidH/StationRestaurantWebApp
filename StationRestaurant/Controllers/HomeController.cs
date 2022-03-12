@@ -9,17 +9,18 @@ namespace StationRestaurant.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IHeadSlideService _headSlideService;
+        // private readonly IHeadSlideService _headSlideService;
         // private readonly IP _headSlideService;
 
-        public HomeController(IHeadSlideService headSlideService)
+        private readonly IUnitOfWorkService _unitOfWorkService;
+        public HomeController(IUnitOfWorkService unitOfWorkService)
         {
-            _headSlideService = headSlideService;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var slides = await _headSlideService.GetAllAsync();
+            var slides = await _unitOfWorkService.headSlideService.GetAllAsync();
 
             var homeVM = new HomeVM
             {
