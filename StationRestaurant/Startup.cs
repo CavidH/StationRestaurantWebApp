@@ -54,6 +54,7 @@ namespace StationRestaurant
             services.AddScoped<IReservationService, RezervationService>();
             services.AddScoped<ITableService, TableService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IHeadSlideService, HeadSlideService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

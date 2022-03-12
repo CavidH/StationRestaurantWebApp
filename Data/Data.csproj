@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="DAL\Migrations\20220306073558_reservtable.cs" />
     <Compile Remove="DAL\Migrations\20220306073558_reservtable.Designer.cs" />
+    <Compile Remove="DAL\Migrations\20220312095827_slide.cs" />
+    <Compile Remove="DAL\Migrations\20220312095827_slide.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

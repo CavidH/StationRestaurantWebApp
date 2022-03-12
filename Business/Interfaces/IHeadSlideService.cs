@@ -9,9 +9,13 @@ namespace Business.Interfaces
     {
         Task<List<HeadSlide>> GetAllAsync();
         Task<HeadSlide> GetAsync(int id);
+
         Task Create(HeadSlidePostVM headSlidePostVm);
+
         //Task Update(int id);
         Task Remove(int id);
+
+        // Task<int> GetEmptySliderCount();
         //Task<int> getPageCount(int take);
         //Task<bool> IsExist(int TableNumber);
     }
