@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
 using Business.Interfaces;
+using Business.Utilities.Helpers;
 using Business.ViewModels.Reservation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace StationRestaurant.Controllers
 {
@@ -9,11 +11,13 @@ namespace StationRestaurant.Controllers
     {
         private readonly IReservationService _reservationService;
         private readonly ITableService _tableService;
+        private readonly IConfiguration _configuration;
 
-        public ReservationController(IReservationService reservationService, ITableService tableService)
+        public ReservationController(IReservationService reservationService, ITableService tableService,IConfiguration configuration)
         {
             _reservationService = reservationService;
             _tableService = tableService;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
@@ -37,6 +41,8 @@ namespace StationRestaurant.Controllers
                 }
 
                 await _reservationService.Create(reservationPostVm);
+                 
+                EmailHelper.EmailContentBuilder(reservationPostVm.Email, "ConfirmationLink", "Confirm Email");
                 return RedirectToAction("Index", "Home");
             }
 

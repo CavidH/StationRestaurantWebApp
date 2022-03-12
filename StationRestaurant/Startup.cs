@@ -42,10 +42,10 @@ namespace StationRestaurant
             services.Configure<IdentityOptions>(Options =>
             {
                 Options.Password.RequiredLength = 8;
-                Options.Password.RequireNonAlphanumeric = true;
+                Options.Password.RequireNonAlphanumeric = false;
                 Options.Password.RequireLowercase = false;
-                Options.Password.RequireUppercase = true;
-                Options.Password.RequireDigit = true;
+                Options.Password.RequireUppercase = false;
+                Options.Password.RequireDigit = false;
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -53,6 +53,7 @@ namespace StationRestaurant
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IReservationService, RezervationService>();
             services.AddScoped<ITableService, TableService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
