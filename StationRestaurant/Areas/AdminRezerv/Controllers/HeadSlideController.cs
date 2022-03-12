@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.HeadSlide;
@@ -20,19 +21,32 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         {
             return View(await _slideService.GetAllAsync());
         }
+
         public async Task<IActionResult> Create()
         {
             return View();
-        } 
+        }
+
         [HttpPost]
+        // [RequestSizeLimit(737280000)] for file siz exeption jsjs
+
         public async Task<IActionResult> Create(HeadSlidePostVM headSlidePostVm)
         {
-
             if (ModelState.IsValid)
             {
-                await _slideService.Create(headSlidePostVm);
+                try
+                {
+                    await _slideService.Create(headSlidePostVm);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("ImageFile",e.Message);
+                    return View(headSlidePostVm);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(headSlidePostVm);
         }
     }

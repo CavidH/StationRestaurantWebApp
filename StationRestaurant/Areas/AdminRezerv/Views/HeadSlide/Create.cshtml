@@ -35,6 +35,7 @@
 
                             <form class="parsley-examples" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
+                                    @* <div class="text-danger" asp-validation-summary="All"></div> *@
                                     <label asp-for="ImageFile">Title<span class="text-danger">*</span> </label>
                                     <input asp-for="ImageFile" parsley-trigger="change" required placeholder="Enter Title" class="form-control">
                                     <span class="text-danger" asp-validation-for="ImageFile"></span>

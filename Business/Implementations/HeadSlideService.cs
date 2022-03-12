@@ -41,7 +41,7 @@ namespace Business.Implementations
 
             if (headSlidePostVm.ImageFile.Count > EmptySlide)
             { 
-                throw new SlideOutOfBoundException($"You can currently upload {EmptySlide} slides  **Limit 8 slide");
+                throw new SlideOutOfBoundException($"You can currently upload {EmptySlide} slides  ** Max Limit 8 slide");
             }
             
             if (!ChechkImageValid(headSlidePostVm.ImageFile))
