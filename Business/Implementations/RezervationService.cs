@@ -78,7 +78,9 @@ namespace Business.Implementations
 
         public async Task<bool> IsReserved(DateTime dateTime, int tableId)
         {
-            var table = await _unitOfWork.tableRepository.GetWithRezervsAsync(tableId);
+            //var table = await _unitOfWork.tableRepository.GetWithRezervsAsync(tableId);
+            var table = await _unitOfWork.tableRepository.GetAsync(p => p.IsDeleted == false && p.Id == tableId, "Reservations");
+
             if (table.Reservations.Count == 0) return false;
 
             if (table.Reservations.Where(p => p.ReservDate.Date == dateTime.Date).FirstOrDefault() != null)

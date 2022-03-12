@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Interfaces;
 using Data.DAL;
-using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories.Implementations
 {
@@ -17,21 +13,21 @@ namespace Data.Repositories.Implementations
             _context = context;
         }
 
-        public async Task<List<Table>> GetAllWithRezervsAsync()
-        {
-            return await _context
-                .Tables
-                .Where(p => p.IsDeleted == false)
-                .Include(p => p.Reservations)
-                .ToListAsync();
-        }
+        //public async Task<List<Table>> GetAllWithRezervsAsync()
+        //{
+        //    return await _context
+        //        .Tables
+        //        .Where(p => p.IsDeleted == false)
+        //        .Include(p => p.Reservations)
+        //        .ToListAsync();
+        //}
 
-        public async Task<Table> GetWithRezervsAsync(int id)
-        {
-            return await _context
-                .Tables
-                .Where(p => p.IsDeleted == false && p.Id == id)
-                .Include(p => p.Reservations).FirstOrDefaultAsync();
-        }
+        //public async Task<Table> GetWithRezervsAsync(int id)
+        //{
+        //    return await _context
+        //        .Tables
+        //        .Where(p => p.IsDeleted == false && p.Id == id)
+        //        .Include(p => p.Reservations).FirstOrDefaultAsync();
+        //}
     }
 }

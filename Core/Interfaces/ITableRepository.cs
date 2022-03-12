@@ -6,8 +6,8 @@ namespace Core.Interfaces
 {
     public interface ITableRepository:IRepository<Table>
     {
-        Task<List<Table>> GetAllWithRezervsAsync();
-        Task<Table> GetWithRezervsAsync(int id);
+        //Task<List<Table>> GetAllWithRezervsAsync();
+        //Task<Table> GetWithRezervsAsync(int id);
 
     }
 }
