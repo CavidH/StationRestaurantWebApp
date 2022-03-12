@@ -39,7 +39,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 }
                 catch (Exception e)
                 {
-                    ModelState.AddModelError("ImageFile", e.Message);
+                    ModelState.AddModelError("FormFiles", e.Message);
                     return View(headSlidePostVm);
                 }
 
@@ -49,10 +49,45 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             return View(headSlidePostVm);
         }
 
+        public async Task<IActionResult> Update(int Id)
+        {
+            if (Id == 0) return NotFound();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int Id, HeadSlideUpdateVM headSlideUpdateVm)
+        {
+            if (Id == 0) return NotFound();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _slideService.Update(Id, headSlideUpdateVm);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("ImageFile",e.Message);
+                    return View(headSlideUpdateVm);
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(headSlideUpdateVm);
+        }
+
         public async Task<IActionResult> Delete(int Id)
         {
             if (Id == 0) return NotFound();
-            await _slideService.Remove(Id);
+            try
+            {
+                await _slideService.Remove(Id);
+            }
+            catch (Exception e)
+            {
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }

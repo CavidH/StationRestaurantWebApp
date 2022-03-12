@@ -12,7 +12,7 @@ namespace Business.Interfaces
 
         Task Create(HeadSlidePostVM headSlidePostVm);
 
-        //Task Update(int id);
+        Task Update(int id,HeadSlideUpdateVM headSlideUpdateVm);
         Task Remove(int id);
 
         // Task<int> GetEmptySliderCount();

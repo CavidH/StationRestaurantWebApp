@@ -40,23 +40,50 @@ namespace Business.Implementations
         {
             int EmptySlide = await _unitOfWork.headSlideRepository.GetEmptySliderCount();
 
-            if (headSlidePostVm.ImageFile.Count > EmptySlide)
+            if (headSlidePostVm.FormFiles.Count > EmptySlide)
             {
                 throw new SlideOutOfBoundException(
                     $"You can currently upload {EmptySlide} slides  ** Max Limit 8 slide");
             }
 
-            if (!ChechkImageValid(headSlidePostVm.ImageFile))
+            if (!ChechkImageValid(headSlidePostVm.FormFiles))
             {
                 throw new ImageFileException(_erorrMessage);
             }
 
-            foreach (var photo in headSlidePostVm.ImageFile)
+            foreach (var photo in headSlidePostVm.FormFiles)
             {
                 string filename = await photo.SaveFileAsync(_env.WebRootPath, "Assets", "img");
                 await _unitOfWork.headSlideRepository.CreateAsync(new HeadSlide {Image = filename});
                 await _unitOfWork.SaveAsync();
             }
+        }
+
+        public async Task Update(int id, HeadSlideUpdateVM headSlideUpdateVm)
+        {
+           
+           
+                if (!headSlideUpdateVm.ImageFile.CheckFileType("image/"))
+                {
+                    _erorrMessage = $"{headSlideUpdateVm.ImageFile.FileName} must be  image type ";
+                    throw new ImageFileException(_erorrMessage);
+                    
+                }
+
+                if (!headSlideUpdateVm.ImageFile.CheckFileSize(300))
+                {
+                    _erorrMessage = $"{headSlideUpdateVm.ImageFile.FileName} size must be less than 300kb";
+                    throw new ImageFileException(_erorrMessage);
+                 }
+            
+
+            var slide = await _unitOfWork.headSlideRepository.GetAsync(p => p.Id == id);
+            if (headSlideUpdateVm.ImageFile is null) throw new NotFoundException("Image not found");
+            FileHelper.RemoveFile(_env.WebRootPath, slide.Image, "Assets", "img");
+            string filename = await headSlideUpdateVm.ImageFile.SaveFileAsync(_env.WebRootPath, "Assets", "img");
+            slide.Image = filename;
+          _unitOfWork.headSlideRepository.Update(slide);
+            await _unitOfWork.SaveAsync();
         }
 
         private bool ChechkImageValid(List<IFormFile> photos)

@@ -1,4 +1,4 @@
-﻿@model HeadSlidePostVM
+﻿@model HeadSlideUpdateVM
 <div class="content-page">
     <div class="content">
 
@@ -35,11 +35,10 @@
 
                             <form class="parsley-examples" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    @* <div class="text-danger" asp-validation-summary="All"></div> *@
-                                    
-                                    <label asp-for="FormFiles">Title<span class="text-danger">*</span> </label>
-                                    <input asp-for="FormFiles" parsley-trigger="change" required   class="form-control">
-                                    <span class="text-danger" asp-validation-for="FormFiles"></span>
+                                    <div class="text-danger" asp-validation-summary="All"></div>
+                                    <label asp-for="ImageFile">Title<span class="text-danger">*</span> </label>
+                                    <input asp-for="ImageFile"   class="form-control">
+                                    <span class="text-danger" asp-validation-for="ImageFile"></span>
                                 </div>
                              
                                 <div class="form-group text-right mb-0">

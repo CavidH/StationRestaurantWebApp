@@ -7,7 +7,7 @@ namespace Business.Validators.HeadSlide
     {
         public HeadSlidePostVMValidator()
         {
-            RuleFor(p => p.ImageFile).NotEmpty().NotNull();
+            RuleFor(p => p.FormFiles).NotEmpty().NotNull();
         }
     }
 }
