@@ -7,11 +7,10 @@ namespace StationRestaurant.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserService _userService;
-
-        public AccountController(IUserService userService)
+        private readonly IUnitOfWorkService _unitOfWorkService;
+        public AccountController(IUnitOfWorkService unitOfWorkService)
         {
-            _userService = userService;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         public IActionResult Index()
@@ -30,7 +29,7 @@ namespace StationRestaurant.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _userService.Create(userPostVm);
+                await _unitOfWorkService.userService.Create(userPostVm);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -48,7 +47,7 @@ namespace StationRestaurant.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _userService.Login(loginVm);
+                await _unitOfWorkService.userService.Login(loginVm);
                 if (ReturnUrl != null)
                 {
                     return Redirect(ReturnUrl);
@@ -61,7 +60,7 @@ namespace StationRestaurant.Controllers
         }
         public async Task<IActionResult> LogOut()
         {
-            await _userService.LogOut();
+            await _unitOfWorkService.userService.LogOut();
             return RedirectToAction("Index","Home");
         }
     }

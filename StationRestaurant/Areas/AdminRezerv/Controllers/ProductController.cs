@@ -9,25 +9,23 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
     [Area("AdminRezerv")]
     public class ProductController : Controller
     {
-        private readonly IProductService _productService;
-        private readonly IProductCategoryService _productCategoryService;
+        private readonly IUnitOfWorkService _unitOfWorkService;
 
-        public ProductController(IProductService productService, IProductCategoryService productCategoryService)
+        public ProductController(IUnitOfWorkService unitOfWorkService)
         {
-            _productService = productService;
-            _productCategoryService = productCategoryService;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            var products = await _productService.GetAllPaginatedAsync(page);
+            var products = await _unitOfWorkService.productService.GetAllPaginatedAsync(page);
             return View(products);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.categories = await _productCategoryService.GetAllAsync();
+            ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
 
             // var categories = await _productCategoryService.GetAllAsync();
             // var result = new ProductPostVM() {ProductCategories = categories};
@@ -40,7 +38,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         {
             // if (ModelState["Image"].ValidationState == ModelValidationState.Invalid) return View();
             // productPostVm.ProductCategories = await _productCategoryService.GetAllAsync();
-            ViewBag.categories = await _productCategoryService.GetAllAsync();
+            ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
 
             if (ModelState.IsValid)
             {
@@ -56,7 +54,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     return View(productPostVm);
                 }
 
-                await _productService.Create(productPostVm);
+                await _unitOfWorkService.productService.Create(productPostVm);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -69,9 +67,9 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         public async Task<IActionResult> Update(int id)
         {
             if (id < 1) return BadRequest();
-            var product = await _productService.GetAsync(id);
+            var product = await _unitOfWorkService.productService.GetAsync(id);
             if (product == null) return NotFound();
-            ViewBag.categories = await _productCategoryService.GetAllAsync();
+            ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
             return View(new ProductUpdateVM()
             {
                 Name = product.Name,
@@ -85,7 +83,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Update(int id, ProductUpdateVM productUpdateVm)
         {
-            ViewBag.categories = await _productCategoryService.GetAllAsync();
+            ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
 
             if (ModelState.IsValid)
             {
@@ -104,7 +102,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     }
                 }
 
-                await _productService.Update(id, productUpdateVm);
+                await _unitOfWorkService.productService.Update(id, productUpdateVm);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -115,7 +113,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if (id < 1) return BadRequest();
-            await _productService.Remove(id);
+            await _unitOfWorkService.productService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Business.Implementations;
 using Business.Interfaces;
 using Business.ViewModels.Table;
 using Microsoft.AspNetCore.Mvc;
@@ -9,16 +8,15 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
     [Area("AdminRezerv")]
     public class TableController : Controller
     {
-        private readonly ITableService _tableService;
+        private readonly IUnitOfWorkService _unitOfWorkService;
 
-        public TableController(ITableService tableService)
+        public TableController(IUnitOfWorkService unitOfWorkService)
         {
-            _tableService = tableService;
+            _unitOfWorkService = unitOfWorkService;
         }
-
         public async Task<IActionResult> Index(int page = 1)
         {
-            var Tables = await _tableService.GetAllPaginatedAsync(page);
+            var Tables = await _unitOfWorkService.tableService.GetAllPaginatedAsync(page);
             return View(Tables);
         }
 
@@ -32,14 +30,14 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await _tableService.IsExist(tablePostVm.TableNumber))
+                if (await _unitOfWorkService.tableService.IsExist(tablePostVm.TableNumber))
                 {
                     ModelState.AddModelError("TableNumber", "This Table Number Already Exist");
                     return View(tablePostVm);
                 }
 
 
-                await _tableService.Create(tablePostVm);
+                await _unitOfWorkService.tableService.Create(tablePostVm);
                 return RedirectToAction("Index");
             }
 
@@ -50,7 +48,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if (id < 1) return BadRequest();
-            await _tableService.Remove(id);
+            await _unitOfWorkService.tableService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }

@@ -9,17 +9,16 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
     [Area("AdminRezerv")]
     public class HeadSlideController : Controller
     {
-        private readonly IHeadSlideService _slideService;
-
-        public HeadSlideController(IHeadSlideService slideService)
+        private readonly IUnitOfWorkService _unitOfWorkService;
+        public HeadSlideController(IUnitOfWorkService unitOfWorkService)
         {
-            _slideService = slideService;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         // GET
         public async Task<IActionResult> Index()
         {
-            return View(await _slideService.GetAllAsync());
+            return View(await _unitOfWorkService.headSlideService.GetAllAsync());
         }
 
         public async Task<IActionResult> Create()
@@ -35,7 +34,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             {
                 try
                 {
-                    await _slideService.Create(headSlidePostVm);
+                    await _unitOfWorkService.headSlideService.Create(headSlidePostVm);
                 }
                 catch (Exception e)
                 {
@@ -63,7 +62,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             {
                 try
                 {
-                    _slideService.Update(Id, headSlideUpdateVm);
+                    _unitOfWorkService.headSlideService.Update(Id, headSlideUpdateVm);
                 }
                 catch (Exception e)
                 {
@@ -82,7 +81,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             if (Id == 0) return NotFound();
             try
             {
-                await _slideService.Remove(Id);
+                await _unitOfWorkService.headSlideService.Remove(Id);
             }
             catch (Exception e)
             {

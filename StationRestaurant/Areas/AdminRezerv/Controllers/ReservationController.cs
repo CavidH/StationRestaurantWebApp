@@ -9,33 +9,31 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
     [Area("AdminRezerv")]
     public class ReservationController : Controller
     {
-        private readonly IReservationService _reservationService;
-        private readonly ITableService _tableService;
+        private readonly IUnitOfWorkService _unitOfWorkService;
 
-        public ReservationController(IReservationService reservationService, ITableService tableService)
+        public ReservationController(IUnitOfWorkService unitOfWorkService)
         {
-            _reservationService = reservationService;
-            _tableService = tableService;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            ViewBag.tables = await _tableService.GetAllAsync();
-            return View(await _reservationService.GetAllPaginatedAsync(page));
+            ViewBag.tables = await _unitOfWorkService.tableService.GetAllAsync();
+            return View(await _unitOfWorkService.reservationService.GetAllPaginatedAsync(page));
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Index(Paginate<Reservation> paginate, int page = 1)
         {
-            ViewBag.tables = await _tableService.GetAllAsync();
-            return View(await _reservationService.GetAllPaginatedAsync(page, paginate.Item.ReservDate.Date));
+            ViewBag.tables = await _unitOfWorkService.tableService.GetAllAsync();
+            return View(await _unitOfWorkService.reservationService.GetAllPaginatedAsync(page, paginate.Item.ReservDate.Date));
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             if (id < 1) return BadRequest();
-            await _reservationService.Remove(id);
+            await _unitOfWorkService.reservationService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }

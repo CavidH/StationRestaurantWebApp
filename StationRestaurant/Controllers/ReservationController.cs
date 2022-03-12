@@ -3,26 +3,20 @@ using Business.Interfaces;
 using Business.Utilities.Helpers;
 using Business.ViewModels.Reservation;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace StationRestaurant.Controllers
 {
     public class ReservationController : Controller
     {
-        private readonly IReservationService _reservationService;
-        private readonly ITableService _tableService;
-        private readonly IConfiguration _configuration;
-
-        public ReservationController(IReservationService reservationService, ITableService tableService,IConfiguration configuration)
+        private readonly IUnitOfWorkService _unitOfWorkService;
+        public ReservationController(IUnitOfWorkService unitOfWorkService)
         {
-            _reservationService = reservationService;
-            _tableService = tableService;
-            _configuration = configuration;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.tables = await _tableService.GetAllAsync();
+            ViewBag.tables = await _unitOfWorkService.tableService.GetAllAsync();
 
             return View();
         }
@@ -31,16 +25,16 @@ namespace StationRestaurant.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(ReservationPostVM reservationPostVm)
         {
-            ViewBag.tables = await _tableService.GetAllAsync();
+            ViewBag.tables = await _unitOfWorkService.tableService.GetAllAsync();
             if (ModelState.IsValid)
             {
-                if (await _reservationService.IsReserved(reservationPostVm.ReservDate.Date, reservationPostVm.TableID))
+                if (await _unitOfWorkService.reservationService.IsReserved(reservationPostVm.ReservDate.Date, reservationPostVm.TableID))
                 {
                     ModelState.AddModelError("TableID", "This table has already been reserved");
                     return View(reservationPostVm);
                 }
 
-                await _reservationService.Create(reservationPostVm);
+                await _unitOfWorkService.reservationService.Create(reservationPostVm);
                  
                 EmailHelper.EmailContentBuilder(reservationPostVm.Email, "ConfirmationLink", "Confirm Email");
                 return RedirectToAction("Index", "Home");
