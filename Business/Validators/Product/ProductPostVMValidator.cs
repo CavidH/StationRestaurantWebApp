@@ -11,6 +11,7 @@ namespace Business.Validators.Product
             RuleFor(p => p.Title).NotNull().NotEmpty().MaximumLength(250);
             RuleFor(p => p.Description).NotNull().NotEmpty().MaximumLength(500);
             RuleFor(p => p.ImageFile).NotNull().NotEmpty();
+            RuleFor(p => p.Price).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
         }
     }
 }

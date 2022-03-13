@@ -9,6 +9,10 @@
     <Compile Remove="DAL\Migrations\20220306073558_reservtable.Designer.cs" />
     <Compile Remove="DAL\Migrations\20220312095827_slide.cs" />
     <Compile Remove="DAL\Migrations\20220312095827_slide.Designer.cs" />
+    <Compile Remove="DAL\Migrations\20220313091053_price column.cs" />
+    <Compile Remove="DAL\Migrations\20220313091053_price column.Designer.cs" />
+    <Compile Remove="DAL\Migrations\20220313091359_col.cs" />
+    <Compile Remove="DAL\Migrations\20220313091359_col.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

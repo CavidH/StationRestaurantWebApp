@@ -75,7 +75,8 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 Name = product.Name,
                 Title = product.Title,
                 Description = product.Title,
-                ProductCategoryID = product.ProductCategoryID
+                ProductCategoryID = product.ProductCategoryID,
+                Price = product.Price
             });
         }
 
