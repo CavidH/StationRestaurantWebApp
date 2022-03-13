@@ -12,6 +12,7 @@ namespace Business.ViewModels.ProductVM
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public int ProductCategoryID { get; set; }
+        public double Price { get; set; }
         public  Core.Entities.ProductCategory ProductCategory { get; set; }
         public List<ProductImage> ProductImages { get; set; }
     }

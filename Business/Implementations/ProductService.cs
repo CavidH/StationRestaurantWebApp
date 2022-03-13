@@ -35,14 +35,15 @@ namespace Business.Implementations
         {
             return await _unitOfWork
                 .productRepository
-                .GetLastProduct(8);
+                .GetLastProduct(4);
         }
 
         public async Task<Paginate<Product>> GetAllPaginatedAsync(int page)
         {
             var products = await _unitOfWork
                 .productRepository
-                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false, "ProductCategory");
+                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false && p.ProductCategory.IsDeleted == false,
+                    "ProductCategory");
 
             var Result = new Paginate<Product>();
             Result.Items = products;
@@ -55,7 +56,8 @@ namespace Business.Implementations
         {
             var products = await _unitOfWork
                 .productRepository
-                .GetAllAsync(p => p.IsDeleted == false);
+                .GetAllAsync(p => p.IsDeleted == false && p.ProductCategory.IsDeleted == false,
+                    "ProductCategory");
             var productCount = products.Count;
             return (int) Math.Ceiling(((decimal) productCount / take));
         }
@@ -82,7 +84,8 @@ namespace Business.Implementations
                 Description = productPostVm.Description,
                 Title = productPostVm.Title,
                 ProductCategoryID = productPostVm.ProductCategoryID,
-                Image = imageFile
+                Image = imageFile,
+                Price = productPostVm.Price
             };
             await _unitOfWork.productRepository.CreateAsync(product);
             await _unitOfWork.SaveAsync();
@@ -105,6 +108,7 @@ namespace Business.Implementations
             product.Title = productUpdateVm.Title;
             product.Description = productUpdateVm.Description;
             product.ProductCategoryID = productUpdateVm.ProductCategoryID;
+            product.Price = productUpdateVm.Price;
             _unitOfWork.productRepository.Update(product);
             await _unitOfWork.SaveAsync();
 
