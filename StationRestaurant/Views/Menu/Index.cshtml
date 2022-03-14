@@ -1,206 +1,294 @@
-﻿<main>
-    <section id="Menu-logo">
+﻿@model MenuVM
+@{
+    string statusActive = "active";
+
+    string statusActiveShow = "  active show";
+    string statusActivedontShow = "container fade tab-pane";
+}
+<main>
+<section id="Menu-logo">
+    <div class="row">
+        <div class="menu-logo-container col-lg-12">
+            <img src="Assets/Img/PinClipart.com_header-clipart_101429.png">
+        </div>
+    </div>
+
+</section>
+<section id="Menu" class="menu">
+<ul class="nav nav-pills justify-content-center">
+    @for (int i = 0; i < @Model.ProductCategories.Count; i++)
+    {
+        <li class="nav-item">
+            <a class="nav-link  custom-btn  @if (i == 0){@statusActive} " data-toggle="pill" href="#@Model.ProductCategories[i].Name">@Model.ProductCategories[i].Name</a>
+        </li>
+    }
+
+    @* <li class="nav-item"> *@
+    @*     <a class="nav-link  custom-btn active " data-toggle="pill" href="#drink">drink</a> *@
+    @* </li> *@
+    @* <li class="nav-item"> *@
+    @*     <a class="nav-link  custom-btn " data-toggle="pill" href="#burger">burger</a> *@
+    @* </li> *@
+    @* <li class="nav-item"> *@
+    @*     <a class="nav-link   custom-btn " data-toggle="pill" href="#meat">meat</a> *@
+    @* </li> *@
+
+</ul>
+<div class="menu-content tab-content">
+@for (int i = 0; i < @Model.ProductCategories.Count; i++)
+{
+    <div id="@Model.ProductCategories[i].Name" class='container fade tab-pane @if (i == 0) { @statusActiveShow; } '>
         <div class="row">
-            <div class="menu-logo-container col-lg-12">
-                <img src="Assets/Img/PinClipart.com_header-clipart_101429.png">
+            <div class="col-lg-7 col-md-12">
+                @if (Model.ProductCategories[i].Products != null)
+                {
+                    @foreach (var product in Model.ProductCategories[i].Products)
+                    {
+                        <div class="menu-item">
+                            <div class="menu-img">
+                                <a href="Assets/img/@product.Image">
+                                    <img src="Assets/img/@product.Image" alt="Image">
+                                </a>
+                            </div>
+                            <div class="menu-text">
+                                <h3>
+                                    <span>@product.Name</span> <strong>$@product.Price </strong>
+                                </h3>
+                                <p>@product.Description</p>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+            <div class="col-lg-5 col-md-12">
+                <div class="menu-img-container">
+                    @if (Model.ProductCategories[i].Products != null)
+                    {
+                        <img src="Assets/Img/@Model.ProductCategories[i].Products[0].Image" class=" " alt="">
+                    }
+                </div>
             </div>
         </div>
+    </div>
+}
 
-    </section>
-    <section id="Menu" class="menu">
-        <ul class="nav nav-pills justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link  custom-btn active " data-toggle="pill" href="#drink">drink</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link  custom-btn " data-toggle="pill" href="#burger">burger</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link   custom-btn " data-toggle="pill" href="#meat">meat</a>
-            </li>
 
-        </ul>
-        <div class="menu-content tab-content">
-            <div id="drink" class="container fade tab-pane active show ">
-                <div class="row">
-                    <div class="col-lg-7 col-md-12">
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Single Cup Brew</span> <strong>$7.00 </strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Caffe Americano</span> <strong>$9.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Caramel Macchiato</span> <strong>$15.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Standard black coffee</span> <strong>$8.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Standard black coffee</span> <strong>$12.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Single Cup Brew</span> <strong>$7.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Caffe Americano</span> <strong>$9.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Caramel Macchiato</span> <strong>$15.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Standard black coffee</span> <strong>$8.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/img/menu-beverage.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Standard black coffee</span> <strong>$12.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-12">
-                        <div class="menu-img-container">
-                            <img src="Assets/Img/menudrinksm1.jpg" class=" " alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="burger" class="container tab-pane fade">
-                <div class="row">
-                    <div class="col-lg-7 col-md-12">
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/Img/menu-burger.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Single Cup Brew</span> <strong>$7.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/Img/menu-burger.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Single Cup Brew</span> <strong>$7.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/Img/menu-burger.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Single Cup Brew</span> <strong>$7.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="col-lg-5 col-md-12">
-                        <div class="menu-img-container">
-                            <img src="Assets/Img/menu-burger-img.jpg" class=" " alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="meat" class="container tab-pane fade">
-                <div class="row">
-                    <div class="col-lg-7 col-md-12">
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/Img/menu-burger.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>meat</span> <strong>$7.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/Img/menu-burger.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Single Cup Brew</span> <strong>$7.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-img">
-                                <img src="Assets/Img/menu-burger.jpg" alt="Image">
-                            </div>
-                            <div class="menu-text">
-                                <h3><span>Single Cup Brew</span> <strong>$7.00</strong></h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="col-lg-5 col-md-12">
-                        <div class="menu-img-container">
-                            <img src="Assets/Img/menu-burger-img.jpg" class=" " alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </section>
+@* <div id="drink" class="container fade tab-pane active show "> *@
+@*     <div class="row"> *@
+@*         <div class="col-lg-7 col-md-12"> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Single Cup Brew</span> <strong>$7.00 </strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Caffe Americano</span> <strong>$9.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Caramel Macchiato</span> <strong>$15.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Standard black coffee</span> <strong>$8.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Standard black coffee</span> <strong>$12.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Single Cup Brew</span> <strong>$7.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Caffe Americano</span> <strong>$9.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Caramel Macchiato</span> <strong>$15.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Standard black coffee</span> <strong>$8.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/img/menu-beverage.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Standard black coffee</span> <strong>$12.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*         <div class="col-lg-5 col-md-12"> *@
+@*             <div class="menu-img-container"> *@
+@*                 <img src="Assets/Img/menudrinksm1.jpg" class=" " alt=""> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+@* <div id="burger" class="container tab-pane fade"> *@
+@*     <div class="row"> *@
+@*         <div class="col-lg-7 col-md-12"> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/Img/menu-burger.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Single Cup Brew</span> <strong>$7.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/Img/menu-burger.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Single Cup Brew</span> <strong>$7.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/Img/menu-burger.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Single Cup Brew</span> <strong>$7.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@* *@
+@*         </div> *@
+@*         <div class="col-lg-5 col-md-12"> *@
+@*             <div class="menu-img-container"> *@
+@*                 <img src="Assets/Img/menu-burger-img.jpg" class=" " alt=""> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+@* <div id="meat" class="container tab-pane fade"> *@
+@*     <div class="row"> *@
+@*         <div class="col-lg-7 col-md-12"> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/Img/menu-burger.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>meat</span> <strong>$7.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/Img/menu-burger.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Single Cup Brew</span> <strong>$7.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="menu-item"> *@
+@*                 <div class="menu-img"> *@
+@*                     <img src="Assets/Img/menu-burger.jpg" alt="Image"> *@
+@*                 </div> *@
+@*                 <div class="menu-text"> *@
+@*                     <h3> *@
+@*                         <span>Single Cup Brew</span> <strong>$7.00</strong> *@
+@*                     </h3> *@
+@*                     <p>Lorem ipsum dolor sit amet elit. Phasel nec preti facil</p> *@
+@*                 </div> *@
+@*             </div> *@
+@* *@
+@*         </div> *@
+@*         <div class="col-lg-5 col-md-12"> *@
+@*             <div class="menu-img-container"> *@
+@*                 <img src="Assets/Img/menu-burger-img.jpg" class=" " alt=""> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+
+</div>
+</section>
 </main>

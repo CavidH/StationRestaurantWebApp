@@ -25,10 +25,12 @@ namespace Business.Implementations
             _environment = environment;
         }
 
-        public Task<List<Product>> GetAllAsync()
+        public async Task<List<Product>> GetAllAsync()
         {
-            //algorithm expetion ve s
-            throw new System.NotImplementedException();
+            return await _unitOfWork
+                .productRepository
+                .GetAllAsync(p => p.IsDeleted == false && p.ProductCategory.IsDeleted == false,
+                    "ProductCategory");
         }
 
         public async Task<List<Product>> GetLastProductsAsync()

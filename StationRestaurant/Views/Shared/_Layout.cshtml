@@ -14,7 +14,8 @@
           integrity="sha512-kwJUhJJaTDzGp6VTPBbMQWBFUof6+pv0SM3s8fo+E6XnPmVmtfwENK0vHYup3tsYnqHgRDoBDTJWoq7rnQw2+g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="~/Assets/Style/style.css">
-    <title>@ViewData["Title"] - Station Restaurant</title>
+    @* <title>@ViewData["Title"] - Station Restaurant</title> *@
+    <title>Station Restaurant</title>
 
 
 </head>
@@ -41,7 +42,7 @@
                             <a class="nav-link" href="Index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Menu.html">Menu</a>
+                            <a class="nav-link" asp-controller="Menu"  asp-action="Index">Menu</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Reservation</a>

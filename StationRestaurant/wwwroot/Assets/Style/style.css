@@ -456,6 +456,7 @@ body {
     display: block;
     width: 100%;
     opacity: 0;
+    height: 254px;
     /* visually hide the img element */
 }
 
@@ -714,8 +715,9 @@ Menu page start
 }
 
 .menu .menu-img img {
-    width: 100%;
-    border-radius: 100px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
 }
 
 .menu .menu-text {
@@ -786,15 +788,16 @@ strong {
     background-color: rgb(255, 255, 255) !important;
     border: 1px solid black;
     color: black !important;
-
-
+    border-radius: 26px;
 }
 
 .nav-pills li a {
 
     color: rgba(47, 51, 48, 0.74) !important;
-}
+    margin-left: 5px;
+    border-radius: 26px !important;
 
+}
 
 /* 1 */
 .custom-btn {
@@ -808,6 +811,8 @@ strong {
     4px 4px 5px 0px #0001;
     border: 1px solid black;
     color: black !important;
+    border-radius: 26px;
+
 
 }
 
