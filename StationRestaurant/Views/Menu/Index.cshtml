@@ -35,9 +35,48 @@
 
 </ul>
 <div class="menu-content tab-content">
-@for (int i = 0; i < @Model.ProductCategories.Count; i++)
+
+@if (@Model.ProductCategories.Count != 0)
 {
-    <div id="@Model.ProductCategories[i].Name" class='container fade tab-pane @if (i == 0) { @statusActiveShow; } '>
+    <div id="@Model.ProductCategories[0].Name" class='container fade tab-pane active show '>
+        <div class="row">
+            <div class="col-lg-7 col-md-12">
+                @if (Model.ProductCategories[0].Products != null)
+                {
+                    @foreach (var product in Model.ProductCategories[0].Products)
+                    {
+                        <div class="menu-item">
+                            <div class="menu-img">
+                                <a href="Assets/img/@product.Image">
+                                    <img src="Assets/img/@product.Image" alt="Image">
+                                </a>
+                            </div>
+                            <div class="menu-text">
+                                <h3>
+                                    <span>@product.Name</span> <strong>$@product.Price </strong>
+                                </h3>
+                                <p>@product.Description</p>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+            <div class="col-lg-5 col-md-12">
+                <div class="menu-img-container">
+                    @if (Model.ProductCategories[0].Products != null)
+                    {
+                        <img src="Assets/Img/@Model.ProductCategories[0].Products[0].Image" class=" " alt="">
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@for (int i = 1; i < @Model.ProductCategories.Count; i++)
+{
+    <div id="@Model.ProductCategories[i].Name" class='container fade tab-pane  '>
         <div class="row">
             <div class="col-lg-7 col-md-12">
                 @if (Model.ProductCategories[i].Products != null)
@@ -71,6 +110,7 @@
             </div>
         </div>
     </div>
+}
 }
 
 
