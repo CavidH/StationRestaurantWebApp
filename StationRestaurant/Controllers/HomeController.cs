@@ -22,11 +22,13 @@ namespace StationRestaurant.Controllers
         {
             var slides = await _unitOfWorkService.headSlideService.GetAllAsync();
             var lastProducts = await _unitOfWorkService.productService.GetLastProductsAsync();
+            var miniGallery = await _unitOfWorkService.galleryService.GetLastProductsAsync();
 
             var homeVM = new HomeVM
             {
                 HeadSlides = slides,
-                Products = lastProducts
+                Products = lastProducts,
+                MiniGallery = miniGallery
             };
             return View(homeVM);
         }
