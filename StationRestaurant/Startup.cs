@@ -1,3 +1,4 @@
+using System;
 using Business.Implementations;
 using Business.Interfaces;
 using Business.Validators.ProductCategory;
@@ -11,10 +12,8 @@ using Core.Entities;
 using Data.DAL;
 using Data.Repositories;
 using FluentValidation.AspNetCore;
-using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Serialization;
 
 namespace StationRestaurant
 {
@@ -39,6 +38,7 @@ namespace StationRestaurant
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddSession(option => { option.IdleTimeout = TimeSpan.FromSeconds(20); });
             services.Configure<IdentityOptions>(Options =>
             {
                 Options.Password.RequiredLength = 8;
@@ -55,7 +55,7 @@ namespace StationRestaurant
             // services.AddScoped<ITableService, TableService>();
             // services.AddScoped<IUserService, UserService>();
             // services.AddScoped<IHeadSlideService, HeadSlideService>();
-            services.AddScoped<IUnitOfWorkService,UnitOfWorkService>();
+            services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,12 +74,10 @@ namespace StationRestaurant
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
