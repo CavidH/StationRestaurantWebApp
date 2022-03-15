@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Exceptions;
@@ -62,7 +63,7 @@ namespace Business.Implementations
             foreach (var photo in galleryPostVm.ImageFiles)
             {
                 string filename = await photo.SaveFileAsync(_environment.WebRootPath, "Assets", "img");
-                await _unitOfWork.galleryImageRepository.CreateAsync(new GaleryImage {Image = filename});
+                await _unitOfWork.galleryImageRepository.CreateAsync(new GaleryImage { Image = filename });
                 await _unitOfWork.SaveAsync();
             }
         }
@@ -79,7 +80,11 @@ namespace Business.Implementations
 
         public async Task<int> getPageCount(int take)
         {
-            throw new System.NotImplementedException();
+            var galleryImages = await _unitOfWork
+                .galleryImageRepository
+                .GetAllAsync();
+            var galleryImagesCount = galleryImages.Count;
+            return (int)Math.Ceiling(((decimal)galleryImagesCount / take));
         }
 
         private bool ChechkImageValid(List<IFormFile> photos)
