@@ -10,7 +10,7 @@ namespace Business.Interfaces
     {
         Task<List<GaleryImage>> GetAllAsync();
         Task<List<GaleryImage>> GetLastProductsAsync();
-        Task<Paginate<GaleryImage>> GetAllPaginatedAsync(int page);
+        Task<Paginate<GaleryImage>> GetAllPaginatedAsync(int page,int size);
         Task<GaleryImage> GetAsync(int id);
         Task Create(GalleryPostVM galleryPostVm);
         Task Update(int id, GalleryUpdateVM galleryUpdateVm);
