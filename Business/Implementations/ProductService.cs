@@ -64,6 +64,13 @@ namespace Business.Implementations
             return (int) Math.Ceiling(((decimal) productCount / take));
         }
 
+        // public async Task<int> getLastIdAsync()
+        // {
+        //     var product = await _unitOfWork.productRepository
+        //         .GetAllAsync(p => p.IsDeleted == false);
+        //     return product[product.Count-1].Id;
+        // }
+
         public async Task<Product> GetAsync(int id)
         {
             var category = await _unitOfWork
