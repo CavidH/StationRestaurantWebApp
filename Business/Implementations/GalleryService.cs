@@ -33,14 +33,16 @@ namespace Business.Implementations
 
         public async Task<List<GaleryImage>> GetLastProductsAsync()
         {
-            throw new System.NotImplementedException();
+            return await _unitOfWork
+                .galleryImageRepository
+                .GetLastProduct(3);
         }
 
-        public async Task<Paginate<GaleryImage>> GetAllPaginatedAsync(int page)
+        public async Task<Paginate<GaleryImage>> GetAllPaginatedAsync(int page, int size)
         {
             var dbGalleryImages = await _unitOfWork
                 .galleryImageRepository
-                .GetAllPaginatedAsync(page, 10);
+                .GetAllPaginatedAsync(page, size);
 
             var Result = new Paginate<GaleryImage>();
             Result.Items = dbGalleryImages;
@@ -64,14 +66,33 @@ namespace Business.Implementations
             foreach (var photo in galleryPostVm.ImageFiles)
             {
                 string filename = await photo.SaveFileAsync(_environment.WebRootPath, "Assets", "img");
-                await _unitOfWork.galleryImageRepository.CreateAsync(new GaleryImage { Image = filename });
+                await _unitOfWork.galleryImageRepository.CreateAsync(new GaleryImage {Image = filename});
                 await _unitOfWork.SaveAsync();
             }
         }
 
         public async Task Update(int id, GalleryUpdateVM galleryUpdateVm)
         {
-            throw new System.NotImplementedException();
+            if (!galleryUpdateVm.ImagFile.CheckFileType("image/"))
+            {
+                _erorrMessage = $"{galleryUpdateVm.ImagFile.FileName} must be  image type ";
+                throw new ImageFileException(_erorrMessage);
+            }
+
+            if (!galleryUpdateVm.ImagFile.CheckFileSize(300))
+            {
+                _erorrMessage = $"{galleryUpdateVm.ImagFile.FileName} size must be less than 300kb";
+                throw new ImageFileException(_erorrMessage);
+            }
+
+            var galeryImage = await _unitOfWork.galleryImageRepository.GetAsync(p => p.Id == id);
+            if (galleryUpdateVm.ImagFile is null) throw new NotFoundException("Image not found");
+            FileHelper.RemoveFile(_environment.WebRootPath, galeryImage.Image, "Assets", "img");
+            var filename = galleryUpdateVm.ImagFile.SaveFileAsync(_environment.WebRootPath, "Assets", "img");
+            filename.Wait();
+            galeryImage.Image = await filename;
+            _unitOfWork.galleryImageRepository.Update(galeryImage);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task Remove(int id)
@@ -89,7 +110,7 @@ namespace Business.Implementations
                 .galleryImageRepository
                 .GetAllAsync();
             var galleryImagesCount = galleryImages.Count;
-            return (int)Math.Ceiling(((decimal)galleryImagesCount / take));
+            return (int) Math.Ceiling(((decimal) galleryImagesCount / take));
         }
 
         private bool ChechkImageValid(List<IFormFile> photos)

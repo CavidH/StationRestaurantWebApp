@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Business.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Controllers
 {
     public class GalleryController : Controller
     {
-        public IActionResult Index()
+        private readonly IUnitOfWorkService _unitOfWorkService;
+
+        public GalleryController(IUnitOfWorkService unitOfWorkService)
         {
-            return View();
+            _unitOfWorkService = unitOfWorkService;
+        }
+
+        public async Task<IActionResult> Index(int page = 1)
+        {
+            return View(await _unitOfWorkService.galleryService.GetAllPaginatedAsync(page,12));
         }
     }
 }
