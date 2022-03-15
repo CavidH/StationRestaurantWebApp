@@ -2,11 +2,13 @@
 using Business.Interfaces;
 using Business.Utilities;
 using Business.ViewModels.ProductVM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
 {
     [Area("AdminRezerv")]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IUnitOfWorkService _unitOfWorkService;
@@ -18,15 +20,12 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            var products = await _unitOfWorkService.productService.GetAllPaginatedAsync(page);
-            return View(products);
+            return View(await _unitOfWorkService.productService.GetAllPaginatedAsync(page));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
+         public async Task<IActionResult> Create()
         {
             ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
-
             // var categories = await _productCategoryService.GetAllAsync();
             // var result = new ProductPostVM() {ProductCategories = categories};
             return View();
@@ -39,7 +38,6 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             // if (ModelState["Image"].ValidationState == ModelValidationState.Invalid) return View();
             // productPostVm.ProductCategories = await _productCategoryService.GetAllAsync();
             ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
-
             if (ModelState.IsValid)
             {
                 if (!productPostVm.ImageFile.CheckFileType("image/"))
@@ -63,7 +61,6 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             return View(productPostVm);
         }
 
-        [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
             if (id < 1) return BadRequest();

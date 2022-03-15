@@ -2,14 +2,17 @@ using System;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.HeadSlide;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
 {
     [Area("AdminRezerv")]
+    [Authorize]
     public class HeadSlideController : Controller
     {
         private readonly IUnitOfWorkService _unitOfWorkService;
+
         public HeadSlideController(IUnitOfWorkService unitOfWorkService)
         {
             _unitOfWorkService = unitOfWorkService;
@@ -27,6 +30,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         // [RequestSizeLimit(737280000)] for file size exeption jsjs
         public async Task<IActionResult> Create(HeadSlidePostVM headSlidePostVm)
         {
@@ -55,6 +59,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int Id, HeadSlideUpdateVM headSlideUpdateVm)
         {
             if (Id == 0) return NotFound();
@@ -66,7 +71,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 }
                 catch (Exception e)
                 {
-                    ModelState.AddModelError("ImageFile",e.Message);
+                    ModelState.AddModelError("ImageFile", e.Message);
                     return View(headSlideUpdateVm);
                 }
 
@@ -76,6 +81,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             return View(headSlideUpdateVm);
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int Id)
         {
             if (Id == 0) return NotFound();
