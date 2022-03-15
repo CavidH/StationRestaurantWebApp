@@ -25,7 +25,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         {
             //var c = await _context.GaleryImages.ToListAsync();
 
-            return View(await _unitOfWorkService.galleryService.GetAllPaginatedAsync(page));
+            return View(await _unitOfWorkService.galleryService.GetAllPaginatedAsync(page,10));
         }
 
         public ActionResult Create()
@@ -57,6 +57,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         public ActionResult Update(int id)
         {
+            if (id <= 0) return NotFound();
             return View();
         }
 
@@ -64,14 +65,21 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Update(int id, GalleryUpdateVM galleryUpdateVm)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _unitOfWorkService.galleryService.Update(id, galleryUpdateVm);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("ImagFile", e.Message);
+                    return View(galleryUpdateVm);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(galleryUpdateVm);
         }
 
         public async Task<ActionResult> Delete(int id)
