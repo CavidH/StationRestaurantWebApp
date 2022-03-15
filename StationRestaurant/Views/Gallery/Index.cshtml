@@ -1,34 +1,66 @@
-﻿<main>
+﻿@model Paginate<GaleryImage>
+@{
+    int count = ((Model.CurrentPage - 1) * 10) + 1;
+}
+<main>
     <section >
         <h1 class="gallery-title">Gallery</h1>
         <div class="galery">
-            <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a><a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a><a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a> <a href="Assets/Img/sm5.jpg">
-                <img src="Assets/Img/sm5.jpg" alt="">
-            </a>
+            @foreach (var item in @Model.Items)
+            {
+                <a href="Assets/Img/@item.Image">
+                    <img src="Assets/Img/@item.Image" alt="">
+                </a>
+            }
         </div>
-        <h3>to do Pagination</h3>
+        @if (@Model.AllPageCount > 1)
+        {
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+
+                    @if (Model.CurrentPage > 1)
+                    {
+                        var prev = Model.CurrentPage - 1;
+                        <li class="page-item ">
+                            <a class="page-link" asp-action="Index" asp-route-page="@prev">Previous</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link ">Previous</a>
+                        </li>
+                    }
+                    @{
+                        if (1 < Model.AllPageCount)
+                        {
+                            var start = 1;
+                            var end = Model.AllPageCount;
+                            for (int i = start; i <= end; i++)
+                            {
+                                <li class="page-item @(Model.CurrentPage == i ? "disabled" : "")">
+                                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                </li>
+                            }
+                        }
+                    }
+                    @if (Model.CurrentPage < Model.AllPageCount)
+                    {
+                        var next = Model.CurrentPage + 1;
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-page="@next">Next</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link">Next</a>
+                        </li>
+                    }
+
+                </ul>
+            </nav>
+        }
 
     </section>
 
