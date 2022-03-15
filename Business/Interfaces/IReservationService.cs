@@ -13,12 +13,14 @@ namespace Business.Interfaces
     {
         Task<List<Reservation>> GetAllAsync();
         Task<Paginate<Reservation>> GetAllPaginatedAsync(int page);
-        Task<Paginate<Reservation>> GetAllPaginatedAsync(int page,DateTime date);
+        Task<Paginate<Reservation>> GetAllPaginatedAsync(int page, DateTime date);
         Task<Reservation> GetAsync(int id);
         Task Create(ReservationPostVM reservationPostVm);
         Task Update(int id, ReservationPostVM reservationPostVm);
         Task<bool> IsReserved(DateTime dateTime, int tableId);
         Task Remove(int id);
         Task<int> getPageCount(int Take);
+        Task<int> getLastIdAsync();
+        Task ConfirmReservation(int id);
     }
 }

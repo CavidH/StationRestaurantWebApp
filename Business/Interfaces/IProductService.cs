@@ -16,5 +16,6 @@ namespace Business.Interfaces
         Task Update(int id, ProductUpdateVM productUpdateVm);
         Task Remove(int id);
         Task<int> getPageCount(int take);
+        // Task<int> getLastIdAsync();
     }
 }
