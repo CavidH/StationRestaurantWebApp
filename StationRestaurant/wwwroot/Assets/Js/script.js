@@ -12,21 +12,21 @@
 //     //     })
 //     //         .done(function (result) {
 //     //         })
-        //… rest of code left out
-        // $.ajax({
-        //      type: "POST",
-        //      url: "/Reservation/AJAXPost",
-        //      data: {"Datereserv": $("#Date_input").val()},
-        //      success: function (response) {
-        //          // alert("Student Name: " + response.Name + "<br/>Email: " + response.Email);
-        //      },
-        //      failure: function (response) {
-        //          alert(response.responseText);
-        //      },
-        //      error: function (response) {
-        //          alert(response.responseText);
-        //      }
-        //  });
+//… rest of code left out
+// $.ajax({
+//      type: "POST",
+//      url: "/Reservation/AJAXPost",
+//      data: {"Datereserv": $("#Date_input").val()},
+//      success: function (response) {
+//          // alert("Student Name: " + response.Name + "<br/>Email: " + response.Email);
+//      },
+//      failure: function (response) {
+//          alert(response.responseText);
+//      },
+//      error: function (response) {
+//          alert(response.responseText);
+//      }
+//  });
 //     });
 // });
 // $(document).ready(function () {
@@ -206,5 +206,33 @@ $(function () {
 
 
 lightGallery(document.querySelector(".galery"))
+
+
+$(document).ready(function () {
+    var $regexnumber = /^(\+|\d)[0-9]{8,16}$/;
+    $('#PhoneNumber').on('keypress keydown keyup', function () {
+        if (!$(this).val().match($regexnumber)) {
+  
+            $('.PhoneNumberlabel').addClass('text-danger');
+            $('.PhoneNumberlabel').show();
+        } else {
+        
+            $('.PhoneNumberlabel').removeClass('text-danger');
+        }
+    });
+
+
+    var $regexEmail = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    $('#Email').on('keypress keydown keyup', function () {
+        if (!$(this).val().match($regexEmail)) {
+             $('.Emaillabel').addClass('text-danger');
+            $('.Emaillabel').show();
+        } else {
+            // else, do not display message
+            $('.Emaillabel').removeClass('text-danger');
+        }
+    });
+});
+ 
 
 

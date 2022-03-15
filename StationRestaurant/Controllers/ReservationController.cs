@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities.Helpers;
 using Business.ViewModels.Reservation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Controllers
@@ -49,6 +50,7 @@ namespace StationRestaurant.Controllers
             return View(reservationPostVm);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> ConfirmReserv(int reservationId, string token)
         {
             var reservation = await _unitOfWorkService.reservationService.GetAsync(reservationId);
@@ -58,7 +60,7 @@ namespace StationRestaurant.Controllers
             var tokenConfirmDt = reservation.ReservDate;
             // var EmailDTToken = DateTime.ParseExact(token, "MM/dd/yyyy HH:mm:ss",
             //     System.Globalization.CultureInfo.InvariantCulture);
-            DateTime EmailDTToken=DateTime.Now;
+            DateTime EmailDTToken = DateTime.Now;
             try
             {
                 EmailDTToken = DateTime.ParseExact(token, "MM/dd/yyyy HH:mm:ss",
