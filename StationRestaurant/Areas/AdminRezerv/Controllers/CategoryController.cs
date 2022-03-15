@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.ProductCategory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
 {
     [Area("AdminRezerv")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWorkService _unitOfWorkService;
@@ -17,7 +19,6 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         {
             return View(await _unitOfWorkService.productCategoryService.GetAllAsync());
         }
-        [HttpGet]
         public async Task<IActionResult> Create()
         {
             return View();
@@ -63,7 +64,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
 
 
-
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             if (id < 1) return BadRequest();
