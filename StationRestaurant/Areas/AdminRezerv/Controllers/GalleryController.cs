@@ -74,8 +74,17 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
+            if (id == 0) return NotFound();
+            try
+            {
+                await _unitOfWorkService.galleryService.Remove(id);
+            }
+            catch (Exception e)
+            {
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }
