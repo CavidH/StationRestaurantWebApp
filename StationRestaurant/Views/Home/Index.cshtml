@@ -28,7 +28,6 @@
                         <p>@product.ProductCategory.Name</p>
                     </a>
                 </div>
-
             }
             @* <div class="card"> *@
             @*     <a class="card-image" href="http://station.eu5.org/Assets/Img/sm5.jp" target="_blank" *@
@@ -121,18 +120,15 @@
     <section id="Galery">
         <h3 class="gallery-title-hm ">Galery</h3>
         <div class="galery">
-            <a href="~/Assets/Img/sm5.jpg" class="hg">
-                <img src="~/Assets/Img/sm5.jpg" alt="">
-            </a>
-            <a href="~/Assets/Img/sm5.jpg" class="hg">
-                <img src="~/Assets/Img/sm5.jpg" alt="">
-            </a>
-            <a href="~/Assets/Img/sm5.jpg" class="hg">
-                <img src="~/Assets/Img/sm5.jpg" alt="">
-            </a>
+            @foreach (var item in @Model.MiniGallery)
+            {
+                <a href="~/Assets/Img/@item.Image" class="hg">
+                    <img src="~/Assets/Img/@item.Image" alt="">
+                </a>
+            }
         </div>
         <p class="see-all">
-            <a href="Gallery.html">See All</a>
+            <a asp-controller="Gallery" asp-action="Index" >See All</a>
         </p>
     </section>
     <section id="Home-parallax">
