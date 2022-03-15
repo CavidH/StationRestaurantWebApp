@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities.Helpers;
@@ -52,18 +53,30 @@ namespace StationRestaurant.Controllers
         {
             var reservation = await _unitOfWorkService.reservationService.GetAsync(reservationId);
             if (reservation == null) return NotFound();
-            if (reservation.IsActive)
-            {
-                ViewBag.msg = "Reservation Has Already Been Confirmed!";
-                return View();
-            }
+
 
             var tokenConfirmDt = reservation.ReservDate;
-            var EmailDTToken = DateTime.ParseExact(token, "MM/dd/yyyy HH:mm:ss",
-                System.Globalization.CultureInfo.InvariantCulture);
+            // var EmailDTToken = DateTime.ParseExact(token, "MM/dd/yyyy HH:mm:ss",
+            //     System.Globalization.CultureInfo.InvariantCulture);
+            DateTime EmailDTToken=DateTime.Now;
+            try
+            {
+                EmailDTToken = DateTime.ParseExact(token, "MM/dd/yyyy HH:mm:ss",
+                    CultureInfo.InvariantCulture);
+            }
+            catch (Exception e)
+            {
+                EmailDTToken.AddYears(9);
+            }
 
             if (tokenConfirmDt == EmailDTToken)
             {
+                if (reservation.IsActive)
+                {
+                    ViewBag.msg = "Reservation Has Already Been Confirmed!";
+                    return View();
+                }
+
                 try
                 {
                     await _unitOfWorkService.reservationService.ConfirmReservation(reservation.Id);
