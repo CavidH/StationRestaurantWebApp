@@ -50,7 +50,7 @@
                                                 <img src="~/Assets/img/@product.Image" width="70" class="img-fluid" alt="">
                                             </a>
                                         </td>
-                                        <td>@product.CreatedAt</td>
+                                        <td>@TimeZoneInfo.ConvertTime(product.CreatedAt, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")).AddHours(13)</td>
                                         @*                                            <td>@product.ProductCategory.Name</td>
 *@
                                         <td> @* 
