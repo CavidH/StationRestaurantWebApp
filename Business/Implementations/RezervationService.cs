@@ -50,9 +50,9 @@ namespace Business.Implementations
             return Result;
         }
 
-        public Task<Reservation> GetAsync(int id)
+        public async Task<Reservation> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.reservationRepository.GetAsync(p => p.IsDeleted == false && p.Id == id);
         }
 
         public async Task Create(ReservationPostVM reservationPostVm)
@@ -79,7 +79,8 @@ namespace Business.Implementations
         public async Task<bool> IsReserved(DateTime dateTime, int tableId)
         {
             //var table = await _unitOfWork.tableRepository.GetWithRezervsAsync(tableId);
-            var table = await _unitOfWork.tableRepository.GetAsync(p => p.IsDeleted == false && p.Id == tableId, "Reservations");
+            var table = await _unitOfWork.tableRepository.GetAsync(p => p.IsDeleted == false && p.Id == tableId,
+                "Reservations");
 
             if (table.Reservations.Count == 0) return false;
 
@@ -137,6 +138,21 @@ namespace Business.Implementations
                 .GetAllAsync(p => p.IsDeleted == false);
             var productCount = reservations.Count;
             return (int) Math.Ceiling(((decimal) productCount / take));
+        }
+
+        public async Task<int> getLastIdAsync()
+        {
+            var reserv = await _unitOfWork.reservationRepository
+                .GetAllAsync(p => p.IsDeleted == false);
+            return reserv[reserv.Count - 1].Id;
+        }
+
+        public async Task ConfirmReservation(int id)
+        {
+            var reservation = await _unitOfWork.reservationRepository.GetAsync(p => p.Id == id);
+            reservation.IsActive = true;
+            _unitOfWork.reservationRepository.Update(reservation);
+            await _unitOfWork.SaveAsync();
         }
     }
 }
