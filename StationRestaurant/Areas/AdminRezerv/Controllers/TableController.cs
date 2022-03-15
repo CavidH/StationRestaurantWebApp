@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.Table;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
 {
     [Area("AdminRezerv")]
+    [Authorize]
     public class TableController : Controller
     {
         private readonly IUnitOfWorkService _unitOfWorkService;
@@ -14,10 +16,10 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         {
             _unitOfWorkService = unitOfWorkService;
         }
+
         public async Task<IActionResult> Index(int page = 1)
         {
-            var Tables = await _unitOfWorkService.tableService.GetAllPaginatedAsync(page);
-            return View(Tables);
+            return View(await _unitOfWorkService.tableService.GetAllPaginatedAsync(page));
         }
 
         public async Task<IActionResult> Create()
@@ -26,6 +28,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TablePostVM tablePostVm)
         {
             if (ModelState.IsValid)

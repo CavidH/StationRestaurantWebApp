@@ -2,11 +2,13 @@
 using Business.Interfaces;
 using Business.ViewModels;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
 {
     [Area("AdminRezerv")]
+    [Authorize]
     public class ReservationController : Controller
     {
         private readonly IUnitOfWorkService _unitOfWorkService;
