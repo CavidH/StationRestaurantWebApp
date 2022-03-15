@@ -16,7 +16,7 @@ namespace Business.Utilities.Helpers
             mailMessage.Body = content;
 
             SmtpClient client = new SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential("hcavid386@gmail.com", "expres386net");
+            client.Credentials = new System.Net.NetworkCredential("hcavid386@gmail.com", "passs");
             client.Host = "smtp.gmail.com";
             client.Port = 587;
             client.EnableSsl = true;
