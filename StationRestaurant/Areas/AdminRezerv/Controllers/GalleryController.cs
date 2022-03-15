@@ -23,7 +23,6 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
-
             //var c = await _context.GaleryImages.ToListAsync();
 
             return View(await _unitOfWorkService.galleryService.GetAllPaginatedAsync(page));
@@ -55,6 +54,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
             return View(galleryPostVm);
         }
+
         public ActionResult Update(int id)
         {
             return View();
@@ -72,6 +72,11 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            return RedirectToAction(nameof(Index));
         }
     }
 }
