@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Business.Exceptions;
 using Business.Interfaces;
 using Business.Utilities;
+using Business.Utilities.Helpers;
 using Business.ViewModels;
 using Business.ViewModels.Gallery;
 using Core;
@@ -75,7 +76,11 @@ namespace Business.Implementations
 
         public async Task Remove(int id)
         {
-            throw new System.NotImplementedException();
+            var galleryImage = await _unitOfWork.galleryImageRepository.GetAsync(p => p.Id == id);
+            if (galleryImage == null) throw new NotFoundException("Slide not found");
+            FileHelper.RemoveFile(_environment.WebRootPath, galleryImage.Image, "Assets", "img");
+            _unitOfWork.galleryImageRepository.Remove(galleryImage);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task<int> getPageCount(int take)
