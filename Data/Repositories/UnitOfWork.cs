@@ -14,6 +14,7 @@ namespace Data.Repositories
         private ITableRepository _tableRepository;
         private IReservationRepository _reservationRepository;
         private IHeadSlideRepository _headSlideRepository;
+        private IGalleryImageRepository _galleryImageRepository;
 
 
         //12 ci setirdeki data null gele biler sebeb 20 ci setr
@@ -36,6 +37,9 @@ namespace Data.Repositories
 
         public IHeadSlideRepository headSlideRepository =>
             _headSlideRepository = _headSlideRepository ?? new HeadSlideRepository(_context);
+
+        public IGalleryImageRepository galleryImageRepository =>
+            _galleryImageRepository = _galleryImageRepository ?? new GalleryImageRepository(_context);
 
 
         public async Task SaveAsync()

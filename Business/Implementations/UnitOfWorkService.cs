@@ -19,6 +19,7 @@ namespace Business.Implementations
         private IReservationService _reservationService;
         private ITableService _tableService;
         private IUserService _userService;
+        private IGalleryService _galleryService;
 
 
         public UnitOfWorkService(IUnitOfWork unitOfWork, IWebHostEnvironment environment,
@@ -51,5 +52,8 @@ namespace Business.Implementations
 
         public IUserService userService => _userService =
             _userService = _userService ?? new UserService(_userManager, _signInManager, _roleManager);
+
+        public IGalleryService galleryService =>
+            _galleryService = _galleryService ?? new GalleryService(_unitOfWork, _environment);
     }
 }

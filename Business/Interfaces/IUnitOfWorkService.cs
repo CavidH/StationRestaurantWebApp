@@ -8,5 +8,6 @@ namespace Business.Interfaces
         public IReservationService reservationService { get; }
         public ITableService tableService { get; }
         public IUserService userService { get; }
+        public IGalleryService galleryService { get; }
     }
 }

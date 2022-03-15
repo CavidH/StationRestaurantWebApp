@@ -10,6 +10,7 @@ namespace Core
         public ITableRepository tableRepository { get; }
         public IReservationRepository reservationRepository { get; }
         public IHeadSlideRepository headSlideRepository { get; }
+        public IGalleryImageRepository galleryImageRepository { get; }
 
         Task SaveAsync();
     }
