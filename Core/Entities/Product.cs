@@ -14,6 +14,7 @@ namespace Core.Entities
         public DateTime CreatedAt { get; set; }
         public int ProductCategoryID { get; set; }
         public ProductCategory ProductCategory { get; set; }
+        public List<Comment> Comments { get; set; }
         public string Image { get; set; }
         //public List<ProductImage> ProductImages { get; set; }
 

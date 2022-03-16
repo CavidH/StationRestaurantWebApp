@@ -15,7 +15,6 @@ namespace Data.Configurations
             builder.Property(p => p.CreatedAt).IsRequired().HasDefaultValueSql("GETUTCDATE()");
             builder.Property(p => p.Image).IsRequired().HasMaxLength(255);
             builder.Property(p => p.Price).IsRequired();
-
         }
     }
 }
