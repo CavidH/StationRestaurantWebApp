@@ -1,130 +1,78 @@
-﻿<main>
-     <section id="Product">
-         <div class="container">
-             <div class="row">
-                 <div class="col-lg-5">
-                     <img src="Assets/Img/menusupsm2.jpg" class="product_image" alt="">
-                 </div>
-                 <div class="col-lg-6 product_content">
-                     <h4>Blog Title Here</h4>
-                     <span>january 20, 2020 / By admin / 4 comments</span>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-                         in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-                         are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden
-                         in the middle of text. All the Lorem Ipsum generators on the Internet
-                         tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                 </div>
-             </div>
-         </div>
-     </section>
+﻿@model Business.ViewModels.Comment.CommentVM
+@{
+    var deletereturnurl = Context.Request.Path.ToString() + "?id=" + @Model.Product.Id;
+    int commentcount = Model.Product.Comments.Where(p=>p.IsDeleted==false).Count();
+}
+
+<main>
+    <section id="Product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <img src="Assets/Img/@Model.Product.Image" class="product_image" alt="">
+                </div>
+                <div class="col-lg-6 product_content">
+                    <h4>@Model.Product.Name</h4>
+                    <span>@TimeZoneInfo.ConvertTime(Model.Product.CreatedAt, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")).AddHours(13).ToString("MM/dd/yyyy HH:mm")/ @commentcount Comment</span>
+                    <p>
+                        @Model.Product.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="Comment">
         <div class="container pr_cover">
-            <div class="col-lg-12">
-                <h4>COMMENTS (04)</h4>
-                <ul class="comments">
-                    <li>
-                        <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
-                        <div class="content_post">
-                            <h5>USer Name</h5>
-                            <span>12 jan date time</span>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form,
-                                by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
-                        <div class="content_post">
-                            <h5>USer Name</h5>
-                            <span>12 jan date time</span>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form,
-                                by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
-                        <div class="content_post">
-                            <h5>USer Name</h5>
-                            <span>12 jan date time</span>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form,
-                                by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
-                        <div class="content_post">
-                            <h5>USer Name</h5>
-                            <span>12 jan date time</span>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form,
-                                by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
-                        <div class="content_post">
-                            <h5>USer Name</h5>
-                            <span>12 jan date time</span>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form,
-                                by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
-                        <div class="content_post">
-                            <h5>USer Name</h5>
-                            <span>12 jan date time</span>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form,
-                                by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
-                        <div class="content_post">
-                            <h5>USer Name</h5>
-                            <span>12 jan date time</span>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form,
-                                by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
-                        <div class="content_post">
-                            <h5>USer Name</h5>
-                            <span>12 jan date time</span>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form,
-                                by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-                    </li>
+            @if (commentcount > 0)
+            {
+                <div class="col-lg-12">
+                    <h4>@commentcount COMMENT</h4>
+                    <ul class="comments">
+                        @foreach (var comment in Model.Product.Comments)
+                        {
+                            if (comment.IsDeleted == true) continue;
 
-                </ul>
-            </div>
+                            <li>
+                                <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
+                                <div class="content_post">
+                                    <h5>@comment.FullName</h5>
+                                    <span>@comment.CreatedAt.ToString("MM/dd/yyyy HH:mm")</span>
+                                    <p>
+                                        @comment.CommentContent
+                                    </p>
+                                </div>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@comment.Id" asp-route-returnurl="@deletereturnurl">Delete</a>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
             <div class="Comment_form">
-                <h4>POST A COMMENT</h4>
-                <form class="comment_form">
+                <h4>ADD COMMENT</h4>
+                <form method="post" class="comment_form">
                     <div class="row">
                         <div class="col-md-6 ">
-                            <input class="comment_form_control" placeholder="Full name" type="text" name=" Name">
+                            <input asp-for="FullName" parsley-trigger="change" required placeholder="FullName" class="comment_form_control">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
                         </div>
-
                         <div class="col-md-6">
-                            <input class="comment_form_control" placeholder="Email" type="Email" name="Email">
+                            <input asp-for="Email" parsley-trigger="change" required placeholder="Email" class="comment_form_control">
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                         <div class="col-md-12">
-                            <input class="comment_form_control" placeholder="Subject" type="text" name="Sebject">
+                            <input asp-for="Subject" parsley-trigger="change" required placeholder="Subject" class="comment_form_control">
+                            <span asp-validation-for="Subject" class="text-danger"></span>
                         </div>
                         <div class="col-md-12">
-
-                            <textarea class="textarea" placeholder="Write a comment"></textarea>
+                            <input asp-for="CommentContent" parsley-trigger="change" required placeholder="Write a comment" class="textarea">
+                            <span asp-validation-for="CommentContent" class="text-danger"></span>
                         </div>
+                        @* <input asp-for="ProductId" value="@Model.Product.Id" type="hidden"> *@
                         <div class="col-md-12">
-                            <button class="send_comment_btn">Post Comment</button>
+                            <button type="submit" class="send_comment_btn">Post Comment</button>
                         </div>
                     </div>
                 </form>
