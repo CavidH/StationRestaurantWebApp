@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
@@ -73,11 +74,11 @@ namespace Business.Implementations
 
         public async Task<Product> GetAsync(int id)
         {
-            var category = await _unitOfWork
+            var product = await _unitOfWork
                 .productRepository
-                .GetAsync(p => p.Id == id && p.IsDeleted == false);
-            if (category == null) return null;
-            return category;
+                .GetAsync(p => p.Id == id && p.IsDeleted == false ,"ProductCategory","Comments");
+            if (product == null) return null;
+            return product;
         }
 
         public async Task Create(ProductPostVM productPostVm)
