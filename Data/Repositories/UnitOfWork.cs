@@ -15,9 +15,9 @@ namespace Data.Repositories
         private IReservationRepository _reservationRepository;
         private IHeadSlideRepository _headSlideRepository;
         private IGalleryImageRepository _galleryImageRepository;
+        private ICommentRepository _commentRepository;
+        private IContactRepository _contactRepository;
 
-
-        //12 ci setirdeki data null gele biler sebeb 20 ci setr
 
         public UnitOfWork(AppDbContext context)
         {
@@ -40,6 +40,12 @@ namespace Data.Repositories
 
         public IGalleryImageRepository galleryImageRepository =>
             _galleryImageRepository = _galleryImageRepository ?? new GalleryImageRepository(_context);
+
+        public ICommentRepository commentRepository =>
+            _commentRepository = _commentRepository ?? new CommentRepository(_context);
+
+        public IContactRepository contactRepository =>
+            _contactRepository = _contactRepository ?? new ContactRepository(_context);
 
 
         public async Task SaveAsync()
