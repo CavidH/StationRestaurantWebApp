@@ -2,12 +2,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
+using Core;
 using Core.Entities;
 
 namespace Business.Implementations
 {
     public class CommentService:ICommentService
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CommentService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
         public async Task<List<Comment>> GetAllAsync()
         {
             throw new System.NotImplementedException();

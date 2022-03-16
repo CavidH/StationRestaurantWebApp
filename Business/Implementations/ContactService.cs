@@ -2,12 +2,20 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
+using Core;
 using Core.Entities;
 
 namespace Business.Implementations
 {
-    public class ContactService:IContactService
+    public class ContactService : IContactService
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ContactService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public async Task<List<Contact>> GetAllAsync()
         {
             throw new System.NotImplementedException();

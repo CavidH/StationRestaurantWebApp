@@ -20,6 +20,8 @@ namespace Business.Implementations
         private ITableService _tableService;
         private IUserService _userService;
         private IGalleryService _galleryService;
+        private ICommentService _commentService;
+        private IContactService _contactService;
 
 
         public UnitOfWorkService(IUnitOfWork unitOfWork, IWebHostEnvironment environment,
@@ -55,5 +57,11 @@ namespace Business.Implementations
 
         public IGalleryService galleryService =>
             _galleryService = _galleryService ?? new GalleryService(_unitOfWork, _environment);
+
+        public ICommentService commentService =>
+            _commentService = _commentService ?? new CommentService(_unitOfWork);
+
+        public IContactService contactService =>
+            _contactService = _contactService ?? new ContactService(_unitOfWork);
     }
 }

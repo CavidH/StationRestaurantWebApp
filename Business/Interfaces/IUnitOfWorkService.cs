@@ -9,5 +9,7 @@ namespace Business.Interfaces
         public ITableService tableService { get; }
         public IUserService userService { get; }
         public IGalleryService galleryService { get; }
+        public ICommentService commentService { get; }
+        public IContactService contactService { get; }
     }
 }
