@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Admin\" />
-    <Folder Include="wwwroot\Assets\img" />
   </ItemGroup>
 
   <ItemGroup>
