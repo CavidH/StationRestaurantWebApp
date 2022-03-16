@@ -579,18 +579,21 @@ body {
 
 .see-all {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .see-all a {
-    color: black;
+    color: #4f4848;
     text-decoration: none;
+    font-size: 25px;
+}
+.see-all a:hover {
     font-size: 25px;
 }
 
 #Galery {
-    padding-bottom: 70px;
-    padding-top: 70px;}
+    padding-bottom: 25px;
+    padding-top: 35px;}
 
 /*#headcard{    padding-top: 70px;}*/
 
@@ -1147,9 +1150,19 @@ input {
 
 
 #Home-parallax1{
-    margin-top: 70px;
+    margin-top: 40px;
 }
 /*.content-parallax a:hover{*/
 /*    background-color: rgba(12, 12, 13, 0.78);*/
 
 /*}*/
+
+
+.page-link {
+    color: black !important;
+    font-weight: 400;
+}
+.disabled a{
+    color: #999f9f !important;
+    font-weight: 100;
+}
