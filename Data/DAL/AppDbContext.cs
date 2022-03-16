@@ -10,7 +10,6 @@ namespace Data.DAL
         //add-migration AppUser -o DAL/Migrations
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -22,6 +21,9 @@ namespace Data.DAL
             builder.ApplyConfiguration(new HeadSlideConfiguration());
             builder.ApplyConfiguration(new SettingConfiguration());
             builder.ApplyConfiguration(new ReservationConfiguration());
+            builder.ApplyConfiguration(new TableConfiguration());
+            builder.ApplyConfiguration(new CommentConfiguration());
+            builder.ApplyConfiguration(new ContactConfiguration());
             builder.ApplyConfiguration(new TableConfiguration());
             //builder.ApplyConfiguration(new ProductImageConfiguration());
 

@@ -11,7 +11,7 @@ namespace Data.Configurations
             builder.Property(p => p.FirstName).IsRequired().HasMaxLength(255);
             builder.Property(p => p.LastName).IsRequired().HasMaxLength(255);
             builder.Property(p => p.Email).IsRequired().HasMaxLength(255);
-            builder.Property(p => p.Response).IsRequired().HasColumnType("TEXT");
+            builder.Property(p => p.Response).HasColumnType("TEXT");
             builder.Property(p => p.Message).IsRequired().HasColumnType("TEXT");
             builder.Property(p => p.IsDeleted).IsRequired().HasDefaultValue(false);
             builder.Property(p => p.Status).IsRequired().HasDefaultValue(false);

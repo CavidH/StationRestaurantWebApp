@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.DAL.Migrations
 {
-    public partial class CommentandContacttable : Migration
+    public partial class ccTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,12 @@ namespace Data.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Subject = table.Column<string>(nullable: true),
-                    CommentContent = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(maxLength: 255, nullable: false),
+                    Email = table.Column<string>(maxLength: 255, nullable: false),
+                    Subject = table.Column<string>(maxLength: 255, nullable: false),
+                    CommentContent = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -38,15 +38,15 @@ namespace Data.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(maxLength: 255, nullable: false),
+                    LastName = table.Column<string>(maxLength: 255, nullable: false),
+                    Email = table.Column<string>(maxLength: 255, nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    Message = table.Column<string>(nullable: true),
-                    Response = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: false),
+                    Message = table.Column<string>(type: "TEXT", nullable: false),
+                    Response = table.Column<string>(type: "TEXT", nullable: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false)
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
