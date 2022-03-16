@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
-                    <img src="Assets/Img/@Model.Product.Image" class="product_image" alt="">
+                    <img src="~/Assets/Img/@Model.Product.Image" class="product_image" alt="">
                 </div>
                 <div class="col-lg-6 product_content">
                     <h4>@Model.Product.Name</h4>
@@ -33,7 +33,7 @@
                             if (comment.IsDeleted == true) continue;
 
                             <li>
-                                <img src="Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
+                                <img src="~/Assets/Img/user.jpg" class="comment_image" alt="image" title="image">
                                 <div class="content_post">
                                     <h5>@comment.FullName</h5>
                                     <span>@comment.CreatedAt.ToString("MM/dd/yyyy HH:mm")</span>
