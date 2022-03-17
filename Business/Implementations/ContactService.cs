@@ -25,7 +25,15 @@ namespace Business.Implementations
 
         public async Task<Paginate<Contact>> GetAllPaginatedAsync(int page)
         {
-            throw new System.NotImplementedException();
+            var contacts = await _unitOfWork
+                .contactRepository
+                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false);
+
+            var Result = new Paginate<Contact>();
+            Result.Items = contacts;
+            Result.CurrentPage = page;
+            Result.AllPageCount = await getPageCount(10);
+            return Result;
         }
 
         public async Task<Contact> GetAsync(int id)
@@ -60,7 +68,11 @@ namespace Business.Implementations
 
         public async Task<int> getPageCount(int take)
         {
-            throw new System.NotImplementedException();
+            var contacts = await _unitOfWork
+                .contactRepository
+                .GetAllAsync(p => p.IsDeleted == false);
+            var contactsCount = contacts.Count;
+            return (int) Math.Ceiling(((decimal) contactsCount / take));
         }
     }
 }
