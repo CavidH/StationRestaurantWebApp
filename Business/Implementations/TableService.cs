@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Exceptions;
 using Business.Interfaces;
 using Business.ViewModels;
 using Business.ViewModels.Table;
@@ -56,11 +57,14 @@ namespace Business.Implementations
 
         public async Task Update(int id, TablePostVM tablePostVm)
         {
-            // var tables = await _unitOfWork.tableRepository.GetAllAsync(p => p.IsDeleted == false);
-            // if (tables.Where(p=>p.TableNumber==tablePostVm.TableNumber).FirstOrDefault().Id!=id)
-            // {
-            //     throw new Exception("This Table Number Already Exist");
-            // }
+            #region CheckDbTable
+
+            var dbTable = await _unitOfWork.tableRepository.GetAsync(p =>
+                p.IsDeleted == false && p.TableNumber == tablePostVm.TableNumber);
+            
+            if (dbTable.Id != id) throw new TableException("This Table Number Already Exist");
+
+            #endregion
 
             var table = await _unitOfWork.tableRepository
                 .GetAsync(p => p.Id == id && p.IsDeleted == false);
