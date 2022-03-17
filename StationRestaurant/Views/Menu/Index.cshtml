@@ -45,22 +45,24 @@
                 {
                     @foreach (var product in Model.ProductCategories[0].Products)
                     {
-                        <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
-                            <div class="menu-item">
-                                <div class="menu-img">
-                                    <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
-                                        <img src="Assets/img/@product.Image" alt="Image">
-                                    </a>
+                        <div class="menu-item">
+                            <div class="menu-img">
+                                <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                                    <img src="Assets/img/@product.Image" alt="Image">
+                                </a>
 
-                                </div>
-                                <div class="menu-text">
+                            </div>
+                            <div class="menu-text">
+                                <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id" id="menu-link">
+
                                     <h3>
                                         <span>@product.Name</span> <strong>$@product.Price </strong>
                                     </h3>
                                     <p>@product.Description</p>
-                                </div>
+                                </a>
+
                             </div>
-                        </a>
+                        </div>
                     }
                 }
 

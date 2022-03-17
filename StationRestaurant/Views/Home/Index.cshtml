@@ -19,7 +19,7 @@
         @foreach (var product in Model.Products)
         {
             <div class="card">
-                <a class="card-image" href="~/Assets/img/@product.Image" target="_blank"
+                <a class="card-image" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id" target="_blank"
                    style="background-image: url('Assets/img/@product.Image');">
                     <img src="~/Assets/img/@product.Image" alt="Psychopomp"/>
                 </a>
