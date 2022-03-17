@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
 using Business.ViewModels.ProductVM;
@@ -23,11 +24,9 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             return View(await _unitOfWorkService.productService.GetAllPaginatedAsync(page));
         }
 
-         public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create()
         {
             ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
-            // var categories = await _productCategoryService.GetAllAsync();
-            // var result = new ProductPostVM() {ProductCategories = categories};
             return View();
         }
 
@@ -35,8 +34,6 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(ProductPostVM productPostVm)
         {
-            // if (ModelState["Image"].ValidationState == ModelValidationState.Invalid) return View();
-            // productPostVm.ProductCategories = await _productCategoryService.GetAllAsync();
             ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
             if (ModelState.IsValid)
             {
@@ -52,7 +49,16 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     return View(productPostVm);
                 }
 
-                await _unitOfWorkService.productService.Create(productPostVm);
+                try
+                {
+                    await _unitOfWorkService.productService.Create(productPostVm);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                    return View(productPostVm);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -100,7 +106,15 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     }
                 }
 
-                await _unitOfWorkService.productService.Update(id, productUpdateVm);
+                try
+                {
+                    await _unitOfWorkService.productService.Update(id, productUpdateVm);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                    return View(productUpdateVm);
+                }
 
                 return RedirectToAction(nameof(Index));
             }

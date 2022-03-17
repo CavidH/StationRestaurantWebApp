@@ -84,9 +84,6 @@ namespace Business.Implementations
         public async Task Create(ProductPostVM productPostVm)
         {
             string imageFile = await productPostVm.ImageFile.SaveFileAsync(_environment.WebRootPath, "Assets", "img");
-            // slide.Image = filename;
-            // await _context.Sliders.AddAsync(slide);
-            // await _context.SaveChangesAsync();
 
             var product = new Product()
             {
