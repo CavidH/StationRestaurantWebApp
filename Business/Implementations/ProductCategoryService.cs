@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Exceptions;
 using Business.Interfaces;
 using Business.ViewModels;
 using Business.ViewModels.ProductCategory;
@@ -53,6 +54,11 @@ namespace Business.Implementations
 
         public async Task Create(ProductCategoryVM productCategoryVm)
         {
+            var dbcategory = await _unitOfWork
+                .productCategoryRepository
+                .GetAsync(p => p.IsDeleted == false && p.Name.ToLower() == productCategoryVm.Name.ToLower());
+
+            if (dbcategory != null) throw new CategoryException("This Category Already Exist");
             var p = new ProductCategory()
             {
                 Name = productCategoryVm.Name
@@ -64,7 +70,23 @@ namespace Business.Implementations
 
         public async Task Update(int id, ProductCategoryVM productCategoryVm)
         {
-            //exceptionlari nezere al
+            #region CheckCategory
+
+            var dbCategory = await _unitOfWork
+                .productCategoryRepository.GetAsync(p =>
+                    p.IsDeleted == false && p.Name.ToLower() == productCategoryVm.Name.ToLower());
+
+            if (dbCategory != null)
+            {
+                if (dbCategory.Name.ToLower() == productCategoryVm.Name.ToLower() && dbCategory.Id != id)
+                {
+                    throw new CategoryException("This Category Already Exist");
+                }
+            }
+
+            #endregion
+
+
             var category = await _unitOfWork
                 .productCategoryRepository
                 .GetAsync(p => p.Id == id);
