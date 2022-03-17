@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
@@ -20,7 +21,7 @@ namespace Business.Implementations
 
         public async Task<List<Table>> GetAllAsync()
         {
-           return await _unitOfWork.tableRepository.GetAllAsync(p => p.IsDeleted==false);
+            return await _unitOfWork.tableRepository.GetAllAsync(p => p.IsDeleted == false);
         }
 
         public async Task<Paginate<Table>> GetAllPaginatedAsync(int page)
@@ -38,7 +39,8 @@ namespace Business.Implementations
 
         public async Task<Table> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.tableRepository
+                .GetAsync(p => p.Id == id && p.IsDeleted == false);
         }
 
         public async Task Create(TablePostVM tablePostVm)
@@ -54,7 +56,18 @@ namespace Business.Implementations
 
         public async Task Update(int id, TablePostVM tablePostVm)
         {
-            throw new NotImplementedException();
+            // var tables = await _unitOfWork.tableRepository.GetAllAsync(p => p.IsDeleted == false);
+            // if (tables.Where(p=>p.TableNumber==tablePostVm.TableNumber).FirstOrDefault().Id!=id)
+            // {
+            //     throw new Exception("This Table Number Already Exist");
+            // }
+
+            var table = await _unitOfWork.tableRepository
+                .GetAsync(p => p.Id == id && p.IsDeleted == false);
+            table.TableNumber = tablePostVm.TableNumber;
+            table.MaxPersonCount = tablePostVm.MaxPersonCount;
+            _unitOfWork.tableRepository.Update(table);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task Remove(int id)

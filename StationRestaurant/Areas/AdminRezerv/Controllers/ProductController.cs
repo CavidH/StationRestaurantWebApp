@@ -63,7 +63,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            if (id < 1) return BadRequest();
+            if (id < 0) return BadRequest();
             var product = await _unitOfWorkService.productService.GetAsync(id);
             if (product == null) return NotFound();
             ViewBag.categories = await _unitOfWorkService.productCategoryService.GetAllAsync();
