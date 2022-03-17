@@ -67,7 +67,7 @@
                             <span asp-validation-for="Subject" class="text-danger"></span>
                         </div>
                         <div class="col-md-12">
-                            <input asp-for="CommentContent" parsley-trigger="change" required placeholder="Write a comment" class="textarea">
+                            <textarea asp-for="CommentContent"  class="textarea_contact"  ></textarea>
                             <span asp-validation-for="CommentContent" class="text-danger"></span>
                         </div>
                         @* <input asp-for="ProductId" value="@Model.Product.Id" type="hidden"> *@
