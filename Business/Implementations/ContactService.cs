@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
+using Business.ViewModels.Contact;
 using Core;
 using Core.Entities;
 
@@ -31,9 +33,19 @@ namespace Business.Implementations
             throw new System.NotImplementedException();
         }
 
-        public async Task Create(Contact contact)
+        public async Task Create(ContactVM contactVm)
         {
-            throw new System.NotImplementedException();
+            var contact = new Contact
+            {
+                FirstName = contactVm.FirstName,
+                LastName = contactVm.LastName,
+                Email = contactVm.Email,
+                Message = contactVm.Message,
+                PhoneNumber = contactVm.PhoneNumber,
+                CreatedAt = DateTime.Now
+            };
+            await _unitOfWork.contactRepository.CreateAsync(contact);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task Update(int id, Contact contact)
