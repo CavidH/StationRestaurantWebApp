@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Business.Exceptions;
 using Business.Interfaces;
@@ -46,6 +45,12 @@ namespace Business.Implementations
 
         public async Task Create(TablePostVM tablePostVm)
         {
+            var dbTable = await _unitOfWork.tableRepository.GetAsync(p =>
+                p.IsDeleted == false && p.TableNumber == tablePostVm.TableNumber);
+
+            if (dbTable != null) throw new TableException("This Table Number Already Exist");
+
+
             var table = new Table()
             {
                 TableNumber = tablePostVm.TableNumber,
@@ -61,7 +66,7 @@ namespace Business.Implementations
 
             var dbTable = await _unitOfWork.tableRepository.GetAsync(p =>
                 p.IsDeleted == false && p.TableNumber == tablePostVm.TableNumber);
-            
+
             if (dbTable.Id != id) throw new TableException("This Table Number Already Exist");
 
             #endregion
