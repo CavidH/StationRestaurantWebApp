@@ -5,32 +5,35 @@
         <h2>CONTACT US</h2>
         <div class="row">
             <div class="col-md-12">
-                <form method="post" asp-controller="Contact" asp-action="Create" id="request" class="contactForum">
+                <form method="post" id="request" class="contactForum">
                     <div class="row">
                         <div class="col-md-6">
+
                             <label asp-for="FirstName" class="contact_label">First Name</label>
-                            <input asp-for="FirstName" parsley-trigger="change" required class="form_contact">
                             <span asp-validation-for="FirstName" class="text-danger"></span>
+                            <input asp-for="FirstName" parsley-trigger="change" required class="form_contact">
                         </div>
                         <div class="col-md-6">
                             <label asp-for="LastName" class="contact_label">Last Name</label>
-                            <input asp-for="LastName" parsley-trigger="change" required class="form_contact">
                             <span asp-validation-for="LastName" class="text-danger"></span>
+                            <input asp-for="LastName" parsley-trigger="change" required class="form_contact">
                         </div>
                         <div class="col-md-6">
                             <label asp-for="Email" class="contact_label">Email</label>
-                            <input asp-for="Email" parsley-trigger="change" required class="form_contact">
                             <span asp-validation-for="Email" class="text-danger"></span>
+                            <input asp-for="Email" parsley-trigger="change" required class="form_contact">
+
                         </div>
                         <div class="col-md-6">
                             <label asp-for="PhoneNumber" class="contact_label">Phone Number</label>
-                            <input asp-for="PhoneNumber" parsley-trigger="change" required class="form_contact">
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            <input asp-for="PhoneNumber" parsley-trigger="change" required class="form_contact">
+
                         </div>
                         <div class="col-md-12">
                             <label asp-for="Message" class="contact_label">Message</label>
-                            <textarea asp-for="Message"  class="textarea_contact"></textarea>
                             <span asp-validation-for="Message" class="text-danger"></span>
+                            <textarea asp-for="Message"  class="textarea_contact"></textarea>
                         </div>
                         <div class="col-md-12">
                             <button class="send_contact_btn">Send</button>

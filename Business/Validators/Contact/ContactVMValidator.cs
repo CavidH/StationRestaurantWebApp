@@ -1,8 +1,9 @@
+using Business.ViewModels.Contact;
 using FluentValidation;
 
 namespace Business.Validators.Contact
 {
-    public class ContactVMValidator : AbstractValidator<Core.Entities.Contact>
+    public class ContactVMValidator : AbstractValidator<ContactVM>
     {
         public ContactVMValidator()
         {
