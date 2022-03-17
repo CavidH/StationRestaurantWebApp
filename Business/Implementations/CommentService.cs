@@ -40,7 +40,7 @@ namespace Business.Implementations
                 FullName = commentVM.FullName,
                 Email = commentVM.Email,
                 Subject = commentVM.Subject,
-                CommentContent = commentVM.Subject,
+                CommentContent = commentVM.CommentContent,
                 CreatedAt = DateTime.Now,
                 ProductId = productId
             };
