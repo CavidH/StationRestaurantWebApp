@@ -69,8 +69,16 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 //if (!await _productCategoryService.IsExits(id)) return NotFound();
                 var category = await _unitOfWorkService.productCategoryService.GetAsync(id);
                 if (category == null) return NotFound();
-                await _unitOfWorkService.productCategoryService.Update(id, productCategoryVm);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _unitOfWorkService.productCategoryService.Update(id, productCategoryVm);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                    return View(productCategoryVm);
+                }
             }
 
             return View(productCategoryVm);
@@ -80,7 +88,15 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if (id < 1) return BadRequest();
-            await _unitOfWorkService.productCategoryService.Remove(id);
+            try
+            {
+                await _unitOfWorkService.productCategoryService.Remove(id);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }
