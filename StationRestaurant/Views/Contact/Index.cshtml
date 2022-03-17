@@ -1,48 +1,54 @@
-﻿
-  <section id="Contact">
-      <div class="container">
-          <h2>CONTACT US</h2>
-          <div class="row">
-              <div class="col-md-12">
-                  <form id="request" class="contactForum">
-                      <div class="row">
-                          <div class="col-md-6">
-                              <label class="contact_label">First name</label>
-                              <input class="form_contact" name="First name" type="text">
-                          </div>
-                          <div class="col-md-6">
-                              <label class="contact_label">Last name</label>
-                              <input class="form_contact" name="Last name" type="text">
-                          </div>
-                          <div class="col-md-6">
-                              <label class="contact_label">your email</label>
-                              <input class="form_contact" name="your email" type="Email">
-                          </div>
-                          <div class="col-md-6">
-                              <label class="contact_label">Phone number</label>
-                              <input class="form_contact" name="Phone number" type="text">
-                          </div>
-                          <div class="col-md-12">
-                              <label class="contact_label">Message</label>
-                              <textarea class="textarea_contact" name="Message"></textarea>
-                          </div>
-                          <div class="col-md-12">
-                              <button class="send_contact_btn">Send</button>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
+﻿@model Business.ViewModels.Contact.ContactVM 
 
-      </div>
-
-  </section>
-    <section id="Map_Contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 map ">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.507752686338!2d49.84656671525638!3d40.37543787936997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d3c65f0508d%3A0xf55eb7ece67b24ab!2sStation%20Baku%20Restaurant!5e0!3m2!1saz!2s!4v1647431040536!5m2!1saz!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+<section id="Contact">
+    <div class="container">
+        <h2>CONTACT US</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" asp-controller="Contact" asp-action="Create" id="request" class="contactForum">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label asp-for="FirstName" class="contact_label">First Name</label>
+                            <input asp-for="FirstName" parsley-trigger="change" required class="form_contact">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="LastName" class="contact_label">Last Name</label>
+                            <input asp-for="LastName" parsley-trigger="change" required class="form_contact">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="contact_label">Email</label>
+                            <input asp-for="Email" parsley-trigger="change" required class="form_contact">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="PhoneNumber" class="contact_label">Phone Number</label>
+                            <input asp-for="PhoneNumber" parsley-trigger="change" required class="form_contact">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="Message" class="contact_label">Message</label>
+                            <textarea asp-for="Message"  class="textarea_contact"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="send_contact_btn">Send</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+
+    </div>
+
+</section>
+<section id="Map_Contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 map ">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.507752686338!2d49.84656671525638!3d40.37543787936997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d3c65f0508d%3A0xf55eb7ece67b24ab!2sStation%20Baku%20Restaurant!5e0!3m2!1saz!2s!4v1647431040536!5m2!1saz!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
