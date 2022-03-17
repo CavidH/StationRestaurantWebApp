@@ -19,10 +19,21 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            var contacts = await _unitOfWorkService
-                .contactService
-                .GetAllPaginatedAsync(page);
-            return View(contacts);
+            return View(await _unitOfWorkService.contactService.GetAllPaginatedAsync(page));
+        }
+
+        public async Task<IActionResult> Reply(int id)
+        {
+            if (id < 1) NotFound();
+            try
+            {
+                return View(await _unitOfWorkService.contactService.GetAsync(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            //reply yaz email config ele davam to do da
         }
 
 

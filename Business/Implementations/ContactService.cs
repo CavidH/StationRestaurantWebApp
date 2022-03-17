@@ -38,7 +38,9 @@ namespace Business.Implementations
 
         public async Task<Contact> GetAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var contact = await _unitOfWork.contactRepository.GetAsync(p => p.IsDeleted == false);
+            if (contact is null) throw new Exception("Contact  Not Found ");
+            return contact;
         }
 
         public async Task Create(ContactVM contactVm)
