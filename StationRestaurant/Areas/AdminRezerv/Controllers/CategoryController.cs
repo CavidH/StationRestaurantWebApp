@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.ProductCategory;
 using Microsoft.AspNetCore.Authorization;
@@ -11,31 +12,43 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
     public class CategoryController : Controller
     {
         private readonly IUnitOfWorkService _unitOfWorkService;
+
         public CategoryController(IUnitOfWorkService unitOfWorkService)
         {
             _unitOfWorkService = unitOfWorkService;
         }
+
         public async Task<IActionResult> Index()
         {
             return View(await _unitOfWorkService.productCategoryService.GetAllAsync());
         }
+
         public async Task<IActionResult> Create()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductCategoryVM productCategoryVm)
         {
             if (ModelState.IsValid)
             {
-                await _unitOfWorkService.productCategoryService.Create(productCategoryVm);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _unitOfWorkService.productCategoryService.Create(productCategoryVm);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                    return View(productCategoryVm);
+                }
             }
 
             return View(productCategoryVm);
-
         }
+
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
@@ -45,6 +58,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             if (category == null) return NotFound();
             return View(category);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, ProductCategoryVM productCategoryVm)
@@ -63,8 +77,6 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         }
 
 
-
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             if (id < 1) return BadRequest();

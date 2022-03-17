@@ -26,6 +26,7 @@
                                 <tr>
                                     <th>№</th>
                                     <th>Category</th>
+                                    <th>Product Count</th>
                                     <th>Creation Date</th>
                                     <th>Settings</th>
                                 </tr>
@@ -37,6 +38,8 @@
                                     <tr>
                                         <td>@count</td>
                                         <td>@category.Name.ToUpper()</td>
+                                        <td>@category.Products.Where(p => p.IsDeleted == false).Count()</td>
+
                                         <td>@TimeZoneInfo.ConvertTime(category.CreatedAt, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")).AddHours(13)</td>
                                         <td>
                                             @*     <a  class="btn btn-icon waves-effect waves-light btn-primary"  asp-action="Detail"  asp-route-id="@category.Id" ><i class="mdi mdi-eye-outline"></i></a> *@
@@ -49,7 +52,6 @@
                                         </td>
 
                                     </tr>
-
 
                                     count++;
                                 }
