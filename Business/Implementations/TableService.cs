@@ -21,14 +21,14 @@ namespace Business.Implementations
 
         public async Task<List<Table>> GetAllAsync()
         {
-            return await _unitOfWork.tableRepository.GetAllAsync(p => p.IsDeleted == false);
+            return await _unitOfWork.tableRepository.GetAllAsync(p => p.IsDeleted == false,"Reservations");
         }
 
         public async Task<Paginate<Table>> GetAllPaginatedAsync(int page)
         {
             var tables = await _unitOfWork
                 .tableRepository
-                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false);
+                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false,"Reservations");
 
             var Result = new Paginate<Table>();
             Result.Items = tables;
@@ -40,7 +40,7 @@ namespace Business.Implementations
         public async Task<Table> GetAsync(int id)
         {
             return await _unitOfWork.tableRepository
-                .GetAsync(p => p.Id == id && p.IsDeleted == false);
+                .GetAsync(p => p.Id == id && p.IsDeleted == false,"Reservations");
         }
 
         public async Task Create(TablePostVM tablePostVm)

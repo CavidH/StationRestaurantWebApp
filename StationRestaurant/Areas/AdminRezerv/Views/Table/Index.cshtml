@@ -23,7 +23,7 @@
                                     <th>№</th>
                                     <th>Table Number</th>
                                     <th>Person</th>
-                                    <th>Status</th>
+                                    @* <th>Status</th> *@
                                     <th>Setting</th>
 
 
@@ -31,49 +31,44 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach (var product in Model.Items)
+                                @foreach (var table in Model.Items)
                                 {
                                     <tr>
                                         <td>@count </td>
                                         <td>
                                             <button type="button" class="btn btn-dropbox waves-effect waves-light">
-                                                @product.TableNumber
+                                                @table.TableNumber
                                             </button>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-icon waves-effect waves-light btn-purple">
-                                                @product.MaxPersonCount
+                                                @table.MaxPersonCount
                                             </button>
                                         </td>
-                                        <td>
-                                            @if (@product.IsReserved == true)
-                                            {
-                                                <button type="button" class="btn btn-icon waves-effect waves-light btn-danger"> Reserved </button>
-                                            }
-                                            else
-                                            {
-                                                <button type="button" class="btn btn-icon waves-effect waves-light btn-primary"> Empty </button>
-                                            }
+                                        @* <td> *@
+                                        @*     @if (@product.IsReserved == true) *@
+                                        @*     { *@
+                                        @*         <button type="button" class="btn btn-icon waves-effect waves-light btn-danger"> Reserved </button> *@
+                                        @*     } *@
+                                        @*     else *@
+                                        @*     { *@
+                                        @*         <button type="button" class="btn btn-icon waves-effect waves-light btn-primary"> Empty </button> *@
+                                        @*     } *@
+                                        @* *@
+                                        @* </td> *@
 
-                                        </td>
-
                                         <td>
-                                            @* 
-                                                <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Detail" asp-route-id="@product.Id">
+
+                                            <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Detail" asp-route-id="@table.Id">
                                                 <i class="mdi mdi-eye-outline"></i>
-                                                </a>*@
-                                            @* <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@product.Id"> *@
-                                            @* <i class="mdi mdi-pencil-outline"></i> *@
-                                            @* </a> *@
-                                            @if (!product.IsReserved)
-                                            {
-                                                <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@product.Id">
-                                                    <i class="mdi mdi-delete-outline"></i>
-                                                </a>
-                                                <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@product.Id">
-                                                    <i class="mdi mdi-pencil-outline"></i>
-                                                </a>
-                                            }
+                                            </a>
+                                            <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@table.Id">
+                                                <i class="mdi mdi-delete-outline"></i>
+                                            </a>
+                                            <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@table.Id">
+                                                <i class="mdi mdi-pencil-outline"></i>
+                                            </a>
+
                                         </td>
 
                                     </tr>

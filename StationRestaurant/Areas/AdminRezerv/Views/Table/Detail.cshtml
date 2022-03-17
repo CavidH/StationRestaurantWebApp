@@ -1,0 +1,96 @@
+﻿@model  Table
+@{
+    int count = 1;
+}
+<div class="content-page">
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-responsive">
+                        <h4 class="m-t-0 header-title mb-4">
+ </h4>
+                        @* <a class="btn btn-info waves-effect width-md waves-light " asp-action="Create" style="color:#ffffff  ">Add</a> *@
+                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                            <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Name</th>
+                                <th>LastName</th>
+                                <th>Reserv Date</th>
+                                <th>Email Status</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Additionals</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @foreach (var rezerv in Model.Reservations)
+                            {
+                                <tr>
+                                    <td>@count </td>
+                                    <td>
+                                        @rezerv.Name
+                                    </td>
+                                    <td>
+                                        @rezerv.LastName
+                                    </td>
+                                    <td>
+                                        @rezerv.ReservDate
+                                    </td>
+                                    <td>
+                                        @if (rezerv.IsActive)
+                                        {
+                                            <button type="button" class="btn btn-success waves-effect width-md waves-light text-uppercase">Active</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-danger waves-effect width-md waves-light ext-uppercase">DeActive</button>
+                                        }
+                                    </td>
+                                    <td>
+                                        @rezerv.Email
+                                    </td>
+                                    <td>
+                                        @rezerv.PhoneNumber
+                                    </td>
+                                    <td>
+                                        @rezerv.Additionals
+                                    </td>
+
+                                </tr>
+
+
+                                count++;
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- end content -->
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                2015 - 2021 &copy; Velonic theme by <a href="#">Coderthemes</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->
+
+</div>

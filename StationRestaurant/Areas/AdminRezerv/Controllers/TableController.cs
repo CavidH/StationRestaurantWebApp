@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Business.Interfaces;
+using Business.ViewModels;
 using Business.ViewModels.Table;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,19 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         public async Task<IActionResult> Index(int page = 1)
         {
             return View(await _unitOfWorkService.tableService.GetAllPaginatedAsync(page));
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            if (id < 1) return NotFound();
+            try
+            {
+                return View(await _unitOfWorkService.tableService.GetAsync(id));
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
         }
 
         public async Task<IActionResult> Create()
@@ -50,6 +64,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     ModelState.AddModelError("", e.Message);
                     return View(tablePostVm);
                 }
+
                 return RedirectToAction("Index");
             }
 
@@ -62,7 +77,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             var table = await _unitOfWorkService.tableService.GetAsync(id);
             var tableVM = new TablePostVM
             {
-                Id = table.Id ,// for check is exist
+                Id = table.Id, // for check is exist
                 TableNumber = table.TableNumber,
                 MaxPersonCount = table.MaxPersonCount
             };
