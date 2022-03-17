@@ -54,19 +54,13 @@
                                                 <button type="button" class="btn btn-icon waves-effect waves-light btn-purple">Pending</button>
                                             }
                                         </td>
-
-                                        @* <td>@contact.Price</td> *@
-                                        @* <td > *@
-                                        @*     <a href="~/Assets/img/@contact.Image"> *@
-                                        @*         <img src="~/Assets/img/@contact.Image" width="70" class="img-fluid" alt=""> *@
-                                        @*     </a> *@
-                                        @* </td> *@
-                                        @*<td>@product.ProductCategory.Name</td>*@
                                         <td>
                                             <a class="btn btn-icon waves-effect waves-light btn-primary" asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@contact.Id">
                                                 reply
                                             </a>
-
+                                            <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@contact.Id">
+                                                <i class="mdi mdi-delete-outline"></i>
+                                            </a>
                                         </td>
 
                                     </tr>

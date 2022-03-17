@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Business.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StationRestaurant.Areas.AdminRezerv.Controllers
-{   [Area("AdminRezerv")]
+{
+    [Area("AdminRezerv")]
     [Authorize]
     public class ContactController : Controller
     {
@@ -15,12 +17,27 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             _unitOfWorkService = unitOfWorkService;
         }
 
-        public async Task<IActionResult> Index(int page=1)
+        public async Task<IActionResult> Index(int page = 1)
         {
             var contacts = await _unitOfWorkService
                 .contactService
                 .GetAllPaginatedAsync(page);
             return View(contacts);
+        }
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _unitOfWorkService.contactService.Remove(id);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

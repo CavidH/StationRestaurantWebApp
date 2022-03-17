@@ -63,7 +63,12 @@ namespace Business.Implementations
 
         public async Task Remove(int id)
         {
-            throw new System.NotImplementedException();
+            var contact = await _unitOfWork
+                .contactRepository
+                .GetAsync(p => p.Id == id && p.IsDeleted == false);
+            contact.IsDeleted = true;
+            _unitOfWork.contactRepository.Update(contact);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task<int> getPageCount(int take)
