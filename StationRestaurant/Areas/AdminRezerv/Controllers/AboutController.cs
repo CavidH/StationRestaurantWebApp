@@ -17,6 +17,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         public IActionResult Index()
         {
+            // var about=_unitOfWorkService.
             return View();
         }
     }
