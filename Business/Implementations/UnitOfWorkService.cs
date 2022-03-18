@@ -66,6 +66,6 @@ namespace Business.Implementations
             _contactService = _contactService ?? new ContactService(_unitOfWork);
 
         public ISettingService settingService =>
-            _settingService = _settingService ?? new SettingService(_unitOfWork);
+            _settingService = _settingService ?? new SettingService(_unitOfWork, _environment);
     }
 }

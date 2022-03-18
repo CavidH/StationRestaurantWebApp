@@ -8,5 +8,6 @@ namespace Business.ViewModels.Home
         public List<Core.Entities.HeadSlide> HeadSlides { get; set; }
         public List<Product> Products { get; set; }
         public List<GaleryImage> MiniGallery { get; set; }
+        public Dictionary<string, string> Settings { get; set; }
     }
 }

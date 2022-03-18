@@ -23,12 +23,16 @@ namespace StationRestaurant.Controllers
             var slides = await _unitOfWorkService.headSlideService.GetAllAsync();
             var lastProducts = await _unitOfWorkService.productService.GetLastProductsAsync();
             var miniGallery = await _unitOfWorkService.galleryService.GetLastProductsAsync();
+            var setting = await _unitOfWorkService.settingService.GetAllAsynDic();
+          
+            
 
             var homeVM = new HomeVM
             {
                 HeadSlides = slides,
                 Products = lastProducts,
-                MiniGallery = miniGallery
+                MiniGallery = miniGallery,
+                Settings = setting
             };
             return View(homeVM);
         }
