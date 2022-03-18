@@ -70,9 +70,27 @@
                     </form>
                 </div>
             </div>
-<input type="text" id="datepicker">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <input id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/>
+@* https://flatpickr.js.org/plugins/ *@
+                    <script>
+                    
+                    const picker = document.getElementById('date1');
+                    picker.addEventListener('input', function(e){
+                      var day = new Date(this.value).getUTCDay();
+                      if([5,0].includes(day)){
+                        e.preventDefault();
+                        this.value = '';
+                        alert('Weekends not allowed');
+                      }
+                    });
+                    </script>
+                </div>
+            </div>
         </div>
-  
+
     </section>
 
 
