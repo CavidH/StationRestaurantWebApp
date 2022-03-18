@@ -28,12 +28,12 @@ namespace Business.Implementations
 
         public async Task<List<Setting>> GetAllAsync()
         {
-            return await _unitOfWork.SettingRepository.GetAllAsync();
+            return await _unitOfWork.settingRepository.GetAllAsync();
         }
 
         public async Task<Dictionary<string, string>> GetAllAsynDic()
         {
-            var dbSetting = await _unitOfWork.SettingRepository.GetAllAsync();
+            var dbSetting = await _unitOfWork.settingRepository.GetAllAsync();
             return dbSetting.ToDictionary(p => p.Key, p => p.Value);
         }
 
@@ -62,7 +62,7 @@ namespace Business.Implementations
             }
 
             var setting = await _unitOfWork
-                .SettingRepository
+                .settingRepository
                 .GetAsync(p => p.Id == id);
 
             if (setting is null)
@@ -74,7 +74,7 @@ namespace Business.Implementations
             string imageFile = await settingVm.ImageFile.SaveFileAsync(_environment.WebRootPath, "Assets", "img");
             setting.UpdatedAt = DateTime.Now;
             setting.Value = imageFile;
-            _unitOfWork.SettingRepository.Update(setting);
+            _unitOfWork.settingRepository.Update(setting);
 
             await _unitOfWork.SaveAsync();
         }
