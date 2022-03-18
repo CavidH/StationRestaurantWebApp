@@ -1,4 +1,4 @@
-﻿@model List<Setting>
+﻿@model About
 <!-- ============================================================== -->
 <!-- Start Page Content here -->
 <!-- ============================================================== -->
@@ -20,30 +20,32 @@
 
                                 <thead>
                                 <tr>
-                                    <th>Key</th>
-                                    <th>Value</th>
+                                    <th>Title</th>
+                                    <th>Head</th>
+                                    <th>content</th>
                                     <th>Updated At</th>
+                                    <th>Image</th>
                                     <th>Settings</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @foreach (var setting in Model)
-                                {
-                                    <tr>
-                                        <td>@setting.Key</td>
-                                        <td>
-                                            <img src="~/Assets/img/@setting.Value" width="100" class="img-fluid" alt="">
-                                        </td>
-                                        <td>@setting.UpdatedAt</td>
-                                        <td>
-                                            <a class="btn btn-icon waves-effect waves-light btn-purple" asp-route-id="@setting.Id" asp-action="Update">
-                                                <i class="mdi mdi-pencil-outline"></i>
-                                            </a>
-                                        </td>
 
-                                    </tr>
-                                }
+                                <tr>
+                                    <td>@Model.Title</td>
+                                    <td>@Model.Head</td>
+                                    <td>@Model.Content</td>
+                                    <td>@Model.UpdatedAt</td>
+                                    <td>
+                                        <img src="~/Assets/img/@Model.Image" width="500" class="img-fluid" alt="">
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-icon waves-effect waves-light btn-purple"  asp-action="Update">
+                                            <i class="mdi mdi-pencil-outline"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

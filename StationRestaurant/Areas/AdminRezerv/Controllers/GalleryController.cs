@@ -25,7 +25,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
         {
             //var c = await _context.GaleryImages.ToListAsync();
 
-            return View(await _unitOfWorkService.galleryService.GetAllPaginatedAsync(page,10));
+            return View(await _unitOfWorkService.galleryService.GetAllPaginatedAsync(page, 10));
         }
 
         public ActionResult Create()
@@ -63,13 +63,13 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(int id, GalleryUpdateVM galleryUpdateVm)
+        public async Task<ActionResult> Update(int id, GalleryUpdateVM galleryUpdateVm)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _unitOfWorkService.galleryService.Update(id, galleryUpdateVm);
+                    await _unitOfWorkService.galleryService.Update(id, galleryUpdateVm);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception e)

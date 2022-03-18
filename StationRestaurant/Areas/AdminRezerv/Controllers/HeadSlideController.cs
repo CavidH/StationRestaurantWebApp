@@ -67,7 +67,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             {
                 try
                 {
-                    _unitOfWorkService.headSlideService.Update(Id, headSlideUpdateVm);
+                    await _unitOfWorkService.headSlideService.Update(Id, headSlideUpdateVm);
                 }
                 catch (Exception e)
                 {

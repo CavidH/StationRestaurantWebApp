@@ -1,4 +1,5 @@
 using Business.ViewModels;
+using Business.ViewModels.About;
 using FluentValidation;
 
 namespace Business.Validators.About
@@ -10,7 +11,6 @@ namespace Business.Validators.About
             RuleFor(p => p.Title).NotNull().NotEmpty().MaximumLength(200);
             RuleFor(p => p.Head).NotNull().NotEmpty().MaximumLength(200);
             RuleFor(p => p.Content).NotNull().NotEmpty().MaximumLength(600);
-            RuleFor(p => p.ImageFile).NotNull().NotEmpty();
         }
     }
 }
