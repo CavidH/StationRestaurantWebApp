@@ -11,8 +11,9 @@ namespace Core
         public IReservationRepository reservationRepository { get; }
         public IHeadSlideRepository headSlideRepository { get; }
         public IGalleryImageRepository galleryImageRepository { get; }
-        public ICommentRepository commentRepository{ get; }
-        public IContactRepository contactRepository{ get; }
+        public ICommentRepository commentRepository { get; }
+        public IContactRepository contactRepository { get; }
+        public ISettingRepository SettingRepository { get; }
 
         Task SaveAsync();
     }
