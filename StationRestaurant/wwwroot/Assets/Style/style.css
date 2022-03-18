@@ -1266,3 +1266,17 @@ input {
 .map {
     width: 100%;
 }
+
+
+
+#Reservation {
+    margin-top: 100px;
+}
+
+#Reservation h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 81px;
+    font-weight: 600;
+}

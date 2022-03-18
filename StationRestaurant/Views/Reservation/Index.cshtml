@@ -1,5 +1,73 @@
 ﻿@model  ReservationPostVM  
 <main>
+    <section id="Reservation">
+        <div class="container">
+            <h2>CONTACT US</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="post" id="request" class="contactForum">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <label asp-for="Name" class="contact_label">First Name<span class="text-danger">*</span></label>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                                <input asp-for="Name" parsley-trigger="change" required class="form_contact">
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="LastName" class="contact_label">Last Name<span class="text-danger">*</span></label>
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                                <input asp-for="LastName" parsley-trigger="change" required class="form_contact">
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="contact_label  Emaillabel">Email<span class="text-danger">*</span></label>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                                <input asp-for="Email" parsley-trigger="change" required class="form_contact">
+
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PhoneNumber" class="contact_label PhoneNumberlabel">Phone Number<span class="text-danger">*</span></label>
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                <input asp-for="PhoneNumber" parsley-trigger="change" required class="form_contact">
+
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ReservDate" class="contact_label">Reservation Date<span class="text-danger">*</span></label>
+                                <span asp-validation-for="ReservDate" class="text-danger"></span>
+                                <input asp-for="ReservDate" parsley-trigger="change" required class="form_contact">
+
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="TableID" class="contact_label">Select Table<span class="text-danger">*</span></label>
+                                <span asp-validation-for="TableID" class="text-danger"></span>
+                                <select class="form-control" asp-for="TableID">
+                                    @foreach (var table in(List<Table>) ViewBag.tables)
+                                    {
+                                        <option value="@table.Id">№ @table.TableNumber</option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <label asp-for="Additionals" class="contact_label">Additionals</label>
+                                <span asp-validation-for="Additionals" class="text-danger"></span>
+                                <textarea asp-for="Additionals"  class="textarea_contact"></textarea>
+                            </div>
+                            <label ><span class="text-danger">*</span>After Reservation, please confirm the email, otherwise the Reservation will not be registered</label>
+
+                            <div class="col-md-12">
+                                <button class="send_contact_btn">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
     <div class="content-page">
         <div class="content">
 
@@ -76,7 +144,7 @@
                     <!-- end col -->
 
                 </div>
-                
+
 
             </div>
             <!-- end container-fluid -->
