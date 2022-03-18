@@ -11,5 +11,6 @@ namespace Business.Interfaces
         public IGalleryService galleryService { get; }
         public ICommentService commentService { get; }
         public IContactService contactService { get; }
+        public ISettingService settingService { get; }
     }
 }

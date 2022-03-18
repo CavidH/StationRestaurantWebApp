@@ -22,6 +22,7 @@ namespace Business.Implementations
         private IGalleryService _galleryService;
         private ICommentService _commentService;
         private IContactService _contactService;
+        private ISettingService _settingService;
 
 
         public UnitOfWorkService(IUnitOfWork unitOfWork, IWebHostEnvironment environment,
@@ -63,5 +64,8 @@ namespace Business.Implementations
 
         public IContactService contactService =>
             _contactService = _contactService ?? new ContactService(_unitOfWork);
+
+        public ISettingService settingService =>
+            _settingService = _settingService ?? new SettingService(_unitOfWork);
     }
 }
