@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
+using Business.Utilities.Helpers;
 using Business.ViewModels;
 using Business.ViewModels.Contact;
+using Business.ViewModels.Reply;
 using Core;
 using Core.Entities;
 
@@ -56,6 +58,24 @@ namespace Business.Implementations
             };
             await _unitOfWork.contactRepository.CreateAsync(contact);
             await _unitOfWork.SaveAsync();
+        }
+
+        public async Task ReplyAsync(int id, ReplyVM replyVm)
+        {
+            var dbproduct = await _unitOfWork
+                .contactRepository
+                .GetAsync(p => p.Id == id && p.IsDeleted == false);
+            if (dbproduct == null)
+            {
+                throw new Exception("Contact Not Found");
+            }
+
+            dbproduct.Response = replyVm.Message;
+            dbproduct.Status = true;
+            _unitOfWork.contactRepository.Update(dbproduct);
+            await _unitOfWork.SaveAsync();
+            EmailHelper.SendEmail(dbproduct.Email, "Message =>" + dbproduct.Message + "\nReply =>" + replyVm.Message,
+                "Reply");
         }
 
         public async Task Update(int id, Contact contact)

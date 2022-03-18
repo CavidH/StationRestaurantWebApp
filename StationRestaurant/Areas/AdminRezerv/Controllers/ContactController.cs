@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Business.Interfaces;
+using Business.ViewModels.Reply;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +28,12 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             if (id < 1) NotFound();
             try
             {
-                return View(await _unitOfWorkService.contactService.GetAsync(id));
+                var contact = await _unitOfWorkService.contactService.GetAsync(id);
+                var replyVM = new ReplyVM
+                {
+                    Contact = contact
+                };
+                return View(replyVM);
             }
             catch (Exception e)
             {
@@ -36,6 +42,27 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             //reply yaz email config ele davam to do da
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Reply(int id, ReplyVM replyVm)
+        {
+            if (id < 1) NotFound();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _unitOfWorkService.contactService.ReplyAsync(id, replyVm);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            var contact = await _unitOfWorkService.contactService.GetAsync(id);
+            replyVm.Contact = contact;
+            return View(replyVm);
+        }
 
         public async Task<IActionResult> Delete(int id)
         {

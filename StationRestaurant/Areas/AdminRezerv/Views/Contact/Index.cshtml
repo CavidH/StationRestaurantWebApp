@@ -55,9 +55,12 @@
                                             }
                                         </td>
                                         <td>
-                                            <a class="btn btn-icon waves-effect waves-light btn-primary"   asp-action="Reply" asp-route-id="@contact.Id">
-                                                Reply
-                                            </a>
+                                            @if (!contact.Status)
+                                            {
+                                                <a class="btn btn-icon waves-effect waves-light btn-primary" asp-action="Reply" asp-route-id="@contact.Id">
+                                                    Reply
+                                                </a>
+                                            }
                                             <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@contact.Id">
                                                 <i class="mdi mdi-delete-outline"></i>
                                             </a>
