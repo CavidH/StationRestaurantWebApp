@@ -13,7 +13,8 @@ namespace Core
         public IGalleryImageRepository galleryImageRepository { get; }
         public ICommentRepository commentRepository { get; }
         public IContactRepository contactRepository { get; }
-        public ISettingRepository SettingRepository { get; }
+        public ISettingRepository settingRepository { get; }
+        public IAboutRepository aboutRepository { get; }
 
         Task SaveAsync();
     }

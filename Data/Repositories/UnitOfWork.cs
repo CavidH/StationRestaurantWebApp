@@ -18,6 +18,7 @@ namespace Data.Repositories
         private ICommentRepository _commentRepository;
         private IContactRepository _contactRepository;
         private ISettingRepository _settingRepository;
+        private IAboutRepository _aboutRepository;
 
 
         public UnitOfWork(AppDbContext context)
@@ -48,8 +49,11 @@ namespace Data.Repositories
         public IContactRepository contactRepository =>
             _contactRepository = _contactRepository ?? new ContactRepository(_context);
 
-        public ISettingRepository SettingRepository =>
+        public ISettingRepository settingRepository =>
             _settingRepository = _settingRepository ?? new SettingRepository(_context);
+
+        public IAboutRepository aboutRepository =>
+            _aboutRepository = _aboutRepository ?? new AboutRepository(_context);
 
 
         public async Task SaveAsync()

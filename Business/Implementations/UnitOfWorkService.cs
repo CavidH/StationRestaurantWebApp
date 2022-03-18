@@ -23,6 +23,7 @@ namespace Business.Implementations
         private ICommentService _commentService;
         private IContactService _contactService;
         private ISettingService _settingService;
+        private IAboutService _aboutService;
 
 
         public UnitOfWorkService(IUnitOfWork unitOfWork, IWebHostEnvironment environment,
@@ -67,5 +68,8 @@ namespace Business.Implementations
 
         public ISettingService settingService =>
             _settingService = _settingService ?? new SettingService(_unitOfWork, _environment);
+
+        public IAboutService aboutService =>
+            _aboutService = _aboutService ?? new AboutService(_unitOfWork, _environment);
     }
 }
