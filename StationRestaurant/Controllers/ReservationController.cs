@@ -43,7 +43,7 @@ namespace StationRestaurant.Controllers
                 var Id = await _unitOfWorkService.reservationService.getLastIdAsync();
                 var confirmationLink = Url.Action("ConfirmReserv", "Reservation",
                     new {reservationId = Id, token = reservationPostVm.ReservDate}, Request.Scheme);
-                EmailHelper.EmailContentBuilder(reservationPostVm.Email, confirmationLink, "Confirm Email");
+                EmailHelper.EmailContentBuilder(reservationPostVm.Email, confirmationLink, "Confirm Reservation");
                 return RedirectToAction("Index", "Home");
             }
 

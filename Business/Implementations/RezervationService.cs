@@ -65,8 +65,16 @@ namespace Business.Implementations
                 Email = reservationPostVm.Email,
                 ReservDate = reservationPostVm.ReservDate,
                 TableID = reservationPostVm.TableID,
-                Additionals = reservationPostVm.Additionals
             };
+            if (reservationPostVm.Additionals is null)
+            {
+                newReserv.Additionals = " ";
+            }
+            else
+            {
+                newReserv.Additionals = reservationPostVm.Additionals;
+            }
+
             await _unitOfWork.reservationRepository.CreateAsync(newReserv);
             await _unitOfWork.SaveAsync();
         }
@@ -84,7 +92,8 @@ namespace Business.Implementations
 
             if (table.Reservations.Count == 0) return false;
 
-            if (table.Reservations.Where(p => p.ReservDate.Date == dateTime.Date).FirstOrDefault() != null)
+            if (table.Reservations.Where(p => p.ReservDate.Date == dateTime.Date && p.IsDeleted == false)
+                    .FirstOrDefault() != null)
             {
                 return true;
             }
