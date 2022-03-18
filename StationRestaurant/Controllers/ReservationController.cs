@@ -21,6 +21,8 @@ namespace StationRestaurant.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.tables = await _unitOfWorkService.tableService.GetAllAsync();
+            ViewBag.setting = await _unitOfWorkService.settingService.GetAllAsynDic();
+
 
             return View();
         }

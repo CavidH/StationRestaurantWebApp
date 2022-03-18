@@ -2,7 +2,10 @@
 <main>
     <section id="Reservation">
         <div class="container">
+
             <h2>Reservation</h2>
+
+
             <div class="row">
                 <div class="col-md-12">
                     <form method="post" id="request" class="contactForum">
@@ -49,10 +52,14 @@
 
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label asp-for="Additionals" class="contact_label">Additionals</label>
                                 <span asp-validation-for="Additionals" class="text-danger"></span>
                                 <textarea asp-for="Additionals"  class="textarea_contact"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="~/Assets/img/@ViewBag.setting["plan"]" style="width: 100%; max-width: 450px; " alt="">
+
                             </div>
                             <label ><span class="text-danger">*</span>After Reservation, please confirm the email, otherwise the Reservation will not be registered</label>
 
@@ -68,90 +75,90 @@
 
     </section>
 
-    <div class="content-page">
-        <div class="content">
-
-            <!-- Start Content-->
-            <div class="container-fluid">
-
-
-                <div class="row d-flex justify-content-center mt-5">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-4">Basic Form</h4>
-                                @* <div class="alert-danger"  asp-validation-summary="All"  ></div> *@
-                                <form class="parsley-examples" method="post" enctype="multipart/form-data">
-                                    <div asp-validation-summary="All" class="text-danger"></div>
-                                    <div class="form-group">
-                                        <label asp-for="Name">Name<span class="text-danger">*</span></label>
-                                        <input asp-for="Name" parsley-trigger="change" required placeholder="Enter Name" class="form-control">
-                                        <span asp-validation-for="Name" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="LastName">Last Name<span class="text-danger">*</span></label>
-                                        <input asp-for="LastName" parsley-trigger="change" required placeholder="Enter LastName" class="form-control">
-                                        <span asp-validation-for="LastName" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="PhoneNumber" class="PhoneNumberlabel ">Phone Number<span class="text-danger">*</span></label>
-                                        <input asp-for="PhoneNumber" pattern="^(\+|\d)[0-9]{8,16}$" parsley-trigger="change" required placeholder="Enter PhoneNumber" class="form-control">
-                                        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Email" class="Emaillabel ">Email<span class="text-danger">*</span></label>
-                                        <input asp-for="Email" parsley-trigger="change" required placeholder="Enter Email" class="form-control">
-                                        <span class="text-danger" asp-validation-for="Email"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="ReservDate">Reservation Date<span class="text-danger">*</span></label>
-                                        <input asp-for="ReservDate" parsley-trigger="change" required placeholder="Enter Reservation Date" class="form-control">
-                                        <span class="text-danger" asp-validation-for="ReservDate"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="TableID">Select Table<span class="text-danger">*</span></label>
-                                        <select class="form-control" asp-for="TableID">
-                                            @foreach (var table in(List<Table>) ViewBag.tables)
-                                            {
-                                                <option value="@table.Id">№ @table.TableNumber</option>
-                                            }
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Additionals">Additionals</label>
-                                        <input asp-for="Additionals" parsley-trigger="change" placeholder="Enter Reservation Date" class="form-control">
-                                        <span class="text-danger" asp-validation-for="Additionals"></span>
-                                    </div>
-                                    <label ><span class="text-danger">*</span>After Reservation, please confirm the email, otherwise the Reservation will not be registered</label>
-
-                                    <div class="form-group text-right mb-0">
-                                        <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
-                                            Submit
-                                        </button>
-                                        <button type="reset" class="btn btn-secondary waves-effect waves-light">
-                                            Cancel
-                                        </button>
-                                    </div>
-                                    @* <input hidden="hidden" asp-for="ProductCategories" value="@Model.ProductCategories"> *@
-
-
-                                </form>
-                            </div>
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end col -->
-
-                </div>
-
-
-            </div>
-            <!-- end container-fluid -->
-
-        </div>
-        <!-- end content -->
-
-
-    </div>
+    @* <div class="content-page"> *@
+    @*     <div class="content"> *@
+    @* *@
+    @*         <!-- Start Content--> *@
+    @*         <div class="container-fluid"> *@
+    @* *@
+    @* *@
+    @*             <div class="row d-flex justify-content-center mt-5"> *@
+    @*                 <div class="col-lg-6"> *@
+    @*                     <div class="card"> *@
+    @*                         <div class="card-body"> *@
+    @*                             <h4 class="header-title mb-4">Basic Form</h4> *@
+    @*                             $1$ <div class="alert-danger"  asp-validation-summary="All"  ></div> #1# *@
+    @*                             <form class="parsley-examples" method="post" enctype="multipart/form-data"> *@
+    @*                                 <div asp-validation-summary="All" class="text-danger"></div> *@
+    @*                                 <div class="form-group"> *@
+    @*                                     <label asp-for="Name">Name<span class="text-danger">*</span></label> *@
+    @*                                     <input asp-for="Name" parsley-trigger="change" required placeholder="Enter Name" class="form-control"> *@
+    @*                                     <span asp-validation-for="Name" class="text-danger"></span> *@
+    @*                                 </div> *@
+    @*                                 <div class="form-group"> *@
+    @*                                     <label asp-for="LastName">Last Name<span class="text-danger">*</span></label> *@
+    @*                                     <input asp-for="LastName" parsley-trigger="change" required placeholder="Enter LastName" class="form-control"> *@
+    @*                                     <span asp-validation-for="LastName" class="text-danger"></span> *@
+    @*                                 </div> *@
+    @*                                 <div class="form-group"> *@
+    @*                                     <label asp-for="PhoneNumber" class="PhoneNumberlabel ">Phone Number<span class="text-danger">*</span></label> *@
+    @*                                     <input asp-for="PhoneNumber" pattern="^(\+|\d)[0-9]{8,16}$" parsley-trigger="change" required placeholder="Enter PhoneNumber" class="form-control"> *@
+    @*                                     <span class="text-danger" asp-validation-for="PhoneNumber"></span> *@
+    @*                                 </div> *@
+    @*                                 <div class="form-group"> *@
+    @*                                     <label asp-for="Email" class="Emaillabel ">Email<span class="text-danger">*</span></label> *@
+    @*                                     <input asp-for="Email" parsley-trigger="change" required placeholder="Enter Email" class="form-control"> *@
+    @*                                     <span class="text-danger" asp-validation-for="Email"></span> *@
+    @*                                 </div> *@
+    @*                                 <div class="form-group"> *@
+    @*                                     <label asp-for="ReservDate">Reservation Date<span class="text-danger">*</span></label> *@
+    @*                                     <input asp-for="ReservDate" parsley-trigger="change" required placeholder="Enter Reservation Date" class="form-control"> *@
+    @*                                     <span class="text-danger" asp-validation-for="ReservDate"></span> *@
+    @*                                 </div> *@
+    @*                                 <div class="form-group"> *@
+    @*                                     <label asp-for="TableID">Select Table<span class="text-danger">*</span></label> *@
+    @*                                     <select class="form-control" asp-for="TableID"> *@
+    @*                                         @foreach (var table in(List<Table>) ViewBag.tables) *@
+    @*                                         { *@
+    @*                                             <option value="@table.Id">№ @table.TableNumber</option> *@
+    @*                                         } *@
+    @* *@
+    @*                                     </select> *@
+    @*                                 </div> *@
+    @*                                 <div class="form-group"> *@
+    @*                                     <label asp-for="Additionals">Additionals</label> *@
+    @*                                     <input asp-for="Additionals" parsley-trigger="change" placeholder="Enter Reservation Date" class="form-control"> *@
+    @*                                     <span class="text-danger" asp-validation-for="Additionals"></span> *@
+    @*                                 </div> *@
+    @*                                 <label ><span class="text-danger">*</span>After Reservation, please confirm the email, otherwise the Reservation will not be registered</label> *@
+    @* *@
+    @*                                 <div class="form-group text-right mb-0"> *@
+    @*                                     <button class="btn btn-primary waves-effect waves-light mr-1" type="submit"> *@
+    @*                                         Submit *@
+    @*                                     </button> *@
+    @*                                     <button type="reset" class="btn btn-secondary waves-effect waves-light"> *@
+    @*                                         Cancel *@
+    @*                                     </button> *@
+    @*                                 </div> *@
+    @*                                 $1$ <input hidden="hidden" asp-for="ProductCategories" value="@Model.ProductCategories"> #1# *@
+    @* *@
+    @* *@
+    @*                             </form> *@
+    @*                         </div> *@
+    @*                     </div> *@
+    @*                     <!-- end card --> *@
+    @*                 </div> *@
+    @*                 <!-- end col --> *@
+    @* *@
+    @*             </div> *@
+    @* *@
+    @* *@
+    @*         </div> *@
+    @*         <!-- end container-fluid --> *@
+    @* *@
+    @*     </div> *@
+    @*     <!-- end content --> *@
+    @* *@
+    @* *@
+    @* </div> *@
 </main>
