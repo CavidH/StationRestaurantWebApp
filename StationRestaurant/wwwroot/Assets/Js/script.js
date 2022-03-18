@@ -212,11 +212,11 @@ $(document).ready(function () {
     var $regexnumber = /^(\+|\d)[0-9]{8,16}$/;
     $('#PhoneNumber').on('keypress keydown keyup', function () {
         if (!$(this).val().match($regexnumber)) {
-  
+
             $('.PhoneNumberlabel').addClass('text-danger');
             $('.PhoneNumberlabel').show();
         } else {
-        
+
             $('.PhoneNumberlabel').removeClass('text-danger');
         }
     });
@@ -225,7 +225,7 @@ $(document).ready(function () {
     var $regexEmail = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     $('#Email').on('keypress keydown keyup', function () {
         if (!$(this).val().match($regexEmail)) {
-             $('.Emaillabel').addClass('text-danger');
+            $('.Emaillabel').addClass('text-danger');
             $('.Emaillabel').show();
         } else {
             // else, do not display message
@@ -233,6 +233,13 @@ $(document).ready(function () {
         }
     });
 });
- 
 
+
+$(document).ready(function () {
+
+
+    $('.datepicker').datepicker({
+        daysOfWeekDisabled: [0, 6]
+    });
+});
 

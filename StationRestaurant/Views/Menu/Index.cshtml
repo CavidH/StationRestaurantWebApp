@@ -90,15 +90,17 @@
                     {
                         <div class="menu-item">
                             <div class="menu-img">
-                                <a href="Assets/img/@product.Image">
+                                <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
                                     <img src="Assets/img/@product.Image" alt="Image">
                                 </a>
                             </div>
                             <div class="menu-text">
-                                <h3>
-                                    <span>@product.Name</span> <strong>$@product.Price </strong>
-                                </h3>
-                                <p>@product.Description</p>
+                                <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                                    <h3>
+                                        <span>@product.Name</span> <strong>$@product.Price </strong>
+                                    </h3>
+                                    <p>@product.Description</p>
+                                </a>
                             </div>
                         </div>
                     }
@@ -107,7 +109,7 @@
             </div>
             <div class="col-lg-5 col-md-12">
                 <div class="menu-img-container">
-                    @if (Model.ProductCategories[i].Products != null)
+                    @if (Model.ProductCategories[i].Products != null && Model.ProductCategories[i].Products.Count != 0)
                     {
                         <img src="Assets/Img/@Model.ProductCategories[i].Products[0].Image" class=" " alt="">
                     }

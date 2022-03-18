@@ -13,6 +13,7 @@ namespace StationRestaurant.Controllers
         // private readonly IP _headSlideService;
 
         private readonly IUnitOfWorkService _unitOfWorkService;
+
         public HomeController(IUnitOfWorkService unitOfWorkService)
         {
             _unitOfWorkService = unitOfWorkService;
@@ -24,15 +25,16 @@ namespace StationRestaurant.Controllers
             var lastProducts = await _unitOfWorkService.productService.GetLastProductsAsync();
             var miniGallery = await _unitOfWorkService.galleryService.GetLastProductsAsync();
             var setting = await _unitOfWorkService.settingService.GetAllAsynDic();
-          
-            
+            var about = await _unitOfWorkService.aboutService.GetAsync();
+
 
             var homeVM = new HomeVM
             {
                 HeadSlides = slides,
                 Products = lastProducts,
                 MiniGallery = miniGallery,
-                Settings = setting
+                Settings = setting,
+                About = about
             };
             return View(homeVM);
         }
