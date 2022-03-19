@@ -9,7 +9,7 @@
 <section id="Menu-logo">
     <div class="row">
         <div class="menu-logo-container col-lg-12">
-            <img src="Assets/Img/PinClipart.com_header-clipart_101429.png">
+           <h2 class="menu_title">Menu</h2>
         </div>
     </div>
 
@@ -22,16 +22,7 @@
             <a class="nav-link  custom-btn  @if (i == 0){@statusActive} " data-toggle="pill" href="#@Model.ProductCategories[i].Name">@Model.ProductCategories[i].Name</a>
         </li>
     }
-
-    @* <li class="nav-item"> *@
-    @*     <a class="nav-link  custom-btn active " data-toggle="pill" href="#drink">drink</a> *@
-    @* </li> *@
-    @* <li class="nav-item"> *@
-    @*     <a class="nav-link  custom-btn " data-toggle="pill" href="#burger">burger</a> *@
-    @* </li> *@
-    @* <li class="nav-item"> *@
-    @*     <a class="nav-link   custom-btn " data-toggle="pill" href="#meat">meat</a> *@
-    @* </li> *@
+ 
 
 </ul>
 <div class="menu-content tab-content">
@@ -90,12 +81,12 @@
                     {
                         <div class="menu-item">
                             <div class="menu-img">
-                                <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                                <a  asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
                                     <img src="Assets/img/@product.Image" alt="Image">
                                 </a>
                             </div>
                             <div class="menu-text">
-                                <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                                <a id="menu-link" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
                                     <h3>
                                         <span>@product.Name</span> <strong>$@product.Price </strong>
                                     </h3>

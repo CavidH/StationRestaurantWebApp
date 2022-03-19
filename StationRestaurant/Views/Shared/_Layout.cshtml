@@ -26,32 +26,35 @@
         <div id="Nav" class="navbar navbar-expand-md navbar-light fixed-top ">
             <div class="container">
                 <div class="Logo d-flex">
-                    <a href="Index.html">
+                    <a asp-controller="Home" asp-action="Index">
                         <img src="~/Assets/Img/Logo3.png" alt="">
                     </a>
                 </div>
                 <!-- <a class="navbar-brand" href="#">Navbar</a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColl"
                         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="fas fa-bars"> Menu</span>
+                    <span class="fas fa-bars"></span>
                 </button>
 
                 <div class="collapse navbar-collapse align-content-center" id="navbarColl">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="Index.html">Home</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Menu"  asp-action="Index">Menu</a>
+                            <a class="nav-link" asp-controller="Menu" asp-action="Index">Menu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Reservation</a>
+                            <a class="nav-link" asp-controller="Reservation" asp-action="Index">Reservation</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" asp-controller="Gallery" asp-action="Index">Gallery</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="#Product">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Contact" asp-action="Index"  >Contact</a>
                         </li>
 
                     </ul>
