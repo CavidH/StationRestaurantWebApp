@@ -34,6 +34,10 @@
             <div class="col-lg-7 col-md-12">
                 @if (Model.ProductCategories[0].Products != null)
                 {
+                    if (Model.ProductCategories[0].Products.Where(p=>p.IsDeleted==false)!=null)
+                    {
+                        
+                    }
                     @foreach (var product in Model.ProductCategories[0].Products.Where(p=>p.IsDeleted==false))
                     {
                         <div class="menu-item">
@@ -60,7 +64,7 @@
             </div>
             <div class="col-lg-5 col-md-12">
                 <div class="menu-img-container">
-                    @if (Model.ProductCategories[0].Products != null)
+                    @if (Model.ProductCategories[0].Products.Count != 0)
                     {
                         <img src="Assets/Img/@Model.ProductCategories[0].Products[0].Image" class=" " alt="">
                     }

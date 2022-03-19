@@ -108,7 +108,7 @@ body {
     /*
     max-width: auto;
     */
-    height: 650px !important;
+    height: 700px !important;
     /* margin-bottom: 30px; */
     /*    object-fit: cover;
     object-position: center*/
@@ -427,7 +427,7 @@ body {
 }
 
 .head-card-title {
-    margin-top: 50px;
+    margin-top: 26px;
     margin-bottom: 50px;
     text-align: center;
     text-transform: uppercase;
@@ -1100,7 +1100,7 @@ input {
 }
 
 .Comment_form {
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 50px;
 }
 

@@ -80,7 +80,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             {
                 Name = product.Name,
                 Title = product.Title,
-                Description = product.Title,
+                Description = product.Description,
                 ProductCategoryID = product.ProductCategoryID,
                 Price = product.Price
             });
