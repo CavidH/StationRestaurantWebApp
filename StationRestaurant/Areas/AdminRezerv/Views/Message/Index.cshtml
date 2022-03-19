@@ -33,17 +33,19 @@
                         <div class="card-body">
                             <h4 class="header-title mb-4">Basic Form</h4>
                             @* <div class="alert-danger"  asp-validation-summary="All"  ></div> *@
+                            <h3 class="alert-success  contact_alert">@TempData["msg"]</h3>
+
                             <form method="post">
                                 <div class="form-group row">
-                                    <div class="form-group">
+                                    <div class="form-group Subjectc">
                                         <label asp-for="Subject">Subject<span class="text-danger">*</span> </label>
-                                        <input asp-for="Subject"  parsley-trigger="change" required placeholder="Enter Title" class="form-control">
+                                        <input asp-for="Subject" parsley-trigger="change" required placeholder="Enter Title" class="form-control">
                                         <span class="text-danger" asp-validation-for="Subject"></span>
                                     </div>
                                     <div class="col-lg-10">
                                         <div>Send Message </div>
                                         <span asp-validation-for="Msg" class="text-danger"></span>
-                                        <textarea asp-for="Msg" required class="form-control" rows="5" id="example-textarea"></textarea>
+                                        <textarea asp-for="Msg"    id="example-textarea"></textarea>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Send</button>
@@ -76,3 +78,19 @@
     <!-- end Footer -->
 
 </div>
+<style>
+    .Subjectc{
+        margin-left: 13px;
+    }
+
+</style>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/32.0.0/ckeditor.min.js"></script>
+    <script>
+                        ClassicEditor.create(document.querySelector('#example-textarea')).catch(error => {
+                            console.error(error);
+                        });
+                    </script>
+
+}

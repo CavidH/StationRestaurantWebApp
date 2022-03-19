@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.Message;
 using Microsoft.AspNetCore.Authorization;
@@ -24,13 +25,14 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(MessageVM messageVm)
+        public async Task<IActionResult> Index(MessageVM messageVm)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _unitOfWorkService.messageService.SendMessage(messageVm);
+                    await _unitOfWorkService.messageService.SendMessage(messageVm);
+                    TempData["msg"] = "message sent";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception e)

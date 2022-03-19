@@ -238,15 +238,15 @@ $(document).ready(function () {
 // $(document).ready(function () {
 
 
-    // const picker = document.getElementById('datepicker');
-    // picker.addEventListener('input', function (e) {
-    //     var day = new Date(this.value).getUTCDay();
-    //     if ([5, 0].includes(day)) {
-    //         e.preventDefault();
-    //         this.value = '';
-    //         alert('Weekends not allowed');
-    //     }
-    // });
+// const picker = document.getElementById('datepicker');
+// picker.addEventListener('input', function (e) {
+//     var day = new Date(this.value).getUTCDay();
+//     if ([5, 0].includes(day)) {
+//         e.preventDefault();
+//         this.value = '';
+//         alert('Weekends not allowed');
+//     }
+// });
 
 //  });
 // $(document).ready(function () {
@@ -257,3 +257,4 @@ $(document).ready(function () {
 //             }
 //     });
 // });
+

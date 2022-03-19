@@ -5,10 +5,11 @@
         <h2>CONTACT US</h2>
         <div class="row">
             <div class="col-md-12">
+                <span class="alert-success  contact_alert" >@TempData["msg"]</span>
+
                 <form method="post" id="request" class="contactForum">
                     <div class="row">
                         <div class="col-md-6">
-
                             <label asp-for="FirstName" class="contact_label">First Name</label>
                             <span asp-validation-for="FirstName" class="text-danger"></span>
                             <input asp-for="FirstName" parsley-trigger="change" required class="form_contact">

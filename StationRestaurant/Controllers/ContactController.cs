@@ -28,6 +28,7 @@ namespace StationRestaurant.Controllers
                 try
                 {
                     _unitOfWorkService.contactService.Create(contactVm);
+                    TempData["msg"] = "message sent";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception e)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities.Helpers;
@@ -20,9 +21,18 @@ namespace Business.Implementations
             var reservs = await _unitOfWork
                 .reservationRepository
                 .GetAllAsync();
+            List<string> emails = new List<string>();
             foreach (var res in reservs)
             {
-                EmailHelper.SendEmail(res.Email, message.Msg, message.Subject);
+                if (!emails.Contains(res.Email))
+                {
+                    emails.Add(res.Email);
+                }
+            }
+
+            foreach (var email in emails)
+            {
+                EmailHelper.SendEmail(email, message.Msg, message.Subject);
             }
         }
     }
