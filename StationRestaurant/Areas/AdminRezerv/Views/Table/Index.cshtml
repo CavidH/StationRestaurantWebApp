@@ -15,7 +15,11 @@
                             <h4 class="m-t-0 header-title mb-4">
                                 <b> Table</b>
                             </h4>
-                            <a class="btn btn-info waves-effect width-md waves-light " asp-action="Create" style="color:#ffffff  ">Add</a>
+                            <div class="container mb-4">
+                                <a class="btn btn-info waves-effect width-md waves-light " asp-action="Create" style="color:#ffffff  ">Add</a>
+                                <a class="btn btn-info waves-effect width-md waves-light " href="~/Assets/img/@ViewBag.setting["plan"]" target="_blank" style="color:#ffffff  ">Plan</a>
+
+                            </div>
                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
                                 <thead>

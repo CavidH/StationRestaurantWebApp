@@ -98,38 +98,5 @@ namespace StationRestaurant.Controllers
         }
 
 
-        // [HttpPost]
-        // [AutoValidateAntiforgeryToken]
-        // public async Task<IActionResult> Index(ReservationDataTimeVM reservationDataTimeVm)
-        // {
-        //     _emptyTables= await _reservationService.CheckRezervDate(reservationDataTimeVm.ReservDate);
-        //      return RedirectToAction(nameof(Reservation));
-        // }
-        // [HttpGet]
-        // public IActionResult RezervDate()
-        // {
-        //     return View();
-        // }
-        // [HttpPost]
-        // [AutoValidateAntiforgeryToken]
-        // public IActionResult RezervDate(ReservationPostVM reservationPostVm)
-        // {
-        //     return Json(reservationPostVm);
-        //
-        // }
-        //
-
-        // [HttpGet]
-        // public IActionResult Reservation()
-        // {
-        //     ViewBag.tables = _emptyTables;
-        //     return View();
-        // }  
-        // [HttpPost]
-        // public IActionResult Reservation(ReservationPostVM  reservationPostVm)
-        // {
-        //    
-        //     return View();
-        // }
     }
 }

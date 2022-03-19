@@ -21,6 +21,8 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
+            ViewBag.setting = await _unitOfWorkService.settingService.GetAllAsynDic();
+
             return View(await _unitOfWorkService.tableService.GetAllPaginatedAsync(page));
         }
 
