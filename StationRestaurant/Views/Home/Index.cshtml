@@ -16,7 +16,7 @@
     <section id="headcard">
         <h3 class="head-card-title"> Last added</h3>
         <div class="headcards">
-            @foreach (var product in Model.Products)
+            @foreach (var product in Model.Products.Where(p=>p.ProductCategory.IsDeleted==false))
             {
                 <div class="card">
                     <a class="card-image" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id" target="_blank"
