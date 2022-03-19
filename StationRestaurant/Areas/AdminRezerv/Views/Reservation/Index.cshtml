@@ -22,17 +22,28 @@
                                     <input asp-for="Item.ReservDate" type="date" parsley-trigger="change" required placeholder="Enter date" class="form-control">
                                     <span asp-validation-for="Item.ReservDate" class="text-danger"></span>
                                 </div>
-                                <div class="form-group text-right mb-0 col-3">
+                                <div class="row">
+                                    <div class="form-group text-right mb-0 col-3">
 
-                                    <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
-                                        Search
-                                    </button>
-                                    <button type="reset" class="btn btn-secondary waves-effect waves-light">
-                                        Reset
-                                    </button>
-                                    <a asp-area="AdminRezerv" asp-controller="Reservation" asp-action="Index" class="btn btn-success waves-effect waves-light mr-1">
-                                        All
-                                    </a>
+                                        <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                                            Search
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary waves-effect waves-light">
+                                            Reset
+                                        </button>
+                                        <a asp-area="AdminRezerv" asp-controller="Reservation" asp-action="Index" class="btn btn-success waves-effect waves-light mr-1">
+                                            All
+                                        </a>
+                                    </div>
+                                    <div class="col-9 d-flex justify-content-end">
+
+                                        <a class="btn btn-success waves-effect waves-light mr-1" asp-action="ExportToExcelToday">
+                                            Today Report
+                                        </a>
+                                        <a class="btn btn-success waves-effect waves-light mr-1" asp-action="ExportToExcelAll">
+                                            All Reports
+                                        </a>
+                                    </div>
                                 </div>
                             </form>
 

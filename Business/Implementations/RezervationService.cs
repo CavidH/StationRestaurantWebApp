@@ -19,9 +19,18 @@ namespace Business.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public Task<List<Reservation>> GetAllAsync()
+        public async Task<List<Reservation>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _unitOfWork
+                .reservationRepository
+                .GetAllAsync(p => p.IsDeleted == false, "Table");
+        }
+
+        public async Task<List<Reservation>> GetAllStatAsync()
+        {
+            return await _unitOfWork
+                .reservationRepository
+                .GetAllAsync(p => p.Name != null, "Table");
         }
 
         public async Task<Paginate<Reservation>> GetAllPaginatedAsync(int page)

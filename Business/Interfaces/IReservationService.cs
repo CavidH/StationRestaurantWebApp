@@ -12,6 +12,7 @@ namespace Business.Interfaces
     public interface IReservationService
     {
         Task<List<Reservation>> GetAllAsync();
+        Task<List<Reservation>> GetAllStatAsync();
         Task<Paginate<Reservation>> GetAllPaginatedAsync(int page);
         Task<Paginate<Reservation>> GetAllPaginatedAsync(int page, DateTime date);
         Task<Reservation> GetAsync(int id);
