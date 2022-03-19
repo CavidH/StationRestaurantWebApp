@@ -24,6 +24,7 @@ namespace Business.Implementations
         private IContactService _contactService;
         private ISettingService _settingService;
         private IAboutService _aboutService;
+        private IMessageService _messageService;
 
 
         public UnitOfWorkService(IUnitOfWork unitOfWork, IWebHostEnvironment environment,
@@ -71,5 +72,8 @@ namespace Business.Implementations
 
         public IAboutService aboutService =>
             _aboutService = _aboutService ?? new AboutService(_unitOfWork, _environment);
+
+        public IMessageService messageService =>
+            _messageService = _messageService ?? new MessageService(_unitOfWork);
     }
 }

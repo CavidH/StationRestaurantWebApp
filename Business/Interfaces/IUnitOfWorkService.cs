@@ -13,5 +13,6 @@ namespace Business.Interfaces
         public IContactService contactService { get; }
         public ISettingService settingService { get; }
         public IAboutService aboutService { get; }
+        public IMessageService messageService { get; }
     }
 }
