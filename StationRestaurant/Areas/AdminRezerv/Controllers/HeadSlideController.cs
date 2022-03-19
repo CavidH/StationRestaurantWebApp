@@ -81,7 +81,6 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             return View(headSlideUpdateVm);
         }
 
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int Id)
         {
             if (Id == 0) return NotFound();
