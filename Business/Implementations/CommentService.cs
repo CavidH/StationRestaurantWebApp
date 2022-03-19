@@ -18,8 +18,6 @@ namespace Business.Implementations
             _unitOfWork = unitOfWork;
         }
 
-         
-        
 
         public async Task Create(int productId, CommentVM commentVM)
         {
@@ -44,5 +42,9 @@ namespace Business.Implementations
             await _unitOfWork.SaveAsync();
         }
 
+        public async Task<List<Comment>> GetAllAsync()
+        {
+            return await _unitOfWork.commentRepository.GetAllAsync(p => p.IsDeleted == false);
+        }
     }
 }

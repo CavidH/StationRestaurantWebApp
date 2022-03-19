@@ -8,7 +8,8 @@ namespace Business.Interfaces
 {
     public interface IGalleryService
     {
-        Task<List<GaleryImage>> GetLastProductsAsync();
+        Task<List<GaleryImage>> GetLastimageAsync();
+        Task<List<GaleryImage>> GetAllAsync();
         Task<Paginate<GaleryImage>> GetAllPaginatedAsync(int page,int size);
         Task<GaleryImage> GetAsync(int id);
         Task Create(GalleryPostVM galleryPostVm);

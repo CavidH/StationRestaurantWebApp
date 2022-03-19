@@ -23,7 +23,7 @@ namespace StationRestaurant.Controllers
         {
             var slides = await _unitOfWorkService.headSlideService.GetAllAsync();
             var lastProducts = await _unitOfWorkService.productService.GetLastProductsAsync();
-            var miniGallery = await _unitOfWorkService.galleryService.GetLastProductsAsync();
+            var miniGallery = await _unitOfWorkService.galleryService.GetLastimageAsync();
             var setting = await _unitOfWorkService.settingService.GetAllAsynDic();
             var about = await _unitOfWorkService.aboutService.GetAsync();
 

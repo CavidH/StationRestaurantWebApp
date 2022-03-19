@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.ViewModels.Comment;
+using Core.Entities;
 
 namespace Business.Interfaces
 {
@@ -7,5 +9,6 @@ namespace Business.Interfaces
     {
         Task Create(int productId, CommentVM commentVM);
         Task Remove(int id);
+        Task<List<Comment>> GetAllAsync();
     }
 }

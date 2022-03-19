@@ -22,7 +22,7 @@ namespace Business.Implementations
 
         public async Task<List<Contact>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            return await _unitOfWork.contactRepository.GetAllAsync(p => p.IsDeleted == false);
         }
 
         public async Task<Paginate<Contact>> GetAllPaginatedAsync(int page)

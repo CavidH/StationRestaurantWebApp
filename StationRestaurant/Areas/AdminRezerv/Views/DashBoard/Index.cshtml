@@ -1,1 +1,134 @@
-﻿<p>admin panel</p>
+﻿@model Business.ViewModels.DashBoard.DashBoardVM
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Stats</h4>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!--Widget-1 -->
+            <div class="row ">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="h2 mt-2 text-purple">@Model.ActiveReservCount</div>
+                            <span class="mb-2 text-muted">All Active Reservations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <div class="h2 mt-2 text-white">@Model.TodayReservCount</div>
+                            <span class="mb-2 text-white">Today's Reservations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card bg-warning">
+                        <div class="card-body text-center">
+                            <div class="h2 mt-2 text-white">@Model.CategoryCount</div>
+                            <span class="mb-2 text-white">Category</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card bg-purple">
+                        <div class="card-body text-center">
+                            <div class="h2 mt-2 text-white">@Model.ProductCount</div>
+                            <span class="mb-2 text-white">Product</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end row -->
+
+            <!--Widget-2 -->
+
+            <div class="row">
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card widget-style-1 bg-pink">
+                        <div class="card-body">
+                            <div class="my-4 text-white">
+                                <i class="mdi mdi-comment-multiple"></i>
+                                <h2 class="my-0 font-weight-bold text-white">
+                                    <span data-plugin="counterup">@Model.CommentCount</span>
+                                </h2>
+                                <div>Comments</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card widget-style-1 bg-warning">
+                        <div class="card-body">
+                            <div class="my-4 text-white">
+                                <h2 class="my-0 text-white">
+                                    <span data-plugin="counterup">@Model.ImageCount</span>
+                                </h2>
+                                <div>Image</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card widget-style-1 bg-info">
+                        <div class="card-body">
+                            <div class="my-4 text-white">
+                                <i class="mdi mdi-cash"></i>
+                                <h2 class="my-0 text-white">
+                                    <span data-plugin="counterup">@Model.TableCount</span>
+                                </h2>
+                                <div>Table</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card widget-style-1 bg-success">
+                        <div class="card-body">
+                            <div class="my-4 text-white">
+                                <i class="mdi mdi-account-multiple"></i>
+                                <h2 class="my-0 text-white">
+                                    <span data-plugin="counterup">@Model.PendingContactCount</span>
+                                </h2>
+                                <div>PendingContact</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            2015 - 2020 © Velonic theme by <a href="#">Coderthemes</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+    </div>
+</div> 

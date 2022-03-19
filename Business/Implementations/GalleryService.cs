@@ -26,11 +26,16 @@ namespace Business.Implementations
             _environment = environment;
         }
 
-        public async Task<List<GaleryImage>> GetLastProductsAsync()
+        public async Task<List<GaleryImage>> GetLastimageAsync()
         {
             return await _unitOfWork
                 .galleryImageRepository
                 .GetLastProduct(3);
+        }
+
+        public async Task<List<GaleryImage>> GetAllAsync()
+        {
+            return await _unitOfWork.galleryImageRepository.GetAllAsync();
         }
 
         public async Task<Paginate<GaleryImage>> GetAllPaginatedAsync(int page, int size)
