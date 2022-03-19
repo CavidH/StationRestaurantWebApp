@@ -18,20 +18,8 @@ namespace Business.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<Comment>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<Paginate<Comment>> GetAllPaginatedAsync(int page)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<Comment> GetAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+         
+        
 
         public async Task Create(int productId, CommentVM commentVM)
         {
@@ -48,12 +36,6 @@ namespace Business.Implementations
             await _unitOfWork.SaveAsync();
         }
 
-
-        public async Task Update(int id, Comment comment)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task Remove(int id)
         {
             var comment = await _unitOfWork.commentRepository.GetAsync(p => p.Id == id && p.IsDeleted == false);
@@ -62,9 +44,5 @@ namespace Business.Implementations
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task<int> getPageCount(int take)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

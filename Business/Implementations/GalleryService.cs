@@ -26,11 +26,6 @@ namespace Business.Implementations
             _environment = environment;
         }
 
-        public async Task<List<GaleryImage>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<List<GaleryImage>> GetLastProductsAsync()
         {
             return await _unitOfWork
