@@ -15,15 +15,6 @@ namespace Data.DAL.Migrations
                 oldClrType: typeof(bool),
                 oldType: "bit");
 
-            migrationBuilder.AlterColumn<bool>(
-                name: "IsActive",
-                table: "Reservations",
-                nullable: false,
-                defaultValue: true,
-                oldClrType: typeof(bool),
-                oldType: "bit",
-                oldDefaultValue: false);
-
             migrationBuilder.AddColumn<DateTime>(
                 name: "ReservEndDate",
                 table: "Reservations",
@@ -32,11 +23,6 @@ namespace Data.DAL.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "TimeIntervalId",
-                table: "Reservations",
-                nullable: true);
-
-            migrationBuilder.AddColumn<int>(
-                name: "TimeIntervalIdId",
                 table: "Reservations",
                 nullable: false,
                 defaultValue: 0);
@@ -66,7 +52,7 @@ namespace Data.DAL.Migrations
                 column: "TimeIntervalId",
                 principalTable: "TimeIntervals",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -90,10 +76,6 @@ namespace Data.DAL.Migrations
                 name: "TimeIntervalId",
                 table: "Reservations");
 
-            migrationBuilder.DropColumn(
-                name: "TimeIntervalIdId",
-                table: "Reservations");
-
             migrationBuilder.AlterColumn<bool>(
                 name: "IsDeleted",
                 table: "Reservations",
@@ -101,15 +83,6 @@ namespace Data.DAL.Migrations
                 nullable: false,
                 oldClrType: typeof(bool),
                 oldDefaultValue: false);
-
-            migrationBuilder.AlterColumn<bool>(
-                name: "IsActive",
-                table: "Reservations",
-                type: "bit",
-                nullable: false,
-                defaultValue: false,
-                oldClrType: typeof(bool),
-                oldDefaultValue: true);
         }
     }
 }

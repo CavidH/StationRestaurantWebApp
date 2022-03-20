@@ -16,7 +16,7 @@ namespace Core.Entities
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
-        public int TimeIntervalIdId { get; set; }
+        public int TimeIntervalId { get; set; }
         public Timeİnterval TimeInterval { get; set; }
 
         public int TableID { get; set; }

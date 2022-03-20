@@ -79,7 +79,7 @@ namespace Business.Implementations
                 Email = reservationPostVm.Email,
                 ReservDate = reservationPostVm.ReservDate,
                 TableID = reservationPostVm.TableID,
-                TimeIntervalIdId = reservationPostVm.TimeIntervalIdId,
+                TimeIntervalId = reservationPostVm.TimeIntervalIdId,
                 ReservEndDate = reservationPostVm.ReservDate.AddHours(time)
             };
             if (reservationPostVm.Additionals is null)

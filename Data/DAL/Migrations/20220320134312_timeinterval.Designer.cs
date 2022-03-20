@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220320075024_timeinterval")]
+    [Migration("20220320134312_timeinterval")]
     partial class timeinterval
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -367,7 +367,7 @@ namespace Data.DAL.Migrations
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasDefaultValue(false);
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -398,10 +398,7 @@ namespace Data.DAL.Migrations
                     b.Property<int>("TableID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TimeIntervalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TimeIntervalIdId")
+                    b.Property<int>("TimeIntervalId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -646,7 +643,9 @@ namespace Data.DAL.Migrations
 
                     b.HasOne("Core.Entities.Timeİnterval", "TimeInterval")
                         .WithMany("Reservations")
-                        .HasForeignKey("TimeIntervalId");
+                        .HasForeignKey("TimeIntervalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

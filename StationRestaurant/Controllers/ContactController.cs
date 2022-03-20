@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.Contact;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +22,13 @@ namespace StationRestaurant.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(ContactVM contactVm)
+        public async Task<IActionResult> Index(ContactVM contactVm)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _unitOfWorkService.contactService.Create(contactVm);
+                    await _unitOfWorkService.contactService.Create(contactVm);
                     TempData["msg"] = "message sent";
                     return RedirectToAction(nameof(Index));
                 }
