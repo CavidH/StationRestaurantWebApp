@@ -181,6 +181,20 @@ namespace Business.Implementations
             }
         }
 
+        public async Task Clean()
+        {
+            var reservs = await _unitOfWork.reservationRepository.GetAllAsync(p => p.IsDeleted==false);
+            foreach (var reserv in reservs)
+            {
+                if (reserv.ReservEndDate<DateTime.Now)
+                {
+                    reserv.IsDeleted = true;
+                }
+            }
+
+            await _unitOfWork.SaveAsync();
+        }
+
         public async Task<int> getPageCount(int take)
         {
             var reservations = await _unitOfWork

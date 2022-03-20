@@ -43,6 +43,11 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
             await _unitOfWorkService.reservationService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Clean()
+        {
+            await _unitOfWorkService.reservationService.Clean();
+            return RedirectToAction(nameof(Index));
+        }
 
         public async Task<IActionResult> ExportToExcelToday()
         {
@@ -57,8 +62,9 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 worksheet.Cell(currentRow, 5).Value = "Email";
                 worksheet.Cell(currentRow, 6).Value = "Table";
                 worksheet.Cell(currentRow, 7).Value = "ReservDate";
-                worksheet.Cell(currentRow, 8).Value = "IsActive";
-                worksheet.Cell(currentRow, 9).Value = "Additionals";
+                worksheet.Cell(currentRow, 8).Value = "ReservEndDate";
+                worksheet.Cell(currentRow, 9).Value = "IsActive";
+                worksheet.Cell(currentRow, 10).Value = "Additionals";
 
                 worksheet.Cell(currentRow, 1).Style.Fill.SetBackgroundColor(XLColor.LightGray);
                 worksheet.Cell(currentRow, 2).Style.Fill.SetBackgroundColor(XLColor.LightGray);
@@ -69,6 +75,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 worksheet.Cell(currentRow, 7).Style.Fill.SetBackgroundColor(XLColor.LightGray);
                 worksheet.Cell(currentRow, 8).Style.Fill.SetBackgroundColor(XLColor.LightGray);
                 worksheet.Cell(currentRow, 9).Style.Fill.SetBackgroundColor(XLColor.LightGray);
+                worksheet.Cell(currentRow, 10).Style.Fill.SetBackgroundColor(XLColor.LightGray);
 
 
                 foreach (var contact in (await _unitOfWorkService.reservationService.GetAllAsync()).Where(p =>
@@ -82,16 +89,17 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     worksheet.Cell(currentRow, 5).Value = contact.Email;
                     worksheet.Cell(currentRow, 6).Value = contact.Table.TableNumber;
                     worksheet.Cell(currentRow, 7).Value = contact.ReservDate;
+                    worksheet.Cell(currentRow, 8).Value = contact.ReservEndDate;
                     if (contact.IsActive)
                     {
-                        worksheet.Cell(currentRow, 8).Value = "ACTIVE";
+                        worksheet.Cell(currentRow, 9).Value = "ACTIVE";
                     }
                     else
                     {
-                        worksheet.Cell(currentRow, 8).Value = "DEACTIVE";
+                        worksheet.Cell(currentRow, 9).Value = "DEACTIVE";
                     }
 
-                    worksheet.Cell(currentRow, 9).Value = contact.Additionals;
+                    worksheet.Cell(currentRow, 10).Value = contact.Additionals;
                 }
 
                 using (var stream = new MemoryStream())
@@ -118,8 +126,9 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 worksheet.Cell(currentRow, 5).Value = "Email";
                 worksheet.Cell(currentRow, 6).Value = "Table";
                 worksheet.Cell(currentRow, 7).Value = "ReservDate";
-                worksheet.Cell(currentRow, 8).Value = "IsActive";
-                worksheet.Cell(currentRow, 9).Value = "Additionals";
+                worksheet.Cell(currentRow, 8).Value = "ReservEndDate";
+                worksheet.Cell(currentRow, 9).Value = "IsActive";
+                worksheet.Cell(currentRow, 10).Value = "Additionals";
 
                 worksheet.Cell(currentRow, 1).Style.Fill.SetBackgroundColor(XLColor.LightGray);
                 worksheet.Cell(currentRow, 2).Style.Fill.SetBackgroundColor(XLColor.LightGray);
@@ -130,6 +139,7 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                 worksheet.Cell(currentRow, 7).Style.Fill.SetBackgroundColor(XLColor.LightGray);
                 worksheet.Cell(currentRow, 8).Style.Fill.SetBackgroundColor(XLColor.LightGray);
                 worksheet.Cell(currentRow, 9).Style.Fill.SetBackgroundColor(XLColor.LightGray);
+                worksheet.Cell(currentRow, 10).Style.Fill.SetBackgroundColor(XLColor.LightGray);
 
 
                 foreach (var contact in (await _unitOfWorkService.reservationService.GetAllStatAsync()))
@@ -142,16 +152,17 @@ namespace StationRestaurant.Areas.AdminRezerv.Controllers
                     worksheet.Cell(currentRow, 5).Value = contact.Email;
                     worksheet.Cell(currentRow, 6).Value = contact.Table.TableNumber;
                     worksheet.Cell(currentRow, 7).Value = contact.ReservDate;
+                    worksheet.Cell(currentRow, 8).Value = contact.ReservEndDate;
                     if (contact.IsActive)
                     {
-                        worksheet.Cell(currentRow, 8).Value = "ACTIVE";
+                        worksheet.Cell(currentRow, 9).Value = "ACTIVE";
                     }
                     else
                     {
-                        worksheet.Cell(currentRow, 8).Value = "DEACTIVE";
+                        worksheet.Cell(currentRow, 9).Value = "DEACTIVE";
                     }
 
-                    worksheet.Cell(currentRow, 9).Value = contact.Additionals;
+                    worksheet.Cell(currentRow, 10).Value = contact.Additionals;
                 }
 
                 using (var stream = new MemoryStream())

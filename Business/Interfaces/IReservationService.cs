@@ -20,6 +20,7 @@ namespace Business.Interfaces
         Task Update(int id, ReservationPostVM reservationPostVm);
         Task<bool> IsReserved(DateTime startDateTime,DateTime EndDateTime, int tableId);
         Task Remove(int id);
+        Task Clean();
         Task<int> getPageCount(int Take);
         Task<int> getLastIdAsync();
         Task ConfirmReservation(int id);
