@@ -12,11 +12,12 @@ namespace Core.Entities
         public string Email { get; set; }
         public string Additionals { get; set; }
         public DateTime ReservDate { get; set; }
+        public DateTime ReservEndDate { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
-
-
+        public int TimeIntervalIdId { get; set; }
+        public Timeİnterval TimeInterval { get; set; }
 
         public int TableID { get; set; }
         public Table Table { get; set; }

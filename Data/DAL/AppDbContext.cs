@@ -1,4 +1,4 @@
-using Core.Entities;
+﻿using Core.Entities;
 using Data.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +25,7 @@ namespace Data.DAL
             builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new ContactConfiguration());
             builder.ApplyConfiguration(new TableConfiguration());
+            builder.ApplyConfiguration(new TimeİntervalConfiguration());
             //builder.ApplyConfiguration(new ProductImageConfiguration());
 
             base.OnModelCreating(builder);
@@ -40,6 +41,7 @@ namespace Data.DAL
         public DbSet<Table> Tables { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Timeİnterval> TimeIntervals { get; set; }
 
 
         //public DbSet<ProductImage> ProductImages { get; set; }

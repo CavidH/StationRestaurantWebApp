@@ -17,6 +17,8 @@
     <Compile Remove="DAL\Migrations\20220316122407_CommentandContacttable.Designer.cs" />
     <Compile Remove="DAL\Migrations\20220316123525_cctable.cs" />
     <Compile Remove="DAL\Migrations\20220316123525_cctable.Designer.cs" />
+    <Compile Remove="DAL\Migrations\20220320074853_timeinterval.cs" />
+    <Compile Remove="DAL\Migrations\20220320074853_timeinterval.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
