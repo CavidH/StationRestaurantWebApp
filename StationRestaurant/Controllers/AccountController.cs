@@ -38,6 +38,10 @@ namespace StationRestaurant.Controllers
 
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+               return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -53,7 +57,7 @@ namespace StationRestaurant.Controllers
                     return Redirect(ReturnUrl);
                 }
 
-                return RedirectToAction("Index", "DashBoard");
+                return Redirect("/Adminreserv");
             }
 
             return View(loginVm);
