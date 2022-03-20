@@ -22,6 +22,7 @@ namespace StationRestaurant.Controllers
         {
             ViewBag.tables = await _unitOfWorkService.tableService.GetAllAsync();
             ViewBag.setting = await _unitOfWorkService.settingService.GetAllAsynDic();
+            ViewBag.TimeIntervals = await _unitOfWorkService.timeIntervalService.GetAllAsync();
 
 
             return View();
@@ -32,10 +33,16 @@ namespace StationRestaurant.Controllers
         public async Task<IActionResult> Index(ReservationPostVM reservationPostVm)
         {
             ViewBag.tables = await _unitOfWorkService.tableService.GetAllAsync();
+            ViewBag.TimeIntervals = await _unitOfWorkService.timeIntervalService.GetAllAsync();
+            ViewBag.setting = await _unitOfWorkService.settingService.GetAllAsynDic();
+
             if (ModelState.IsValid)
             {
-                if (await _unitOfWorkService.reservationService.IsReserved(reservationPostVm.ReservDate.Date,
-                        reservationPostVm.TableID))
+                var time = (await _unitOfWorkService.timeIntervalService.GetAsync(reservationPostVm.TimeIntervalIdId))
+                    .Time;
+                var endTime = reservationPostVm.ReservDate.AddHours(time);
+                if (await _unitOfWorkService.reservationService.IsReserved(reservationPostVm.ReservDate,
+                        endTime, reservationPostVm.TableID))
                 {
                     ModelState.AddModelError("TableID", "This table has already been reserved");
                     return View(reservationPostVm);
@@ -96,7 +103,5 @@ namespace StationRestaurant.Controllers
 
             return View();
         }
-
-
     }
 }

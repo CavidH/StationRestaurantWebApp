@@ -25,6 +25,7 @@ namespace Business.Implementations
         private ISettingService _settingService;
         private IAboutService _aboutService;
         private IMessageService _messageService;
+        private ITimeIntervalService _timeIntervalService;
 
 
         public UnitOfWorkService(IUnitOfWork unitOfWork, IWebHostEnvironment environment,
@@ -75,5 +76,8 @@ namespace Business.Implementations
 
         public IMessageService messageService =>
             _messageService = _messageService ?? new MessageService(_unitOfWork);
+
+        public ITimeIntervalService timeIntervalService =>
+            _timeIntervalService = _timeIntervalService ?? new TimeIntervalService(_unitOfWork);
     }
 }

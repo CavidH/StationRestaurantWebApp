@@ -15,6 +15,7 @@ namespace Core
         public IContactRepository contactRepository { get; }
         public ISettingRepository settingRepository { get; }
         public IAboutRepository aboutRepository { get; }
+        public ITimeİntervalRepository ITimeIntervalRepository { get; }
 
         Task SaveAsync();
     }

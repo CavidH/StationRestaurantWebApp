@@ -19,6 +19,7 @@ namespace Data.Repositories
         private IContactRepository _contactRepository;
         private ISettingRepository _settingRepository;
         private IAboutRepository _aboutRepository;
+        private ITimeİntervalRepository _timeIntervalRepository;
 
 
         public UnitOfWork(AppDbContext context)
@@ -54,6 +55,9 @@ namespace Data.Repositories
 
         public IAboutRepository aboutRepository =>
             _aboutRepository = _aboutRepository ?? new AboutRepository(_context);
+
+        public ITimeİntervalRepository ITimeIntervalRepository =>
+            _timeIntervalRepository = _timeIntervalRepository ?? new TimeIntervalRepositoryRepository(_context);
 
 
         public async Task SaveAsync()

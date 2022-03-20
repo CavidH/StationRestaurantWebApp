@@ -23,21 +23,21 @@ namespace Business.Implementations
         {
             return await _unitOfWork
                 .reservationRepository
-                .GetAllAsync(p => p.IsDeleted == false, "Table");
+                .GetAllAsync(p => p.IsDeleted == false, "Table", "TimeInterval");
         }
 
         public async Task<List<Reservation>> GetAllStatAsync()
         {
             return await _unitOfWork
                 .reservationRepository
-                .GetAllAsync(p => p.Name != null, "Table");
+                .GetAllAsync(p => p.Name != null, "Table", "TimeInterval");
         }
 
         public async Task<Paginate<Reservation>> GetAllPaginatedAsync(int page)
         {
             var reservations = await _unitOfWork
                 .reservationRepository
-                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false);
+                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false, "Table", "TimeInterval");
 
             var Result = new Paginate<Reservation>();
             Result.Items = reservations;
@@ -50,7 +50,8 @@ namespace Business.Implementations
         {
             var reservations = await _unitOfWork
                 .reservationRepository
-                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false && p.ReservDate.Date == date);
+                .GetAllPaginatedAsync(page, 10, p => p.IsDeleted == false && p.ReservDate.Date == date, "Table",
+                    "TimeInterval");
 
             var Result = new Paginate<Reservation>();
             Result.Items = reservations;
@@ -61,11 +62,15 @@ namespace Business.Implementations
 
         public async Task<Reservation> GetAsync(int id)
         {
-            return await _unitOfWork.reservationRepository.GetAsync(p => p.IsDeleted == false && p.Id == id);
+            return await _unitOfWork.reservationRepository.GetAsync(p => p.IsDeleted == false && p.Id == id, "Table",
+                "TimeInterval");
         }
 
         public async Task Create(ReservationPostVM reservationPostVm)
         {
+            var time = (await _unitOfWork
+                .ITimeIntervalRepository
+                .GetAsync(p => p.Id == reservationPostVm.TimeIntervalIdId)).Time;
             var newReserv = new Reservation()
             {
                 Name = reservationPostVm.Name,
@@ -74,6 +79,8 @@ namespace Business.Implementations
                 Email = reservationPostVm.Email,
                 ReservDate = reservationPostVm.ReservDate,
                 TableID = reservationPostVm.TableID,
+                TimeIntervalIdId = reservationPostVm.TimeIntervalIdId,
+                ReservEndDate = reservationPostVm.ReservDate.AddHours(time)
             };
             if (reservationPostVm.Additionals is null)
             {
@@ -93,21 +100,43 @@ namespace Business.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<bool> IsReserved(DateTime dateTime, int tableId)
+        public async Task<bool> IsReserved(DateTime startDateTime, DateTime EndDateTime, int tableId)
         {
             //var table = await _unitOfWork.tableRepository.GetWithRezervsAsync(tableId);
             var table = await _unitOfWork.tableRepository.GetAsync(p => p.IsDeleted == false && p.Id == tableId,
                 "Reservations");
-
             if (table.Reservations.Count == 0) return false;
+            var reservs = table.Reservations.Where(p => p.IsDeleted == false);
 
-            if (table.Reservations.Where(p => p.ReservDate.Date == dateTime.Date && p.IsDeleted == false)
-                    .FirstOrDefault() != null)
+            foreach (var reserv in reservs)
             {
-                return true;
+                if (reserv.ReservDate<EndDateTime && reserv.ReservEndDate>startDateTime)
+                {
+                    return true;
+                }
+                if (reserv.ReservDate>=EndDateTime || reserv.ReservEndDate<=startDateTime)
+                {
+                    //25-3-2022  14:00 - 16:00 ****
+                    //25-3-2022  17:00 - 18:00
+                    //25-3-2022  11:00 - 12:00
+                    //25-3-2022  11:00 - 15:00
+                    //25-3-2022  11:00 - 18:00
+                    
+                    return false;
+
+                    
+                    
+                }
             }
 
-            return false;
+            return true;
+
+            // if (table.Reservations.Where(p => p.ReservDate.Date == dateTime.Date && p.IsDeleted == false)
+            //         .FirstOrDefault() != null)
+            // {
+            //     return true;
+            // }
+
 
             // var allDbTables = await _unitOfWork
             //      .tableRepository

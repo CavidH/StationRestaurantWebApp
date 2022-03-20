@@ -1244,7 +1244,7 @@ input {
     font-weight: normal;
     padding: 12px 15px 10px 15px;
     border: inherit;
-    height: 155px;
+    height: 36px;
     border: #ddd solid 1px;
     box-shadow: #0000000f 0 0px 3px 0px;
 }
@@ -1325,7 +1325,9 @@ input {
     font-size: 36px;
 }
 
-
+.without::-webkit-datetime-edit-ampm-field {
+    display: none;
+}
  
 
 

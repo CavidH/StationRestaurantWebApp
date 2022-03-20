@@ -11,5 +11,7 @@ namespace Business.ViewModels.Reservation
         public string Additionals { get; set; }
         public DateTime ReservDate { get; set; }
         public int TableID { get; set; }
+        public int TimeIntervalIdId { get; set; }
+
     }
 }

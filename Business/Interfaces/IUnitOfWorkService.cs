@@ -14,5 +14,6 @@ namespace Business.Interfaces
         public ISettingService settingService { get; }
         public IAboutService aboutService { get; }
         public IMessageService messageService { get; }
+        public ITimeIntervalService timeIntervalService { get; }
     }
 }

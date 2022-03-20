@@ -18,7 +18,7 @@ namespace Business.Interfaces
         Task<Reservation> GetAsync(int id);
         Task Create(ReservationPostVM reservationPostVm);
         Task Update(int id, ReservationPostVM reservationPostVm);
-        Task<bool> IsReserved(DateTime dateTime, int tableId);
+        Task<bool> IsReserved(DateTime startDateTime,DateTime EndDateTime, int tableId);
         Task Remove(int id);
         Task<int> getPageCount(int Take);
         Task<int> getLastIdAsync();

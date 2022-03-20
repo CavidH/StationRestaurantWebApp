@@ -35,10 +35,23 @@
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="ReservDate" class="contact_label">Reservation Date<span class="text-danger">*</span></label>
-                                <span asp-validation-for="ReservDate" class="text-danger"></span>
-                                <input asp-for="ReservDate" parsley-trigger="change" required class="form_contact  datepicker">
+                                <span   asp-validation-for="ReservDate"    class="text-danger without"></span>
+                                <input asp-for="ReservDate" type="datetime-local" parsley-trigger="change" required class="form_contact  datepicker">
 
                             </div>
+                            <div class="col-md-6">
+                                <label asp-for="TimeIntervalIdId" class="contact_label">Hour<span class="text-danger">*</span></label>
+                                <span asp-validation-for="TimeIntervalIdId" class="text-danger"></span>
+                                <select class="form-control" asp-for="TimeIntervalIdId">
+                                    @foreach (var timeInterval in(List<Timeİnterval>) ViewBag.TimeIntervals)
+                                    {
+                                        <option value="@timeInterval.Id">@timeInterval.Id</option>
+                                    }
+                                </select>
+
+                            </div>
+
+
                             <div class="col-md-6">
                                 <label asp-for="TableID" class="contact_label">Select Table<span class="text-danger">*</span></label>
                                 <span asp-validation-for="TableID" class="text-danger"></span>
@@ -51,7 +64,6 @@
                                 </select>
 
                             </div>
-
                             <div class="col-md-6">
                                 <label asp-for="Additionals" class="contact_label">Additionals</label>
                                 <span asp-validation-for="Additionals" class="text-danger"></span>
@@ -63,6 +75,8 @@
                                 </a>
 
                             </div>
+
+
                             <label ><span class="text-danger">*</span>After Reservation, please confirm the email, otherwise the Reservation will not be registered</label>
 
                             <div class="col-md-12">
@@ -74,7 +88,15 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-
+    @*                 <script> *@
+    @* window.onload = function() { *@
+    @*     var d = new Date(); *@
+    @*     var h = d.getHours(); *@
+    @*     var m = d.getMinutes(); *@
+    @*     var s = d.getSeconds(); *@
+    @*     document.getElementById("ReservDate").value = h+":"+m+":"+s; *@
+    @*     }; *@
+    @* </script> *@
                     @* <input id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY"/> *@
                     @* https://flatpickr.js.org/plugins/ *@
                     @* https://amsul.ca/pickadate.js/ *@
