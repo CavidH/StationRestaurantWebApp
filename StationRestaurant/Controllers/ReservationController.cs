@@ -41,6 +41,17 @@ namespace StationRestaurant.Controllers
                 var time = (await _unitOfWorkService.timeIntervalService.GetAsync(reservationPostVm.TimeIntervalIdId))
                     .Time;
                 var endTime = reservationPostVm.ReservDate.AddHours(time);
+
+
+                TimeSpan close = new TimeSpan(0, 0, 0);
+                TimeSpan open = new TimeSpan(9, 0, 0);
+                // if (( endTime.TimeOfDay <= open && endTime.TimeOfDay >= close) ||
+                //     (reservationPostVm.ReservDate.TimeOfDay<=open && reservationPostVm.ReservDate.TimeOfDay>=open ))
+                // {
+                //     ModelState.AddModelError("ReservDate", "active time 9:00 AM – 11:30 PM");
+                //     return View(reservationPostVm);
+                // }
+
                 if (await _unitOfWorkService.reservationService.IsReserved(reservationPostVm.ReservDate,
                         endTime, reservationPostVm.TableID))
                 {
@@ -48,7 +59,16 @@ namespace StationRestaurant.Controllers
                     return View(reservationPostVm);
                 }
 
-                await _unitOfWorkService.reservationService.Create(reservationPostVm);
+                try
+                {
+                    await _unitOfWorkService.reservationService.Create(reservationPostVm);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                    return View(reservationPostVm);
+                }
+
                 var Id = await _unitOfWorkService.reservationService.getLastIdAsync();
                 var confirmationLink = Url.Action("ConfirmReserv", "Reservation",
                     new {reservationId = Id, token = reservationPostVm.ReservDate}, Request.Scheme);

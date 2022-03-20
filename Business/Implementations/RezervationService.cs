@@ -110,22 +110,25 @@ namespace Business.Implementations
 
             foreach (var reserv in reservs)
             {
-                if (reserv.ReservDate<EndDateTime && reserv.ReservEndDate>startDateTime)
+                if (reserv.ReservDate == startDateTime && reserv.ReservEndDate == EndDateTime)
                 {
                     return true;
                 }
-                if (reserv.ReservDate>=EndDateTime || reserv.ReservEndDate<=startDateTime)
+
+                if (reserv.ReservDate < EndDateTime && reserv.ReservEndDate > startDateTime)
+                {
+                    return true;
+                }
+
+                if (reserv.ReservDate >= EndDateTime || reserv.ReservEndDate <= startDateTime)
                 {
                     //25-3-2022  14:00 - 16:00 ****
                     //25-3-2022  17:00 - 18:00
                     //25-3-2022  11:00 - 12:00
                     //25-3-2022  11:00 - 15:00
                     //25-3-2022  11:00 - 18:00
-                    
-                    return false;
 
-                    
-                    
+                    return false;
                 }
             }
 
