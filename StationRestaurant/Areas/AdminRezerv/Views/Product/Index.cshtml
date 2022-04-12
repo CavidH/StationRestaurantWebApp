@@ -53,13 +53,13 @@
                                         <td>@TimeZoneInfo.ConvertTime(product.CreatedAt, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")).AddHours(13)</td>
                                         @*<td>@product.ProductCategory.Name</td>*@
                                         <td>
-                                            <a class="btn btn-icon waves-effect waves-light btn-primary" asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                                            <a class="btn btn-icon waves-effect waves-light btn-primary my-1" asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
                                                 <i class="mdi mdi-eye-outline"></i>
                                             </a>
-                                            <a class="btn btn-icon waves-effect waves-light btn-purple" asp-action="Update" asp-route-id="@product.Id">
+                                            <a class="btn btn-icon waves-effect waves-light btn-purple my-1" asp-action="Update" asp-route-id="@product.Id">
                                                 <i class="mdi mdi-pencil-outline"></i>
                                             </a>
-                                            <a class="btn btn-icon waves-effect waves-light btn-danger" asp-action="Delete" asp-route-id="@product.Id">
+                                            <a class="btn btn-icon waves-effect waves-light btn-danger my-1" asp-action="Delete" asp-route-id="@product.Id">
                                                 <i class="mdi mdi-delete-outline"></i>
                                             </a>
                                         </td>

@@ -25,7 +25,7 @@
                     </a>
                     <a class="card-description" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id" target="_blank">
                         <h2>@product.Name</h2>
-                        <p>@product.ProductCategory.Name</p>
+                        <p>@product.ProductCategory.Name.ToUpper()</p>
                     </a>
                 </div>
             }

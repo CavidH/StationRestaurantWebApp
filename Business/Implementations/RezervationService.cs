@@ -106,7 +106,7 @@ namespace Business.Implementations
             var table = await _unitOfWork.tableRepository.GetAsync(p => p.IsDeleted == false && p.Id == tableId,
                 "Reservations");
             if (table.Reservations.Count == 0) return false;
-            var reservs = table.Reservations.Where(p => p.IsDeleted == false);
+            var reservs = table.Reservations.Where(p => p.IsDeleted == false && p.ReservDate.Date==startDateTime.Date);
 
             foreach (var reserv in reservs)
             {
