@@ -18,7 +18,6 @@ One to two paragraph statement about your product and what it does.
 
 # Admin Panel
 
-## Installation
 ![7](https://github.com/CavidH/StationRestaurantWebApp/blob/master/StationRestaurant/wwwroot/Assets/img/screencapture-localhost-44368-AdminRezerv-2022-04-12-11_10_22.png)
 ![12](https://github.com/CavidH/StationRestaurantWebApp/blob/master/StationRestaurant/wwwroot/Assets/img/screencapture-localhost-44368-AdminRezerv-Reservation-2022-04-12-11_12_02.png)
 ![8](https://github.com/CavidH/StationRestaurantWebApp/blob/master/StationRestaurant/wwwroot/Assets/img/screencapture-localhost-44368-AdminRezerv-Category-2022-04-12-11_10_43.png)
@@ -27,6 +26,7 @@ One to two paragraph statement about your product and what it does.
 ![10](https://github.com/CavidH/StationRestaurantWebApp/blob/master/StationRestaurant/wwwroot/Assets/img/screencapture-localhost-44368-AdminRezerv-Message-2022-04-12-11_12_49.png)
 ![11](https://github.com/CavidH/StationRestaurantWebApp/blob/master/StationRestaurant/wwwroot/Assets/img/screencapture-localhost-44368-AdminRezerv-Product-2022-04-12-11_11_46.png)
 
+## Installation
 
 OS X & Linux:
 
